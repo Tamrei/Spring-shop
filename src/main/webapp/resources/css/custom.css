@@ -1,0 +1,94 @@
+body {
+    background-color:
+    /*#8998B1;*/
+    #EBEBEB;
+}
+
+
+/** bootstrap 'a' **/
+#32 {
+    color: #000004;
+    text-decoration: none
+}
+
+/** out custom table **/
+.table-curved {
+    border-collapse: separate;
+}
+
+.table-curved {
+    border: solid #ccc 1px;
+    border-radius: 6px;
+    border-left: 0px;
+}
+
+/** our custom input file **/
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.inputFile {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    filter: alpha(opacity=0);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    opacity: 0;
+    background-color: transparent;
+    color: transparent;
+}
+
+
+
+.list-group-item {
+    background-color: #f5f5f5;
+    color: #000000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+
