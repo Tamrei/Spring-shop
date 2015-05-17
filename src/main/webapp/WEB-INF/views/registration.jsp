@@ -9,7 +9,7 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/empty.css" %>
+        <%@ include file="../../resources/css/box.css" %>
 
         #center {
             margin-left: auto;

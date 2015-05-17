@@ -13,6 +13,8 @@
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
 
+        <%@ include file="../../resources/css/box.css" %>
+
         .thumbnail {
             /*width: 125px;*/
             height: 185px;
@@ -32,6 +34,12 @@
         #right {
             float: right;
         }
+
+        #footer {
+            height: 60px;
+            background-color: #000000;
+        }
+
 
 
     </style>
@@ -66,49 +74,58 @@
     <title> Shop </title>
 </head>
 
-<body style="padding: 1rem;">
+<body >
 
 <div class="container">
 
-    <jsp:include page="static/navbar.jsp" flush="true"/>
+<jsp:include page="static/navbar.jsp" flush="true"/>
 
-    <div class="carousel slide" data-ride="carousel" style="padding-top: 5%">
+
+<div style="padding-top: 0%; padding-bottom: 1%;">
+    <!-- Header Carousel -->
+    <header id="myCarousel" class="carousel slide" >
+        <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
         </ol>
+
+        <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
                 <img class="slide-image"
                      src="http://healthybliss.net/bliss/wp-content/uploads/2015/01/nooderslide1500-1500x430.jpg"
                      id="img-rounded" alt="">
             </div>
-        </div>
 
-        <div class="carousel-inner">
             <div class="item">
                 <img class="slide-image"
                      src="http://healthybliss.net/bliss/wp-content/uploads/2015/01/nooderslide1500-1500x430.jpg"
                      id="img-rounded" alt="">
             </div>
+
         </div>
 
-        <div class="carousel-inner">
-            <div class="item">
-                <img class="slide-image"
-                     src="http://www.greentribune.com/wp-content/uploads/2013/05/fruits-and-vegetables-supermarket-grocery-store-642x336.png"
-                     id="img-rounded" alt="">
-            </div>
-        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </header>
 
-    </div>
+</div>
+
+    <div class="panel panel-login">
+        <div class="panel-body">
 
     <dl class="dl-horizontal" style="padding-top: 2%">
         <dt>
+
         <div class="list-group" id="searchBar">
-            <a href="#" class="list-group-item" id="All">All</a>
-            <a href="#" class="list-group-item active" id="Fruit">Fruit</a>
+            <a href="#" class="list-group-item active" id="All">All</a>
+            <a href="#" class="list-group-item" id="Fruit">Fruit</a>
             <a href="#" class="list-group-item" id="Drink">Drink</a>
             <a href="#" class="list-group-item" id="Vegetables">Vegetables</a>
             <a href="#" class="list-group-item" id="Diary-products">Dairy-products</a>
@@ -125,33 +142,26 @@
             <div class="row">
                 <c:forEach items="${items}" var="item">
                     <div class="type" id="${item.type}">
-                        <div class="col-md-3" id="${item.type}">
+                        <div class="col-sm-6 col-md-3" id="${item.type}">
                             <!--<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">-->
-                            <div class="thumbnail">
+                            <div class="thumbnail" style="height: 210px;">
                                 <img src="/shop/img/${item.itemID}"
-                                     class="img-rounded" width="75" height="55">
-                                <!--<img src="http://placehold.it/240x150" alt="ALT NAME" class="img-responsive" />-->
+                                     class="img-rounded" height="100">
+                                <!--<img src="http://placehold.it/240x150" class="img-responsive" />-->
 
-                                <div class="caption">
+
+                                <!--<div class="caption">-->
                                     <h4 class="pull-right">$${item.price}</h4>
                                     <h4 id="itemName">${item.itemName}</h4>
 
                                     <p>
-                                        <a data-toggle="modal" class="btn btn-primary" href="#buy${item.itemID}">Buy</a>
-                                        <sec:authorize access="hasRole('ADMIN')"><a data-toggle="modal"
+                                        <a data-toggle="modal" role="button" class="btn btn-primary" href="#buy${item.itemID}">Buy</a>
+                                        <sec:authorize access="hasRole('ADMIN')"><a data-toggle="modal" role="button"
                                                                                     class="btn btn-default"
                                                                                     href="#update${item.itemID}">Edit
                                             form</a></sec:authorize>
                                     </p>
-                                </div>
-
-
-
-
-
-
-
-
+                                <!--</div>--></div>
 
 
                                 <!-- out update form -->
@@ -218,13 +228,14 @@
                                                 <img src="/shop/img/${item.itemID}"
                                                      class="img-rounded" width="140" height="95" id="left"/>
 
-                                                <div id="right" style="padding-right: 40%;">
+                                                <div id="right" style="/*padding-right: 40%;*/ width: 65%;">
                                                     <form:form action="/shop/${item.itemID}">
                                                     <label >Item Name: ${item.itemName} </label>
                                                     <input type="number" id="amount${item.itemID}" name="amount"
                                                            class="form-control bfh-number"
                                                            min="1" max="99999" value="1"
                                                            placeholder="Amount">
+                                                    <h5>Item price is $${item.price}</h5>
 
                                                 </div>
 
@@ -256,7 +267,7 @@
                                 </script>
                                 <!-- </p>-->
                                 <!--</div>-->
-                            </div>
+
                         </div>
                     </div>
 
@@ -268,13 +279,15 @@
             </div>
         </dd>
     </dl>
+            </div>
+        </div>
 
 </div>
 
-<div  role="navigation">
+<div role="navigation" style="background-color: #222">
 
     <div class="container">
-        <h5> Test (c) </h5>
+        <a href="https://github.com/Tamrei/Spring-shop"> Source Code (GitHub) </a>
     </div>
 
 </div>
