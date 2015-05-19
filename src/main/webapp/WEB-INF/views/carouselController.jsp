@@ -26,8 +26,7 @@
 <!-- Page Content -->
 <div class="container">
 
-    <jsp:include page="static/navbar.jsp" flush="true"/>
-
+    <jsp:include page="${request.contextPath}/navbar"></jsp:include>
 
     <c:if test="${not empty notAnImage}">
         <div class="bs-example">

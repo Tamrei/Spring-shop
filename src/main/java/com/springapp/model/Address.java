@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -23,9 +24,11 @@ public class Address {
     private String ownerUsername;
 
     @Column(name = "city")
+    @Size(min=1, max=20, message = "City name can't be empty!")
     private String city;
 
     @Column(name = "street")
+    @Size(min=1, max=20, message = "Street name can't be empty!")
     private String street;
 
     @OneToMany(mappedBy = "address")

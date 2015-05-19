@@ -9,10 +9,14 @@
 
 <html>
 <head>
+
     <style>
-        <%@ include file="../../../resources/css/bootstrap.min.css" %>
-        <%@ include file="../../../resources/css/custom.css" %>
+
+        <%@ include file="/resources/css/bootstrap.css" %>
+        <%@ include file="/resources/css/custom.css" %>
+        <%@ include file="/resources/css/box.css" %>
     </style>
+
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
 
@@ -35,14 +39,18 @@
             <li role="presentation"><a href="/purchases">All purchases</a></li>
             <sec:authorize access="hasRole('ADMIN')">
                 <li role="presentation"><a href="/addItem">Add new Item</a></li>
+
                 <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Admin Tools <b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Admin tools <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Inbox</a></li>
                         <li><a href="#">Drafts</a></li>
                         <li><a href="#">Sent Items</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Trash</a></li>
                     </ul>
                 </li>
+
             </sec:authorize>
             <li role="presentation"><a href="/users">Users</a></li>
         </ul>

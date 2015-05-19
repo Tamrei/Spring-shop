@@ -13,6 +13,7 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
+        <%@ include file="../../resources/css/box.css" %>
     </style>
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
@@ -24,7 +25,7 @@
 
 <div class="container">
 
-    <jsp:include page="static/navbar.jsp" flush="true"/>
+    <jsp:include page="${request.contextPath}/navbar"></jsp:include>
 
     <input type="search" id="searchByUsername" class="form-control" style="margin-bottom:15px;"
            placeholder="Search by username" onkeyup="searchValue('#username', this.id)">
@@ -64,6 +65,15 @@
                             <form:form method="delete" action="users/delete/${user.id}">
                                 <input type="submit" name="submit" class="btn btn-default" value="delete">
                             </form:form>
+                            <div class="btn-group">
+                                <button type="button" data-toggle="dropdown" class="btn btn-default"> Options <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <form:form action="http://localhost:8080/users/${user.id}">
+                                    <li><input type="submit" name="submit" value="enable/disable">Enable / Disable</li>
+                                    </form:form>
+                                </ul>
+                            </div>
                         </td>
                     </sec:authorize>
                 </tr>

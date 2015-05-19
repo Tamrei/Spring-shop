@@ -7,6 +7,7 @@ import com.springapp.util.ImageResizerImpl;
 import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,17 +33,21 @@ public class AddItemController {
     }
 
     @RequestMapping(value="createItem", method = RequestMethod.POST)
-    public ModelAndView createItem(@ModelAttribute("item") @Valid Item item,
+    public ModelAndView createItem(@ModelAttribute("item") @Valid Item item, BindingResult result,
                              @RequestParam("file") MultipartFile file) {
+        if(result.hasErrors()) {
+            return new ModelAndView("addItem", "invalidInputData", "Woops! seams like you have some errors!");
+        }
 
         try {
             item.setItemName(item.getItemName());
             item.setImage(imageResizer.resizeImage(file.getBytes(), 240, 150));
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("No Image ???");
         }
         catch (NullPointerException e) {
-            return new ModelAndView("addItem", "notAnImage", "Woops! seams like its not an image!");
+            return new ModelAndView("addItem", "notAnImage", "Woops! seams like it's not an image!");
         }
 
         itemService.addItem(item);

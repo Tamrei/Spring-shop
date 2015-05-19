@@ -22,22 +22,11 @@
         }
 
         #img-rounded {
-            /*border-radius: 4px;*/
-        }
-
-        #center {
-            /*margin-left: auto;
-            margin-right: auto;*/
-            text-align: center;
+            border-radius: 2px;
         }
 
         #right {
             float: right;
-        }
-
-        #footer {
-            height: 60px;
-            background-color: #000000;
         }
 
         #priceInformation {
@@ -85,18 +74,14 @@
 <div class="container">
 
 
-
 <jsp:include page="${request.contextPath}/navbar"></jsp:include>
-
 
 <div style="padding-top: -50px; padding-bottom: 1%;">
     <!-- Header Carousel -->
     <header id="myCarousel" class="carousel slide">
-        <!-- Indicators -->
-
-
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
+
             <div class="item active">
                 <img class="slide-image"
                      src="http://healthybliss.net/bliss/wp-content/uploads/2015/01/nooderslide1500-1500x430.jpg"
@@ -130,12 +115,10 @@
         <!-- Page Header -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Page Heading
-
-                </h2>
+                <h2 class="page-header"> Shop </h2>
             </div>
         </div>
-        <!-- /.row -->
+
 
         <dl class="dl-horizontal" style="padding-top: 1%">
             <dt>

@@ -24,134 +24,149 @@
 <body>
 <div class="container">
 
-    <jsp:include page="static/navbar.jsp" flush="true"/>
+    <jsp:include page="${request.contextPath}/navbar"></jsp:include>
 
-        <div class="panel panel-login">
+
+    <div class="panel panel-login">
         <div class="panel-body">
 
-    <div class="table">
-        <table class="table table-curved">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Count</th>
-                <th>Price</th>
-            </tr>
-            </thead>
-            <tbody>
+            <!-- Page Header -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header"> Your cart </h2>
+                </div>
+            </div>
 
+            <div class="table">
+                <table class="table table-curved">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Count</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <script>
+                        var price = 0;
+                    </script>
+
+                    <c:forEach items="${carts}" var="purchase">
+                        <tr>
+                            <td><img src="/shop/img/${purchase.key.itemID}" alt="image with rounded corners"
+                                     class="img-rounded" width="120" height="75"></td>
+                            <td id="itemName"> ${purchase.key.itemName} </td>
+                            <td> ${purchase.value.amount} </td>
+                            <td>
+                                <p>Price for ${purchase.value.amount}
+                                    is ${purchase.key.price * purchase.value.amount}</p>
+
+                                <p style="color: green"> Price per one: ${purchase.key.price} </p>
+                            </td>
+
+                            <td>
+                                <form:form method="delete" action="cart/layOut/${purchase.value.cartID}">
+                                    <button type="submit" class="btn btn-default"> Lay out</button>
+                                </form:form>
+                                <a data-toggle="modal" class="btn btn-default" href="#update${purchase.value.cartID}">Edit
+                                    form</a><br>
+                            </td>
+                        </tr>
+
+                        <!-- out update form -->
+                        <div id="update${purchase.value.cartID}" class="modal fade">
+                            <div class="modal-dialog" style="padding-top: 165px;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x
+                                        </button>
+                                        <h4 id="update modal-label">Update ${purchase.key.itemName} | Amount
+                                            : ${purchase.value.amount}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form:form method="post" action="/cart/update/${purchase.value.cartID}">
+
+                                            <div class="form-group">
+                                                <label>Old Amount: ${purchase.value.amount} </label>
+                                                <input type="number" name="amount" class="form-control bfh-number"
+                                                       value="${purchase.value.amount}">
+                                            </div>
+
+                                            <button type="submit" id="sub" class="btn btn-primary">Order</button>
+                                        </form:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            var pricePerOne = ${purchase.key.price};
+                            var amount = ${purchase.value.amount};
+                            var totalPrice = pricePerOne * amount;
+
+                            price += totalPrice;
+
+                            //$("#price${purchase.key.itemID}").text("Total price: " + totalPrice);
+
+                        </script>
+
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 id="totalPrice" style="color: darkgreen"> Test </h4>
             <script>
-                var price = 0;
+                $("#totalPrice").text("Total price: " + price + "$");
             </script>
 
-            <c:forEach items="${carts}" var="purchase">
-                <tr>
-                    <td><img src="/shop/img/${purchase.key.itemID}" alt="image with rounded corners"
-                             class="img-rounded" width="120" height="75"></td>
-                    <td id="itemName"> ${purchase.key.itemName} </td>
-                    <td> ${purchase.value.amount} </td>
-                    <td>
-                        <p>Price for ${purchase.value.amount} is ${purchase.key.price * purchase.value.amount}</p>
-                        <p style="color: green"> Price per one: ${purchase.key.price} </p>
-                    </td>
+            <a id="makePurchase" class="btn btn-default" data-toggle="modal" href="#order">Make purchase</a><br>
 
-                    <td>
-                        <form:form method="delete" action="cart/layOut/${purchase.value.cartID}">
-                            <button type="submit" class="btn btn-default"> Lay out </button>
-                        </form:form>
-                        <a data-toggle="modal" class="btn btn-default" href="#update${purchase.value.cartID}">Edit form</a><br>
-                    </td>
-                </tr>
+            <script>
+                if (price <= 0) {
+                    $('#makePurchase').hide();
+                    $('#searchByItemName').hide();
+                }
+            </script>
 
-                <!-- out update form -->
-                <div id="update${purchase.value.cartID}" class="modal fade">
-                    <div class="modal-dialog" style="padding-top: 165px;">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                                <h4 id="update modal-label">Update ${purchase.key.itemName} | Amount
-                                    : ${purchase.value.amount}</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form:form method="post" action="/cart/update/${purchase.value.cartID}">
+            <!-- out update form -->
+            <div id="order" class="modal fade">
+                <div class="modal-dialog" style="padding-top: 165px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                            <h4 id="modal-label"> Order </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form:form action="makePurchase" commandName="address" method="post" role="form">
 
-                                    <div class="form-group">
-                                        <label>Old Amount: ${purchase.value.amount} </label>
-                                        <input type="number" name="amount" class="form-control bfh-number"
-                                               value="${purchase.value.amount}">
-                                    </div>
+                                <div class="form-group error">
+                                    <label> City: </label>
+                                    <input type="text" name="city" class="form-control"
+                                           placeholder="Enter city name">
+                                    <span class="help-inline" style="color: red"><form:errors path="city"/></span>
+                                </div>
 
-                                    <button type="submit" id="sub" class="btn btn-primary">Order</button>
-                                </form:form>
-                            </div>
+                                <div class="form-group error">
+                                    <label> Street: </label>
+                                    <input type="text" name="street" class="form-control"
+                                           placeholder="Enter street">
+                                    <span class="help-inline" style="color: red"><form:errors path="street"/></span>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Order</button>
+                            </form:form>
                         </div>
                     </div>
                 </div>
-
-                <script>
-                    var pricePerOne = ${purchase.key.price};
-                    var amount = ${purchase.value.amount};
-                    var totalPrice = pricePerOne * amount;
-
-                    price += totalPrice;
-
-                    //$("#price${purchase.key.itemID}").text("Total price: " + totalPrice);
-
-                </script>
-
-            </c:forEach>
-
-            </tbody>
-        </table>
-    </div>
-
-    <h4 id="totalPrice" style="color: darkgreen"> Test </h4>
-    <script>
-        $("#totalPrice").text("Total price: " + price + "$");
-    </script>
-
-    <a id="makePurchase" class="btn btn-default" data-toggle="modal" href="#order">Make purchase</a><br>
-
-    <script>
-        if(price <= 0) {
-            $('#makePurchase').hide();
-            $('#searchByItemName').hide();
-        }
-    </script>
-
-    <!-- out update form -->
-    <div id="order" class="modal fade">
-        <div class="modal-dialog" style="padding-top: 165px;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                    <h4 id="modal-label"> Order </h4>
-                </div>
-                <div class="modal-body">
-                    <form:form action="makePurchase" commandName="address">
-
-                        <div class="form-group">
-                            <label> City: </label>
-                            <input type="text" name="city" class="form-control"
-                                   placeholder="Enter city name">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Street: </label>
-                            <input type="text" name="street" class="form-control"
-                                   placeholder="Enter street">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Order</button>
-                    </form:form>
-                </div>
             </div>
+            <!-- out update form -->
         </div>
     </div>
-    <!-- out update form -->
-</div>
-            </div>
 </div>
 </body>
 </html>

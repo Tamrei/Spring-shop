@@ -37,6 +37,14 @@
         </div>
     </c:if>
 
+    <c:if test="${not empty invalidInputData}">
+        <div class="bs-example">
+            <div class="alert alert-danger alert-error">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> <c:out value="${invalidInputData}"/>
+            </div>
+        </div>
+    </c:if>
 
     <div class="panel panel-login">
         <div class="panel-heading">
@@ -48,20 +56,23 @@
 
 
         <div class="panel-body">
-            <form:form method="post" action="createItem" commandName="item" enctype="multipart/form-data">
+            <form:form method="post" action="createItem" commandName="item" role="form" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Item Name: </label>
                     <input type="text" name="itemName" class="form-control" placeholder="Enter item name">
+                    <span class="help-inline" style="color: red"><form:errors path="itemName"/></span>
                 </div>
 
                 <div class="form-group">
                     <label>Item Type: </label>
-                    <input type="text" name="type" class="form-control" placeholder="Enter item name">
+                    <input type="text" name="type" class="form-control" placeholder="Enter type">
+                    <span class="help-inline" style="color: red"><form:errors path="type"/></span>
                 </div>
 
                 <div class="form-group">
                     <label>Item price: </label>
                     <input type="number" name="price" class="form-control bfh-number" placeholder="Enter Item Price">
+                    <span class="help-inline" style="color: red"><form:errors path="price"/></span>
                 </div>
 
                 <div class="form-group">

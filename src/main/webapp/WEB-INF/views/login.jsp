@@ -22,14 +22,6 @@
 </head>
 <body>
 
-
-
-
-
-
-
-
-
 <div class="container">
 
     <div class="row">
@@ -84,8 +76,6 @@
                                     <input type="password" class="form-control" name="password" placeholder="Enter password">
                                 </div>
 
-
-
                                 <div class="form-group text-center">
 
                                 </div>
@@ -110,14 +100,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 
 </body>
 </html>
