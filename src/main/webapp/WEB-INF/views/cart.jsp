@@ -14,25 +14,26 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
+        <%@ include file="../../resources/css/box.css" %>
     </style>
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
 </head>
 
-<body style="padding: 1rem;">
+<body>
 <div class="container">
 
     <jsp:include page="static/navbar.jsp" flush="true"/>
 
-    <input type="search" id="searchByItemName" class="form-control" style="margin-bottom:15px;"
-           placeholder="Search by item name" onkeyup="searchValue('#itemName', this.id)">
+        <div class="panel panel-login">
+        <div class="panel-body">
 
     <div class="table">
         <table class="table table-curved">
             <thead>
             <tr>
-                <th>IMG</th>
+                <th></th>
                 <th>Name</th>
                 <th>Count</th>
                 <th>Price</th>
@@ -47,7 +48,7 @@
             <c:forEach items="${carts}" var="purchase">
                 <tr>
                     <td><img src="/shop/img/${purchase.key.itemID}" alt="image with rounded corners"
-                             class="img-rounded" width="62" height="62"></td>
+                             class="img-rounded" width="120" height="75"></td>
                     <td id="itemName"> ${purchase.key.itemName} </td>
                     <td> ${purchase.value.amount} </td>
                     <td>
@@ -105,7 +106,7 @@
         </table>
     </div>
 
-    <h3 id="totalPrice" style="color: greenyellow"> Test </h3>
+    <h4 id="totalPrice" style="color: darkgreen"> Test </h4>
     <script>
         $("#totalPrice").text("Total price: " + price + "$");
     </script>
@@ -149,7 +150,8 @@
         </div>
     </div>
     <!-- out update form -->
-
+</div>
+            </div>
 </div>
 </body>
 </html>

@@ -33,7 +33,6 @@ public class CurrentUserHandlerMethodArgumentResolver
             try {
                 user = (User) ((Authentication) principal).getPrincipal();
             } catch (NullPointerException e) {
-                System.out.println("Null");
             }
             return user;
         } else {

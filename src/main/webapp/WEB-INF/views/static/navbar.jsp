@@ -20,19 +20,30 @@
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
+
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/shop">Shop</a>
+        </div>
+
         <ul class="nav navbar-nav">
-
-            <li role="presentation"><a href="/shop">Shop</a></li>
-
             <li role="presentation"><a href="/cart">Cart <sec:authorize access="isAuthenticated()"> <span
                     class="badge"> ${cartCount} </span> </sec:authorize> </a></li>
 
             <li role="presentation"><a href="/myPurchases">My purchases</a></li>
 
             <li role="presentation"><a href="/purchases">All purchases</a></li>
-    <sec:authorize access="hasRole('ADMIN')">
-            <li role="presentation"><a href="/addItem">Add new Item</a></li>
-    </sec:authorize>
+            <sec:authorize access="hasRole('ADMIN')">
+                <li role="presentation"><a href="/addItem">Add new Item</a></li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Admin Tools <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Inbox</a></li>
+                        <li><a href="#">Drafts</a></li>
+                        <li><a href="#">Sent Items</a></li>
+                    </ul>
+                </li>
+            </sec:authorize>
             <li role="presentation"><a href="/users">Users</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -52,8 +63,7 @@
 </nav>
 
 
-
-        <!-- our registration form -->
+<!-- our registration form -->
 <div id="login" class="modal fade">
     <div class="modal-dialog" style="padding-top: 165px;">
         <div class="modal-content">
@@ -89,7 +99,6 @@
     </div>
 </div>
 <!-- our buy form -->
-
 
 
 </body>

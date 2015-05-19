@@ -4,10 +4,13 @@ import com.springapp.dao.CartDAO;
 import com.springapp.dao.generic.GenericDAO;
 import com.springapp.model.Cart;
 import com.springapp.model.Item;
+import com.springapp.util.ImageResizer;
+import com.springapp.util.ImageResizerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -22,6 +25,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private CartDAO cartDAO;
+
+    @Autowired
+    private ImageResizer imageResizer;
 
     /**
      * This method adds purchase data in database
@@ -57,10 +63,22 @@ public class ItemServiceImpl implements ItemService {
         itemDAO.delete(id);
     }
 
+    /**
+     * resize image
+     *
+     * @param item
+     */
     @Override
     @Transactional
     public void addItem(Item item) {
-        itemDAO.add(item);
+        try {
+            item.setImage(imageResizer.resizeImage(item.getImage(), 200, 125));
+            itemDAO.add(item);
+        } catch (IOException e) {
+
+        }
+
+
     }
 
     @Override

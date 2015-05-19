@@ -20,7 +20,6 @@ body {
 .table-curved {
     border: solid #ccc 1px;
     border-radius: 6px;
-    border-left: 0px;
 }
 
 /** our custom input file **/

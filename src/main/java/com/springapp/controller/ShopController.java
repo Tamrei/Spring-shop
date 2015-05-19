@@ -2,8 +2,11 @@ package com.springapp.controller;
 
 import com.springapp.anotation.ActiveUser;
 import com.springapp.model.Item;
+import com.springapp.model.site.HomePageImage;
 import com.springapp.service.CartService;
 import com.springapp.service.ItemService;
+import com.springapp.service.site.HomePageImageService;
+import com.springapp.service.site.HomePageImageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
+@SessionAttributes("cartCount")
 public class ShopController {
 
     @Autowired
@@ -38,7 +42,6 @@ public class ShopController {
         return "redirect:/shop";
     }
 
-//
     @RequestMapping(value = "shop/img/{itemID}")
     @Transactional
     public void displayImage(@PathVariable Integer itemID, HttpServletResponse response) {
@@ -66,16 +69,23 @@ public class ShopController {
     }
 
     @Autowired
-    private CartService cartService;
+    private HomePageImageService homePageImageService;
 
-    @ModelAttribute(value = "cartCount")
-    @PreAuthorize("isAuthenticated()")
-    public void getCartCount(ModelMap modelMap, @ActiveUser User activeUser) {
-        System.out.println("ACCESS!");
-        try {
-            modelMap.addAttribute("cartCount", cartService.getAllItemInTheCart(activeUser.getUsername()).size());
-            System.out.println(cartService.getAllItemInTheCart(activeUser.getUsername()).size());
-        } catch (Exception e) {System.out.println("Customer NULL!!!");}
+    @ModelAttribute(value = "sliderImages")
+    public void getSliderImages(ModelMap modelMap) {
+        modelMap.addAttribute("sliderImages", homePageImageService.getAllHomePageImages());
     }
 
+    @RequestMapping(value = "shop/slider/{id}")
+    @Transactional
+    public void displaySliderImage(@PathVariable Integer id, HttpServletResponse response) {
+        HomePageImage homePageImage = homePageImageService.getHomePageImage(id);
+        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+        try {
+            response.getOutputStream().write(homePageImage.getImage());
+            response.getOutputStream().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

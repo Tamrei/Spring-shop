@@ -2,6 +2,9 @@ package com.springapp.controller;
 
 import com.springapp.model.Item;
 import com.springapp.service.ItemService;
+import com.springapp.util.ImageResizer;
+import com.springapp.util.ImageResizerImpl;
+import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -19,23 +23,30 @@ public class AddItemController {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private ImageResizer imageResizer;
+
     @RequestMapping(value = "addItem", method = RequestMethod.GET)
     public Item item() {
         return new Item();
     }
 
     @RequestMapping(value="createItem", method = RequestMethod.POST)
-    public String createItem(@ModelAttribute("item") @Valid Item item,
+    public ModelAndView createItem(@ModelAttribute("item") @Valid Item item,
                              @RequestParam("file") MultipartFile file) {
+
         try {
             item.setItemName(item.getItemName());
-            item.setImage(file.getBytes());
+            item.setImage(imageResizer.resizeImage(file.getBytes(), 240, 150));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        catch (NullPointerException e) {
+            return new ModelAndView("addItem", "notAnImage", "Woops! seams like its not an image!");
         }
 
         itemService.addItem(item);
 
-        return "redirect:/shop";
+        return new ModelAndView("redirect:/shop");
     }
 }

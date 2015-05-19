@@ -50,17 +50,4 @@ public class PurchasesController {
     public void getAllStatuses(ModelMap modelMap) {
         modelMap.addAttribute("orderStatus", PurchaseStatus.values());
     }
-
-    @Autowired
-    private CartService cartService;
-
-    @ModelAttribute
-    public void getAllStatuses(ModelMap modelMap, @ActiveUser User activeUser) {
-        if(activeUser != null) {
-
-            modelMap.addAttribute("cartCount", cartService.getAllItemInTheCart(activeUser.getUsername()).size());
-            System.out.println(cartService.getAllItemInTheCart(activeUser.getUsername()).size());
-        } else System.out.println("Customer NULL!!!");
-    }
-
 }

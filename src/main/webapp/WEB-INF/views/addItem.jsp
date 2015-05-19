@@ -5,10 +5,12 @@
 
 <html>
 <head>
-    <title>Registration</title>
+    <title>Add new item</title>
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
+
+        <%@ include file="../../resources/css/box.css" %>
 
         #center {
             margin-left: auto;
@@ -26,31 +28,51 @@
 <body>
 <div class="container" id="center">
 
-    <h3>Add new Item</h3>
-
-        <form:form method="post" action="createItem" commandName="item" enctype="multipart/form-data">
-            <div class="form-group">
-                <label>Item Name: </label>
-                <input type="text" name="itemName" class="form-control" placeholder="Enter item name">
+    <c:if test="${not empty notAnImage}">
+        <div class="bs-example">
+            <div class="alert alert-danger alert-error">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> <c:out value="${notAnImage}"/>
             </div>
+        </div>
+    </c:if>
 
-            <div class="form-group">
-                <label>Item Type: </label>
-                <input type="text" name="type" class="form-control" placeholder="Enter item name">
+
+    <div class="panel panel-login">
+        <div class="panel-heading">
+            <div class="row">
+                <h3 align="center">Add new item</h3>
             </div>
+            <hr>
+        </div>
 
-            <div class="form-group">
-                <label>Item price: </label>
-                <input type="number" name="price" class="form-control bfh-number" placeholder="Enter Item Price">
-            </div>
 
-            <div class="form-group">
-                <label>Item Image:</label>
-                <input type="file" name="file" class="form-control">
-            </div>
+        <div class="panel-body">
+            <form:form method="post" action="createItem" commandName="item" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Item Name: </label>
+                    <input type="text" name="itemName" class="form-control" placeholder="Enter item name">
+                </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form:form>
+                <div class="form-group">
+                    <label>Item Type: </label>
+                    <input type="text" name="type" class="form-control" placeholder="Enter item name">
+                </div>
+
+                <div class="form-group">
+                    <label>Item price: </label>
+                    <input type="number" name="price" class="form-control bfh-number" placeholder="Enter Item Price">
+                </div>
+
+                <div class="form-group">
+                    <label>Item Image:</label>
+                    <input type="file" name="file" class="form-control" accept="image/*">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form:form>
+        </div>
+    </div>
 
 </div>
 </body>

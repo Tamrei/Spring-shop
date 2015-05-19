@@ -36,7 +36,7 @@ public class CartController {
 
         return "redirect:/cart";
     }
-
+/*
     @ModelAttribute
     public void getAllStatuses(ModelMap modelMap, @ActiveUser User activeUser) {
         if(activeUser != null) {
@@ -45,4 +45,5 @@ public class CartController {
             System.out.println(cartService.getAllItemInTheCart(activeUser.getUsername()).size());
         } else System.out.println("Customer NULL!!!");
     }
+    */
 }
