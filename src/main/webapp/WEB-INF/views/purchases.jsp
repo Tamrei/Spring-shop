@@ -13,14 +13,14 @@
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
     </style>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
 
     <title>All Purchases</title>
 </head>
 
-<body style="padding: 1rem;">
+<body>
 
 <div class="container">
 

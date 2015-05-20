@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.Random;
 
 @Controller
 @SessionAttributes("cartCount")
@@ -39,7 +41,7 @@ public class ShopController {
                                    @RequestParam("amount") long amount) {
         itemService.putItemInCart(itemID, activeUser.getUsername(), amount);
 
-        return "redirect:/shop";
+        return "redirect:/shop#put";
     }
 
     @RequestMapping(value = "shop/img/{itemID}")
@@ -88,4 +90,6 @@ public class ShopController {
             e.printStackTrace();
         }
     }
+
+
 }

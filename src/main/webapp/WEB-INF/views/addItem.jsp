@@ -9,7 +9,6 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
-
         <%@ include file="../../resources/css/box.css" %>
 
         #center {
@@ -53,7 +52,6 @@
             </div>
             <hr>
         </div>
-
 
         <div class="panel-body">
             <form:form method="post" action="createItem" commandName="item" role="form" enctype="multipart/form-data">

@@ -36,14 +36,4 @@ public class CartController {
 
         return "redirect:/cart";
     }
-/*
-    @ModelAttribute
-    public void getAllStatuses(ModelMap modelMap, @ActiveUser User activeUser) {
-        if(activeUser != null) {
-
-            modelMap.addAttribute("cartCount", cartService.getAllItemInTheCart(activeUser.getUsername()).size());
-            System.out.println(cartService.getAllItemInTheCart(activeUser.getUsername()).size());
-        } else System.out.println("Customer NULL!!!");
-    }
-    */
 }

@@ -11,7 +11,6 @@
 <head>
 
     <style>
-
         <%@ include file="/resources/css/bootstrap.css" %>
         <%@ include file="/resources/css/custom.css" %>
         <%@ include file="/resources/css/box.css" %>
@@ -19,12 +18,22 @@
 
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'ajaxtest.html',
+                success: function (data) {
+                    alert(data);
+                    $('#cartCount').text(data);
+                }
+            });
+        });
+    </script>
 
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-
 
         <div class="navbar-header">
             <a class="navbar-brand" href="/shop">Shop</a>
@@ -32,27 +41,25 @@
 
         <ul class="nav navbar-nav">
             <li role="presentation"><a href="/cart">Cart <sec:authorize access="isAuthenticated()"> <span
-                    class="badge"> ${cartCount} </span> </sec:authorize> </a></li>
+                    class="badge" id="cartCount"> ${cartCount}  </span> </sec:authorize> </a></li>
 
             <li role="presentation"><a href="/myPurchases">My purchases</a></li>
 
-            <li role="presentation"><a href="/purchases">All purchases</a></li>
-            <sec:authorize access="hasRole('ADMIN')">
-                <li role="presentation"><a href="/addItem">Add new Item</a></li>
+            <li role="presentation"><a href="/users">Users</a></li>
 
+            <sec:authorize access="hasRole('ADMIN')">
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Admin tools <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Inbox</a></li>
-                        <li><a href="#">Drafts</a></li>
-                        <li><a href="#">Sent Items</a></li>
+                        <li><a href="/carouselController">Carousel controller</a></li>
+                        <li><a href="/addItem">Add new item</a></li>
+                        <li><a href="/purchases">All orders</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Trash</a></li>
+                        <li><a href="#">Store (coming soon)</a></li>
                     </ul>
                 </li>
-
             </sec:authorize>
-            <li role="presentation"><a href="/users">Users</a></li>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <c:choose>

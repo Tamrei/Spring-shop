@@ -38,11 +38,13 @@
 
 
     </style>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
+
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
     <script>
         $(document).ready(function () {
+            $('#cartNotification').hide();
             var rows = $('div.type');
 
             $("#searchBar").children().click(function () {
@@ -64,6 +66,21 @@
                 rows.show();
             });
 
+            var url = window.location.href; // get current url
+            if(url.endsWith('#put')) {
+                $('#cartNotification').show();
+            }
+
+            $('#test').click(function () {
+                $.ajax({
+                    url: 'ajaxtest.html',
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            });
+
+
         });
     </script>
     <title> Shop </title>
@@ -74,7 +91,9 @@
 <div class="container">
 
 
-<jsp:include page="${request.contextPath}/navbar"></jsp:include>
+<jsp:include page="static/navbar.jsp" flush="true"/>
+
+<button id="test">Test</button>
 
 <div style="padding-top: -50px; padding-bottom: 1%;">
     <!-- Header Carousel -->
@@ -135,6 +154,14 @@
             </div>
             </dt>
             <dd>
+
+                <div class="bs-example" id="cartNotification" style="display:none;">
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Success!</strong> Success!
+                    </div>
+                </div>
+
 
                 <input type="search" id="searchByItemName" class="form-control" style="margin-bottom:15px;"
                        placeholder="Search by item name" onkeyup="searchValue('#itemName', this.id)">
@@ -244,7 +271,7 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-primary"> Buy </button>
+                                                <button class="btn btn-primary" id="putButton"> Buy </button>
                                                 </form:form>
                                             </div>
 
@@ -282,12 +309,14 @@
 
 </div>
 
-<div role="navigation" style="background-color: #222">
 
+
+
+
+<div role="navigation" style="background-color: #222">
     <div class="container">
         <a href="https://github.com/Tamrei/Spring-shop"> Source Code (GitHub) </a>
     </div>
-
 </div>
 
 </body>

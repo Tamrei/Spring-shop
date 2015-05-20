@@ -9,13 +9,6 @@
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
         <%@ include file="../../resources/css/box.css" %>
-
-        #center {
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 5%;
-            width: 25%;
-        }
     </style>
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>

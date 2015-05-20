@@ -1,7 +1,10 @@
 package com.springapp.service;
 
 import com.springapp.model.Item;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public interface ItemService {
@@ -12,4 +15,6 @@ public interface ItemService {
     public void deleteItem(long id);
 
     public void putItemInCart(long itemID, String customerName, long amount);
+
+    public void addItemAndResizeImage(Item item, MultipartFile image, int width, int height) throws IOException;
 }

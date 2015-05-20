@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-md-3">
                             <form:form method="delete" action="carouselController/delete/${image.id}">
-                                <button type="submit" class="btn btn-primary"> Delete </button>
+                                <button type="submit" class="btn btn-primary"> <- Delete this image </button>
                             </form:form>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                     <form:form method="post" action="carouselController/addNewImage" commandName="homePageImage"
                                enctype="multipart/form-data">
                         <div class="form-group">
-                            <label>Item Image:</label>
+                            <label>Add new Image</label>
                             <input type="file" name="file" class="form-control" accept="image/*">
                             <p>All images will be resized to 1500x430 resolution!</p>
                         </div>

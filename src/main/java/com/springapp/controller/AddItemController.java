@@ -24,9 +24,6 @@ public class AddItemController {
     @Autowired
     private ItemService itemService;
 
-    @Autowired
-    private ImageResizer imageResizer;
-
     @RequestMapping(value = "addItem", method = RequestMethod.GET)
     public Item item() {
         return new Item();
@@ -40,8 +37,7 @@ public class AddItemController {
         }
 
         try {
-            item.setItemName(item.getItemName());
-            item.setImage(imageResizer.resizeImage(file.getBytes(), 240, 150));
+            itemService.addItemAndResizeImage(item, file, 240, 150);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("No Image ???");
@@ -49,8 +45,6 @@ public class AddItemController {
         catch (NullPointerException e) {
             return new ModelAndView("addItem", "notAnImage", "Woops! seams like it's not an image!");
         }
-
-        itemService.addItem(item);
 
         return new ModelAndView("redirect:/shop");
     }

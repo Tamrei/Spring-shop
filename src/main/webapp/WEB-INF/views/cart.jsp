@@ -16,15 +16,28 @@
         <%@ include file="../../resources/css/custom.css" %>
         <%@ include file="../../resources/css/box.css" %>
     </style>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
+    <script>
+
+        $(document).ready(function () {
+            var url = window.location.href; // get current url
+            if(url.endsWith('#error')) {
+                $('#order').modal('show');
+                $('#invalidFormAlert').show();
+            }
+            else $('#invalidFormAlert').hide();
+        });
+    </script>
 </head>
 
 <body>
 <div class="container">
 
     <jsp:include page="${request.contextPath}/navbar"></jsp:include>
+
+    
 
 
     <div class="panel panel-login">
@@ -132,15 +145,24 @@
                 }
             </script>
 
-            <!-- out update form -->
+            <!-- our buy form -->
             <div id="order" class="modal fade">
                 <div class="modal-dialog" style="padding-top: 165px;">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                            <h4 id="modal-label"> Order </h4>
+
+                            <h4 id="modal-label"> Make order <small id="totalPrice"> test  </small> </h4>
                         </div>
                         <div class="modal-body">
+
+                            <div class="bs-example" id="invalidFormAlert">
+                                <div class="alert alert-danger alert-error">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong>Error!</strong> Woops !
+                                </div>
+                            </div>
+
                             <form:form action="makePurchase" commandName="address" method="post" role="form">
 
                                 <div class="form-group error">

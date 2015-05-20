@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -21,13 +22,21 @@ public class MakePurchaseController {
     private PurchaseService purchaseService;
 
     @RequestMapping(value = "makePurchase", method = RequestMethod.POST)
-    public String makeOrder(@ModelAttribute("address") @Valid Address address, BindingResult result, @ActiveUser User activeUser) {
+    public ModelAndView makeOrder(@ModelAttribute("address") @Valid Address address, BindingResult result, @ActiveUser User activeUser) {
         if(result.hasErrors()) {
-
+            /*
+            var url = window.location.href; // get current url
+            if(url.endsWith('#error')) {
+                $('#order').modal('show');
+            }
+             */
+            // If form is not valid JavaScript will automatically
+            // open the modal with this form.
+            return new ModelAndView("redirect:/cart#error");
         }
         purchaseService.makeOrder(address, activeUser.getUsername());
 
-        return "redirect:/cart";
+        return new ModelAndView("redirect:/cart");
     }
 
 }

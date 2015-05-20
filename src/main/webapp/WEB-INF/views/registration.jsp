@@ -11,28 +11,6 @@
         <%@ include file="../../resources/css/custom.css" %>
         <%@ include file="../../resources/css/box.css" %>
 
-        #center {
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 5%;
-            width: 25%;
-        }
-
-        #border {
-            border-radius: 4px;
-        }
-
-        #center_input {
-
-        }
-
-        .panel-registratin {
-            border-color: #ccc;
-            -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
-            -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
-            box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
-        }
-
     </style>
 
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
@@ -56,7 +34,6 @@
             </c:if>
 
             <c:if test="${!empty userExist }">
-                <div class="error"><c:out value="${userExist}"/></div>
                 <div class="bs-example">
                     <div class="alert alert-danger alert-error">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>

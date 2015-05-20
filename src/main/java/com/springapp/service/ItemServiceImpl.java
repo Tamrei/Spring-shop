@@ -9,6 +9,7 @@ import com.springapp.util.ImageResizerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,17 +33,17 @@ public class ItemServiceImpl implements ItemService {
     /**
      * This method adds purchase data in database
      *
-     * @param itemID id of the item that was bought
+     * @param itemID       id of the item that was bought
      * @param customerName who bought this item
-     * @param amount amount of the item
+     * @param amount       amount of the item
      */
     @Override
     @Transactional
     public void putItemInCart(long itemID, String customerName, long amount) {
         Cart newCart = new Cart(itemID, customerName, amount);
 
-        for(Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
-            if(cart.getItemID() == newCart.getItemID()) {
+        for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
+            if (cart.getItemID() == newCart.getItemID()) {
                 cart.setAmount(newCart.getAmount() + cart.getAmount());
                 purchaseDAO.update(cart);
                 return;
@@ -59,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public void deleteItem(long id){
+    public void deleteItem(long id) {
         itemDAO.delete(id);
     }
 
@@ -71,14 +72,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @Transactional
     public void addItem(Item item) {
-        try {
-            item.setImage(imageResizer.resizeImage(item.getImage(), 200, 125));
-            itemDAO.add(item);
-        } catch (IOException e) {
-
-        }
-
-
+        itemDAO.add(item);
     }
 
     @Override
@@ -91,5 +85,12 @@ public class ItemServiceImpl implements ItemService {
     @Transactional
     public void updateItem(Item item) {
         itemDAO.update(item);
+    }
+
+    @Override
+    @Transactional
+    public void addItemAndResizeImage(Item item, MultipartFile image, int width, int height) throws IOException{
+        item.setImage(imageResizer.resizeImage(image.getBytes(), width, height)); //set resized image
+        itemDAO.add(item);
     }
 }

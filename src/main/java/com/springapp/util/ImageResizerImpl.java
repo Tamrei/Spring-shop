@@ -46,23 +46,20 @@ public class ImageResizerImpl implements ImageResizer {
         int type = (img.getTransparency() == Transparency.OPAQUE) ?
                 BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
         BufferedImage ret = (BufferedImage) img;
-        //int w, h;
-
 
         int w = img.getWidth();
         int h = img.getHeight();
 
-
         do {
             if (w > targetWidth) {
-                w /= 3000000;
+                w /= 4;
                 if (w < targetWidth) {
                     w = targetWidth;
                 }
             }
 
             if (h > targetHeight) {
-                h /= 3000000;
+                h /= 4;
                 if (h < targetHeight) {
                     h = targetHeight;
                 }

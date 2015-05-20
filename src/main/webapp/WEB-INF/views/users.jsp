@@ -15,12 +15,13 @@
         <%@ include file="../../resources/css/custom.css" %>
         <%@ include file="../../resources/css/box.css" %>
     </style>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
+
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
 
 </head>
-<body style="padding: 1rem;">
+<body>
 
 
 <div class="container">
@@ -70,7 +71,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Action</a></li>
                                     <form:form action="http://localhost:8080/users/${user.id}">
-                                    <li><input type="submit" name="submit" value="enable/disable">Enable / Disable</li>
+                                    <li><a href="#" type="submit">Click!</a></li>
                                     </form:form>
                                 </ul>
                             </div>
@@ -83,7 +84,6 @@
         </table>
     </div>
 </div>
-
 
 </body>
 </html>
