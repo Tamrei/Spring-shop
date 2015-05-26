@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Date;
@@ -30,18 +31,16 @@ public class ShopController {
 
     @RequestMapping(value = "shop")
     public String itemsList(ModelMap modelMap) {
-        modelMap.put("item", new Item());
+        //modelMap.put("item", new Item());
         modelMap.put("items", itemService.getAllItems());
 
         return "shop";
     }
 
-    @RequestMapping(value = "shop/{itemID}", method = RequestMethod.POST)
-    public String putItemInTheCart(@PathVariable Integer itemID, @ActiveUser User activeUser,
-                                   @RequestParam("amount") long amount) {
+    @RequestMapping(value = "/putItemInTheCart", method = RequestMethod.POST)
+    public @ResponseBody
+    void putItemInTheCart(@RequestParam("itemID") Integer itemID, @RequestParam("amount") long amount, @ActiveUser User activeUser) {
         itemService.putItemInCart(itemID, activeUser.getUsername(), amount);
-
-        return "redirect:/shop#put";
     }
 
     @RequestMapping(value = "shop/img/{itemID}")
@@ -69,27 +68,4 @@ public class ShopController {
 
         return "redirect:/shop";
     }
-
-    @Autowired
-    private HomePageImageService homePageImageService;
-
-    @ModelAttribute(value = "sliderImages")
-    public void getSliderImages(ModelMap modelMap) {
-        modelMap.addAttribute("sliderImages", homePageImageService.getAllHomePageImages());
-    }
-
-    @RequestMapping(value = "shop/slider/{id}")
-    @Transactional
-    public void displaySliderImage(@PathVariable Integer id, HttpServletResponse response) {
-        HomePageImage homePageImage = homePageImageService.getHomePageImage(id);
-        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-        try {
-            response.getOutputStream().write(homePageImage.getImage());
-            response.getOutputStream().close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

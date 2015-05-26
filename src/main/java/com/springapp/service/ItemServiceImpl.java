@@ -90,7 +90,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @Transactional
     public void addItemAndResizeImage(Item item, MultipartFile image, int width, int height) throws IOException{
-        item.setImage(imageResizer.resizeImage(image.getBytes(), width, height)); //set resized image
+        item.setImage(imageResizer.resizeImage(image.getBytes(), width, height));
         itemDAO.add(item);
     }
 }

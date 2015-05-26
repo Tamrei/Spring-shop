@@ -29,4 +29,6 @@
         <beans:property name="maxUploadSize" value="100000000"/>
     </beans:bean>
 
+    <mvc:view-controller path="/redirect:/shop" view-name="/shop"/>
+
 </beans:beans>

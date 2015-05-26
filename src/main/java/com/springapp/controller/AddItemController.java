@@ -38,6 +38,7 @@ public class AddItemController {
 
         try {
             itemService.addItemAndResizeImage(item, file, 240, 150);
+            System.out.println("File Name : " + file.getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("No Image ???");

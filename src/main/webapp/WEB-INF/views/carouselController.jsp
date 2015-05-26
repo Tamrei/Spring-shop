@@ -20,13 +20,33 @@
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
+    <script>
+        $(document).ready(function () {
+
+
+        });
+    </script>
 
 </head>
 <body>
 <!-- Page Content -->
+
+<script>
+    /*$.ajax({
+        type: "Get",
+        url: 'homePageImages.html',
+        success: function (data) {
+
+        },
+        error : function (e) {
+            alert("-");
+        }
+    });*/
+</script>
+
 <div class="container">
 
-    <jsp:include page="${request.contextPath}/navbar"></jsp:include>
+    <jsp:include page="static/navbar.jsp" flush="true"/>
 
     <c:if test="${not empty notAnImage}">
         <div class="bs-example">
@@ -50,6 +70,8 @@
             </div>
             <!-- /.row -->
 
+
+
             <!-- Projects Row -->
             <div class="row">
                 <c:forEach items="${homePageImages}" var="image">
@@ -57,19 +79,40 @@
                     <div style="padding-bottom: 300px;">
                         <div class="col-md-8">
                             <a href="#">
-                                <img src="carouselController/img/${image.id}" width="700" height="300"
+                                <img src="homePageImage/img/${image.id}" width="700" height="300"
                                      class="img-rounded"/>
+
                             </a>
                         </div>
                         <div class="col-md-3">
                             <form:form method="delete" action="carouselController/delete/${image.id}">
                                 <button type="submit" class="btn btn-primary"> <- Delete this image </button>
                             </form:form>
+
                         </div>
                     </div>
                     <hr>
 
                 </c:forEach>
+
+                <script>
+                    function deleteImage(id) {
+                        $.ajax({
+                            type: "Post",
+                            url: 'carouselController/delete.html',
+                            data: "id=" + id,
+                            success: function (data) {
+
+                            },
+                            error : function (e) {
+                                alert("-");
+                            }
+                        });
+                    }
+
+
+                    //carouselController/delete
+                </script>
 
                 <div class="col-md-8">
                     <a href="#">

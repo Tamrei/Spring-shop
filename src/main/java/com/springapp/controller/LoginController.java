@@ -28,9 +28,9 @@ public class LoginController {
         return model;
     }
 
-    @RequestMapping(value = "")
+    /*@RequestMapping(value = "")
     public String homePage() {
         return "redirect:/shop";
-    }
+    }*/
 
 }

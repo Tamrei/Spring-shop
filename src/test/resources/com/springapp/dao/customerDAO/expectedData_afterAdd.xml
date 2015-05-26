@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <customer customerID="1" username="customer1" password="123" role="USER" enabled="false" />
+    <customer customerID="2" username="customer2" password="1234" role="ADMIN" enabled="true"/>
+    <customer customerID="3" username="customer3" password="12345" role="USER" enabled="true"/>
+
+    <item/>
+    <cart/>
+    <address/>
+    <purchase/>
+</dataset>

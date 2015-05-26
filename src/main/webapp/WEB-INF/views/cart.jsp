@@ -35,10 +35,7 @@
 <body>
 <div class="container">
 
-    <jsp:include page="${request.contextPath}/navbar"></jsp:include>
-
-    
-
+    <jsp:include page="static/navbar.jsp" flush="true"/>
 
     <div class="panel panel-login">
         <div class="panel-body">

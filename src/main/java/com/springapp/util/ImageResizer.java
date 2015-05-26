@@ -1,5 +1,7 @@
 package com.springapp.util;
 
+import com.springapp.exceptions.ImageFormatException;
+
 import java.io.IOException;
 
 

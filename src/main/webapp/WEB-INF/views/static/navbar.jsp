@@ -18,17 +18,14 @@
 
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script>
+    <script src="<c:url value="/resources/js/ajax.js" />"></script>
+<sec:authorize access="isAuthenticated()">
+<script>
         $(document).ready(function () {
-            $.ajax({
-                url: 'ajaxtest.html',
-                success: function (data) {
-                    alert(data);
-                    $('#cartCount').text(data);
-                }
-            });
+            showCartCount('cartCount');
         });
     </script>
+</sec:authorize>
 
 </head>
 <body>
@@ -41,7 +38,7 @@
 
         <ul class="nav navbar-nav">
             <li role="presentation"><a href="/cart">Cart <sec:authorize access="isAuthenticated()"> <span
-                    class="badge" id="cartCount"> ${cartCount}  </span> </sec:authorize> </a></li>
+                    class="badge" id="cartCount"> </span> </sec:authorize> </a></li>
 
             <li role="presentation"><a href="/myPurchases">My purchases</a></li>
 

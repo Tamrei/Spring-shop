@@ -4,12 +4,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "homepageimage")
 @Proxy(lazy = false)
 //@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
-public class HomePageImage {
+public class HomePageImage implements Serializable {
 
     @Id
     @GenericGenerator(name = "id_generator", strategy = "increment")

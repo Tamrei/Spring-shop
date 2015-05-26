@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <address addressID="1" ownerUsername="testName1" city="testCity1" street="testStreet1" />
+    <address addressID="2" ownerUsername="testName2" city="testCity2" street="testStreet2" />
+
+    <item/>
+    <cart/>
+    <customer/>
+    <purchase/>
+</dataset>

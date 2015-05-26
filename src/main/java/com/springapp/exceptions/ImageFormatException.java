@@ -1,5 +1,5 @@
 package com.springapp.exceptions;
 
 
-public class ImageFormatException extends NullPointerException {
+public class ImageFormatException extends RuntimeException {
 }

@@ -1,5 +1,7 @@
 package com.springapp.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "cart")
 @org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Cart implements Serializable {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")

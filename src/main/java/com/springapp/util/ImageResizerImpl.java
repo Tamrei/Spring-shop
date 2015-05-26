@@ -4,6 +4,7 @@ package com.springapp.util;
 import com.springapp.exceptions.ImageFormatException;
 import org.imgscalr.Scalr;
 import org.springframework.stereotype.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -42,37 +43,41 @@ public class ImageResizerImpl implements ImageResizer {
      *                     {@code RenderingHints.VALUE_INTERPOLATION_BICUBIC})
      */
     private BufferedImage getScaledInstance(BufferedImage img, int targetWidth, int targetHeight, Object hint) {
-
         int type = (img.getTransparency() == Transparency.OPAQUE) ?
                 BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
         BufferedImage ret = (BufferedImage) img;
 
-        int w = img.getWidth();
-        int h = img.getHeight();
+        int imgWidth = img.getWidth();
+        int imgHeight = img.getHeight();
 
-        do {
-            if (w > targetWidth) {
-                w /= 4;
-                if (w < targetWidth) {
-                    w = targetWidth;
+        if (imgWidth < targetWidth || imgHeight < targetHeight) {
+            imgWidth = targetWidth;
+            imgHeight = targetHeight;
+        } else {
+            while (imgWidth != targetWidth || imgHeight != targetHeight) {
+                if (imgWidth > targetWidth) {
+                    imgWidth /= 2;
+                    if (imgWidth < targetWidth) {
+                        imgWidth = targetWidth;
+                    }
+                }
+
+                if (imgHeight > targetHeight) {
+                    imgHeight /= 2;
+                    if (imgHeight < targetHeight) {
+                        imgHeight = targetHeight;
+                    }
                 }
             }
+        }
 
-            if (h > targetHeight) {
-                h /= 4;
-                if (h < targetHeight) {
-                    h = targetHeight;
-                }
-            }
+        BufferedImage tmp = new BufferedImage(imgWidth, imgHeight, type);
+        Graphics2D g2 = tmp.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
+        g2.drawImage(ret, 0, 0, imgWidth, imgHeight, null);
+        g2.dispose();
 
-            BufferedImage tmp = new BufferedImage(w, h, type);
-            Graphics2D g2 = tmp.createGraphics();
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
-            g2.drawImage(ret, 0, 0, w, h, null);
-            g2.dispose();
-
-            ret = tmp;
-        } while (w != targetWidth || h != targetHeight);
+        ret = tmp;
 
         return ret;
     }

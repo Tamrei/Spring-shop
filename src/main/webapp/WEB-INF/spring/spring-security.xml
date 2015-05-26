@@ -16,7 +16,14 @@
         <intercept-url pattern="/addItem" access="isAuthenticated()" />
         <intercept-url pattern="/purchases" access="isAuthenticated()" />
         <intercept-url pattern="/users" access="isAuthenticated()" />
+
+        <intercept-url pattern="/static/navbar" access="isAuthenticated()" />
+        <intercept-url pattern="/cartCount" access="isAuthenticated()" />
         <!--<intercept-url pattern="/shop" access="isAuthenticated()" />-->
+
+        <session-management>
+            <concurrency-control expired-url="/login?logout"/>
+        </session-management>
 
         <form-login
                 login-page="/login"

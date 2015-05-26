@@ -47,7 +47,6 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @Transactional
     public Map<Item, Cart> getAllItemsInTheCart(long cartID) {
-        //Purchase purchase = (Purchase) purchaseDAO.get(cartID);
         Map<Item, Cart> map = new HashMap<Item, Cart>();
 
         for(Cart cart : cartDAO.getCartsForPurchase(cartID)) {
@@ -99,7 +98,6 @@ public class PurchaseServiceImpl implements PurchaseService {
         totalPrice = (double)Math.round(totalPrice * 1000) / 1000;
         purchase.setPrice(totalPrice);
         purchaseDAO.update(purchase);
-
     }
 
     /**

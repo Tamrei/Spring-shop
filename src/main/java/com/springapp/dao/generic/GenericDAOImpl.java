@@ -41,7 +41,6 @@ public class GenericDAOImpl<T, PK extends Serializable>
     @Override
     @Transactional
     public T get(PK id) {
-        //System.out.println("[Generic DAO] GET ID: " + id);
         return (T) getSession().load(type, id);
     }
 

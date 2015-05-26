@@ -25,10 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public void enableDisableUser(long customerID) {
         Customer customer = customerDAO.getByID(customerID);
-        if(customer.isEnabled()){
+        if (customer.isEnabled()) {
             customer.setEnabled(false);
-        }
-        else customer.setEnabled(true);
+        } else customer.setEnabled(true);
 
         customerDAO.updateCustomer(customer);
     }
@@ -42,10 +41,10 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     @Transactional
-    public void registerNewCustomer(Customer customer) throws UserAlreadyExistsException{
+    public void registerNewCustomer(Customer customer) throws UserAlreadyExistsException {
         List<Customer> customerList = customerDAO.getAllCustomers();
-        for(Customer customers : customerList) {
-            if(customer.getUsername().equals(customers.getUsername())) {
+        for (Customer customers : customerList) {
+            if (customer.getUsername().equals(customers.getUsername())) {
                 throw new UserAlreadyExistsException();
             }
         }
