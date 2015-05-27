@@ -93,7 +93,7 @@ public class TestShopController {
         SecurityContextHolder.getContext().setAuthentication(testingAuthenticationToken);
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void list() throws Exception {
         mockMvc.perform(get("/shop"))
@@ -101,10 +101,10 @@ public class TestShopController {
                 .andDo(print())
                 .andExpect(forwardedUrl("/WEB-INF/views/shop.jsp"));
 
-        //verify(itemService).getAllItems();
+        verify(itemService).getAllItems();
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void TestUpdateItem() throws Exception{
         MockMultipartFile file = new MockMultipartFile("file", "image1.jpg", null, "image".getBytes());
@@ -123,10 +123,10 @@ public class TestShopController {
                 .param("price", "999"))
                 .andExpect(redirectedUrl("/shop"));
 
-        //verify(itemService).updateItem(item);
+        verify(itemService).updateItem(item);
     }
 
-    @Ignore
+    //@Ignore
     @Test
     @SuppressWarnings("unchecked")
     public void testBuyItem() throws Exception {
@@ -137,6 +137,6 @@ public class TestShopController {
                 .param("amount", "18"))
                 .andExpect(view().name("redirect:/shop"));
 
-        //verify(itemService).fputItemToTheCart(itemID, "Test", 18);
+        //verify(itemService).putItemToTheCart(itemID, "Test", 18);
     }
 }

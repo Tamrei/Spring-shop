@@ -1,6 +1,8 @@
 package com.springapp.controller;
 
 import com.springapp.anotation.ActiveUser;
+import com.springapp.model.Customer;
+import com.springapp.model.Item;
 import com.springapp.service.CartService;
 import com.springapp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
+
 @Controller
 public class UserController {
 
@@ -21,19 +25,21 @@ public class UserController {
     @RequestMapping("users")
     public String usersList(ModelMap modelMap)  {
         modelMap.put("users", customerService.getAllCustomers());
+
         return "users";
     }
 
     @RequestMapping(value = "users/{id}", method = RequestMethod.POST)
     public String enableDisableUser(@PathVariable Integer id) {
         customerService.enableDisableUser(id);
-        return "redirect:";
+
+        return "redirect:/users";
     }
 
     @RequestMapping(value = "users/delete/{id}", method = RequestMethod.DELETE)
     public String deleteUser(@PathVariable Integer id) {
         customerService.deleteCustomer(id);
+
         return "redirect:/users";
     }
-
 }

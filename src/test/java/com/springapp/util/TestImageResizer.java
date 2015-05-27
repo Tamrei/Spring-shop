@@ -17,6 +17,8 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
@@ -29,15 +31,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-/*@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(locations = {"file:src/test/resources/context/data-test.xml"})
-@TestExecutionListeners({
-        DependencyInjectionTestExecutionListener.class,
-        DbUnitTestExecutionListener.class,
-        TransactionalTestExecutionListener.class})
-@SuppressWarnings("unchecked")
-@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)*/
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
@@ -74,29 +68,4 @@ public class TestImageResizer {
         assertEquals(desiredImage.getWidth(), desiredWidth);
         assertEquals(desiredImage.getHeight(), desiredHeight);
     }
-
-    @Test
-    public void testResizeImage_NullImage() throws Exception {
-        final int desiredWidth = 480;
-        final int desiredHeight = 300;
-
-        final String path = getClass().getResource("test_image_350x282.jpg").getPath();
-
-        System.out.println(path);
-
-        BufferedImage image = ImageIO.read(new File(path));
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "jpg", baos);
-
-        byte[] imageInByte = baos.toByteArray();
-
-        byte[] resizedImage = imageResizer.resizeImage(imageInByte, desiredWidth, desiredHeight);
-
-        BufferedImage desiredImage = ImageIO.read(new ByteArrayInputStream(resizedImage));
-
-        assertEquals(desiredImage.getWidth(), desiredWidth);
-        assertEquals(desiredImage.getHeight(), desiredHeight);
-    }
-
 }

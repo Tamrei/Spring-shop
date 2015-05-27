@@ -97,4 +97,24 @@ public class TestAddItemController {
         verify(itemService).addItemAndResizeImage(item, file, 240, 150);
 
     }
+
+    @Test
+    public void TestAddItem_NullFile() throws Exception{
+        MockMultipartFile file = new MockMultipartFile("file", "image1.jpg", null, "".getBytes());
+
+        Item item = new Item();
+        item.setItemName("TestName");
+        item.setType("TestType");
+        item.setPrice(999);
+        item.setImage(file.getBytes());
+
+        mockMvc.perform(fileUpload("/createItem").file(file)
+                .param("itemName", "TestName")
+                .param("type", "TestType")
+                .param("price", "999"))
+                .andExpect(redirectedUrl("/shop"));
+
+        verify(itemService).addItemAndResizeImage(item, file, 240, 150);
+
+    }
 }

@@ -112,6 +112,7 @@
                         </div>
 
                         <script>
+                            // cont total price
                             var pricePerOne = ${purchase.key.price};
                             var amount = ${purchase.value.amount};
                             var totalPrice = pricePerOne * amount;
@@ -149,7 +150,10 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 
-                            <h4 id="modal-label"> Make order <small id="totalPrice"> test  </small> </h4>
+                            <h4 id="modal-label"> Make order <small id="totalPriceHeader"></small> </h4>
+                            <script>
+                                $("#totalPriceHeader").text("Total price: " + price + "$");
+                            </script>
                         </div>
                         <div class="modal-body">
 

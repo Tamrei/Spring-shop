@@ -6,6 +6,7 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="a" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="td" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -26,7 +27,7 @@
 
 <div class="container">
 
-    <jsp:include page="${request.contextPath}/navbar"></jsp:include>
+    <jsp:include page="static/navbar.jsp" flush="true"/>
 
     <input type="search" id="searchByUsername" class="form-control" style="margin-bottom:15px;"
            placeholder="Search by username" onkeyup="searchValue('#username', this.id)">
@@ -37,7 +38,9 @@
             <tr>
                 <th>ID</th>
                 <th>Username</th>
-                <sec:authorize access="hasRole('ADMIN')"><th>Password</th></sec:authorize>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <th>Password</th>
+                </sec:authorize>
                 <th>Role</th>
                 <th>Status</th>
             </tr>
@@ -48,8 +51,11 @@
                 <tr>
                     <td> ${user.id} </td>
                     <td id="username"> ${user.username} </td>
-                    <sec:authorize access="hasRole('ADMIN')"><td> ${user.password} </td></sec:authorize>
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <td> ${user.password} </td>
+                    </sec:authorize>
                     <td> ${user.role} </td>
+
                     <c:choose>
                         <c:when test="${user.enabled == true}">
                             <td><font color="blue"> enabled </font></td>
@@ -58,24 +64,49 @@
                             <td><font color="red"> disabled </font></td>
                         </c:otherwise>
                     </c:choose>
+
                     <sec:authorize access="hasRole('ADMIN')">
+                        <c:set var="userName"><security:authentication property="name"/></c:set>
+                        <!-- control pane -->
                         <td>
-                            <form:form action="http://localhost:8080/users/${user.id}">
-                                <input type="submit" name="submit" class="btn btn-default" value="enable/disable">
-                            </form:form>
-                            <form:form method="delete" action="users/delete/${user.id}">
-                                <input type="submit" name="submit" class="btn btn-default" value="delete">
-                            </form:form>
-                            <div class="btn-group">
-                                <button type="button" data-toggle="dropdown" class="btn btn-default"> Options <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
+                            <c:choose>
+                                <c:when test="${userName == user.username}">
+                                    <p>Sorry, but you cant </p>
+                                    <p>delete or disable yourself</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="pull-right">
+                                        <form:form action="http://localhost:8080/users/${user.id}">
+                                            <input type="submit" name="submit" class="btn btn-default"
+                                                   value="enable/disable">
+                                        </form:form>
+
+                                        <form:form method="delete" action="users/delete/${user.id}">
+                                            <input type="submit" name="submit" class="btn btn-default" value="delete">
+                                        </form:form>
+                                    </p>
+                                    <!--<div class="btn-group">
+                                    <button type="button" data-toggle="dropdown" class="btn btn-default"> Options <span
+                                    class="caret"></span></button>
+                                    <ul class="dropdown-menu">
                                     <li><a href="#">Action</a></li>
-                                    <form:form action="http://localhost:8080/users/${user.id}">
-                                    <li><a href="#" type="submit">Click!</a></li>
+                                    <form:form action="http://localhost:8080/users/${user.id}" method="post"
+                                               commandName="customer">
+                                        <li><input type="submit" name="submit" class="btn btn-default"
+                                        value="enable/disable"></li>
                                     </form:form>
-                                </ul>
-                            </div>
+                                    <li>
+
+                                    </li>
+                                    </ul>
+                                    </div>-->
+
+                                </c:otherwise>
+
+                            </c:choose>
+                            <!-- control pane -->
                         </td>
+
                     </sec:authorize>
                 </tr>
             </c:forEach>

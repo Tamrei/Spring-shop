@@ -19,16 +19,18 @@
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
     <script src="<c:url value="/resources/js/ajax.js" />"></script>
+
+</head>
+<body>
+
 <sec:authorize access="isAuthenticated()">
-<script>
+    <script>
         $(document).ready(function () {
             showCartCount('cartCount');
         });
     </script>
 </sec:authorize>
 
-</head>
-<body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
 

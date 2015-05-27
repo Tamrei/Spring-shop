@@ -31,6 +31,11 @@
             padding-left: 5px;
         }
 
+        .pagination > li > a, .pagination > li > span {
+            border-radius: 50% !important;
+            margin: 0 5px;
+        }
+
     </style>
 
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
@@ -75,6 +80,7 @@
         async: false,
         success: function (data) {
             //alert("+");
+            //$(document).ajaxStop(function() { location.reload(true); });
         },
         error: function (e) {
             alert("-");
@@ -132,148 +138,145 @@
 <div class="panel panel-login">
 <div class="panel-body">
 
-    <!-- Page Header -->
-    <div class="row">
-        <div class="col-lg-12">
-            <h2 class="page-header"> Shop </h2>
-        </div>
+<!-- Page Header -->
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header"> Shop </h2>
     </div>
+</div>
 
-    <dl class="dl-horizontal" style="padding-top: 1%">
-        <dt>
+<dl class="dl-horizontal" style="padding-top: 1%">
+    <dt>
 
-        <div class="list-group" id="searchBar">
-            <a href="#" class="list-group-item active" id="All">All</a>
-            <a href="#" class="list-group-item" id="Fruit">Fruit</a>
-            <a href="#" class="list-group-item" id="Drink">Drink</a>
-            <a href="#" class="list-group-item" id="Vegetables">Vegetables</a>
-            <a href="#" class="list-group-item" id="Diary-products">Dairy-products</a>
-            <a href="#" class="list-group-item" id="Chocolate">Chocolate</a>
-            <a href="#" class="list-group-item" id="Chips">Chips</a>
+    <div class="list-group" id="searchBar">
+        <a href="#" class="list-group-item active" id="All">All</a>
+        <a href="#" class="list-group-item" id="Fruit">Fruit</a>
+        <a href="#" class="list-group-item" id="Drink">Drink</a>
+        <a href="#" class="list-group-item" id="Vegetables">Vegetables</a>
+        <a href="#" class="list-group-item" id="Diary-products">Dairy-products</a>
+        <a href="#" class="list-group-item" id="Chocolate">Chocolate</a>
+        <a href="#" class="list-group-item" id="Chips">Chips</a>
 
-        </div>
-        </dt>
-        <dd>
+    </div>
+    </dt>
+    <dd>
 
 
-            <input type="search" id="searchByItemName" class="form-control" style="margin-bottom:15px;"
-                   placeholder="Search by item name" onkeyup="searchValue('#itemName', this.id)">
+        <input type="search" id="searchByItemName" class="form-control" style="margin-bottom:15px;"
+               placeholder="Search by item name" onkeyup="searchValue('#itemName', this.id)">
 
-            <div class="row">
-                <c:forEach items="${items}" var="item">
-                    <div class="type" id="${item.type}">
-                        <div class="col-sm-6 col-md-3" id="${item.type}">
-                            <!--<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">-->
-                            <div class="thumbnail" style="height: 220px;">
-                                <img src="/shop/img/${item.itemID}"
-                                     id="img-rounded">
-                                <!--<img src="http://placehold.it/240x150" class="img-responsive" />-->
+        <div class="row">
+            <c:forEach items="${items}" var="item">
+                <div class="type" id="${item.type}">
+                    <div class="col-sm-6 col-md-3" id="${item.type}">
+                        <!--<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">-->
+                        <div class="thumbnail" style="height: 220px;">
+                            <img src="/shop/img/${item.itemID}"
+                                 id="img-rounded">
+                            <!--<img src="http://placehold.it/240x150" class="img-responsive" />-->
 
-                                <div class="caption">
-                                    <h4 class="pull-right">$${item.price}</h4>
-                                    <h4 id="itemName">${item.itemName}</h4>
+                            <div class="caption">
+                                <h4 class="pull-right">$${item.price}</h4>
+                                <h4 id="itemName">${item.itemName}</h4>
 
-                                    <p>
-                                        <a data-toggle="modal" role="button" class="btn btn-primary"
-                                           href="#buy${item.itemID}">Buy</a>
-                                        <sec:authorize access="hasRole('ADMIN')"><a data-toggle="modal"
-                                                                                    role="button"
-                                                                                    class="btn btn-default"
-                                                                                    href="#update${item.itemID}">Edit
-                                            form</a></sec:authorize>
-                                    </p>
-                                </div>
+                                <p>
+                                    <a data-toggle="modal" role="button" class="btn btn-primary"
+                                       href="#buy${item.itemID}">Buy</a>
+                                    <sec:authorize access="hasRole('ADMIN')"><a data-toggle="modal"
+                                                                                role="button"
+                                                                                class="btn btn-default"
+                                                                                href="#update${item.itemID}">Edit
+                                        form</a></sec:authorize>
+                                </p>
                             </div>
+                        </div>
 
-
-
-                            <!-- out update form -->
-                            <div id="update${item.itemID}" class="modal fade">
-                                <div class="modal-dialog" style="padding-top: 165px;">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">x
-                                            </button>
-                                            <h4 id="modal-label">Update ${item.itemName}</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form:form method="post" action="/shop/update/${item.itemID}"
-                                                       commandName="item" enctype="multipart/form-data">
-                                                <div class="form-group">
-                                                    <label>Old Item Name: ${item.itemName} </label>
-                                                    <input type="text" name="itemName" class="form-control"
-                                                           placeholder="Enter Item Name"
-                                                           value="${item.itemName}">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Old Type: ${item.type} </label>
-                                                    <input type="text" name="type" class="form-control"
-                                                           placeholder="Enter Item Name" value="${item.type}">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Old Price: ${item.price} </label>
-                                                    <input type="number" name="price"
-                                                           class="form-control bfh-number" placeholder="Price"
-                                                           value="${item.price}">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Item Image:</label>
-                                                    <input type="file" name="file" class="form-control"
-                                                           value="Test">
-                                                </div>
-
-
-                                                <button type="submit" id="sub">Submit</button>
-                                            </form:form>
-                                        </div>
+                        <!-- out update form -->
+                        <div id="update${item.itemID}" class="modal fade">
+                            <div class="modal-dialog" style="padding-top: 165px;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">x
+                                        </button>
+                                        <h4 id="modal-label">Update ${item.itemName}</h4>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- out update form -->
-
-
-                            <!-- our buy form -->
-                            <!-- Modal -->
-                            <div id="buy${item.itemID}" class="modal fade">
-                                <div class="modal-dialog" style="padding-top: 165px;">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">x
-                                            </button>
-                                            <h4 id="modal-label2">Buy ${item.itemName}</h4>
-                                        </div>
-                                        <div class="modal-body" style="padding-bottom: 35px;">
-                                            <img src="/shop/img/${item.itemID}"
-                                                 class="img-rounded" width="180" height="120" id="left"/>
-
-                                            <div id="right" style="width: 65%;">
-
-                                                <label>Item Name: ${item.itemName} </label>
-                                                <input type="number" id="amount${item.itemID}" name="amount"
-                                                       class="form-control bfh-number"
-                                                       min="1" max="99999" value="1"
-                                                       placeholder="Amount">
-
-                                                <div id="priceInformation">
-                                                    <h4>Price for one ${item.price}</h4>
-                                                    <h4 id="result${item.itemID}"></h4>
-                                                </div>
+                                    <div class="modal-body">
+                                        <form:form method="post" action="/shop/update/${item.itemID}"
+                                                   commandName="item" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label>Old Item Name: ${item.itemName} </label>
+                                                <input type="text" name="itemName" class="form-control"
+                                                       placeholder="Enter Item Name"
+                                                       value="${item.itemName}">
                                             </div>
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary" id="putButton"
-                                                    onclick="putItemInCart(${item.itemID})"> Buy
-                                            </button>
+                                            <div class="form-group">
+                                                <label>Old Type: ${item.type} </label>
+                                                <input type="text" name="type" class="form-control"
+                                                       placeholder="Enter Item Name" value="${item.type}">
+                                            </div>
 
+                                            <div class="form-group">
+                                                <label>Old Price: ${item.price} </label>
+                                                <input type="number" name="price"
+                                                       class="form-control bfh-number" placeholder="Price"
+                                                       value="${item.price}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Item Image:</label>
+                                                <input type="file" name="file" class="form-control"
+                                                       value="Test">
+                                            </div>
+
+
+                                            <button type="submit" id="sub">Submit</button>
+                                        </form:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- out update form -->
+
+
+                        <!-- our buy form -->
+                        <!-- Modal -->
+                        <div id="buy${item.itemID}" class="modal fade">
+                            <div class="modal-dialog" style="padding-top: 165px;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">x
+                                        </button>
+                                        <h4 id="modal-label2">Buy ${item.itemName}</h4>
+                                    </div>
+                                    <div class="modal-body" style="padding-bottom: 35px;">
+                                        <img src="/shop/img/${item.itemID}"
+                                             class="img-rounded" width="180" height="120" id="left"/>
+
+                                        <div id="right" style="width: 65%;">
+
+                                            <label>Item Name: ${item.itemName} </label>
+                                            <input type="number" id="amount${item.itemID}" name="amount"
+                                                   class="form-control bfh-number"
+                                                   min="1" max="99999" value="1"
+                                                   placeholder="Amount">
+
+                                            <div id="priceInformation">
+                                                <h4>Price for one ${item.price}</h4>
+                                                <h4 id="result${item.itemID}"></h4>
+                                            </div>
                                         </div>
 
                                     </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" id="putButton"
+                                                onclick="putItemInCart(${item.itemID})"> Buy
+                                        </button>
+
+                                    </div>
+
                                 </div>
 
                                 <script>
@@ -299,31 +302,46 @@
                                     }
                                 </script>
 
-                                <script>
-                                    var itemID = "#${item.itemID}";
-                                    $('#amount${item.itemID}').on("input", function () {
-                                        var price = ${item.price};
-                                        var amount = ($("#amount${item.itemID}").val());
-                                        var total = price * amount;
-                                        var outputStr = "Price for " + amount + " is $" + total;
-
-                                        $("#result${item.itemID}").text(outputStr);
-                                    });
-                                    $("#sub${item.itemID}").on("click", function () {
-                                        $("#buy${item.itemID}").modal('hide');
-                                    });
-                                </script>
-
                             </div>
-                            <!-- our buy form -->
+
+
+
+                            <script>
+                                var itemID = "#${item.itemID}";
+                                $('#amount${item.itemID}').on("input", function () {
+                                    var price = ${item.price};
+                                    var amount = ($("#amount${item.itemID}").val());
+                                    var total = price * amount;
+                                    var outputStr = "Price for " + amount + " is $" + total;
+
+                                    $("#result${item.itemID}").text(outputStr);
+                                });
+                                $("#sub${item.itemID}").on("click", function () {
+                                    $("#buy${item.itemID}").modal('hide');
+                                });
+                            </script>
 
                         </div>
-                    </div>
+                        <!-- our buy form -->
 
-                </c:forEach>
-            </div>
-        </dd>
-    </dl>
+                    </div>
+                </div>
+
+            </c:forEach>
+        </div>
+
+        <ul class="pagination">
+            <li class="disabled"><a href="#">«</a></li>
+            <li class="active"><a href="#1">1 <span class="sr-only">(current)</span></a></li>
+            <li style=""><a href="#2">2</a></li>
+            <li><a href="#3">3</a></li>
+            <li><a href="#4">4</a></li>
+            <li><a href="#5">5</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+
+    </dd>
+</dl>
 </div>
 </div>
 

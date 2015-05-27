@@ -95,7 +95,7 @@ public class PurchaseServiceImpl implements PurchaseService {
             totalPrice += ((Item) itemDAO.get(cart.getItemID())).getPrice() * cart.getAmount();
         }
 
-        totalPrice = (double)Math.round(totalPrice * 1000) / 1000;
+        totalPrice = (double) Math.round(totalPrice * 1000) / 1000;
         purchase.setPrice(totalPrice);
         purchaseDAO.update(purchase);
     }

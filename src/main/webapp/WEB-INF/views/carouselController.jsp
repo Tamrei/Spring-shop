@@ -110,7 +110,6 @@
                         });
                     }
 
-
                     //carouselController/delete
                 </script>
 

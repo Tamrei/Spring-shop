@@ -1,5 +1,7 @@
 package com.springapp.model.site;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Proxy;
 
@@ -8,8 +10,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "homepageimage")
-@Proxy(lazy = false)
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+//@Proxy(lazy = false)
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class HomePageImage implements Serializable {
 
     @Id
