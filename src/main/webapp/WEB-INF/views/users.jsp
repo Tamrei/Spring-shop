@@ -77,12 +77,12 @@
                                 <c:otherwise>
                                     <p class="pull-right">
                                         <form:form action="http://localhost:8080/users/${user.id}">
-                                            <input type="submit" name="submit" class="btn btn-default"
+                                            <input type="submit" name="submit" class="btn btn-primary"
                                                    value="enable/disable">
                                         </form:form>
 
                                         <form:form method="delete" action="users/delete/${user.id}">
-                                            <input type="submit" name="submit" class="btn btn-default" value="delete">
+                                            <input type="submit" name="submit" class="btn btn-primary" value="delete">
                                         </form:form>
                                     </p>
                                     <!--<div class="btn-group">

@@ -7,10 +7,6 @@ body {
 
 
 /** bootstrap 'a' **/
-#32 {
-    color: #000004;
-    text-decoration: none
-}
 
 /** out custom table **/
 .table-curved {
@@ -19,7 +15,7 @@ body {
 
 .table-curved {
     border: solid #ccc 1px;
-    border-radius: 6px;
+    border-radius: 2px;
 }
 
 /** our custom input file **/

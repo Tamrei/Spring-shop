@@ -19,7 +19,7 @@
         }
 
         #img-rounded {
-            border-radius: 2px;
+            border-radius: 3px;
         }
 
         #right {
@@ -93,6 +93,10 @@
 
 <jsp:include page="static/navbar.jsp" flush="true"/>
 
+<div class="panel panel-login" style="margin-top: 20px">
+<div class="panel-body">
+
+
 <div class="bs-example" id="cartNotification" style="display:none;">
     <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -102,7 +106,8 @@
     </div>
 </div>
 
-<div style="padding-top: -50px; padding-bottom: 1%;">
+
+<div style="padding-bottom: 1%;">
     <!-- Header Carousel -->
     <header id="myCarousel" class="carousel slide">
         <!-- Wrapper for slides -->
@@ -124,7 +129,7 @@
 
         </div>
 
-        <!-- Controls -->
+        <!-- Carousel controls -->
         <a class="left carousel-control" href="#myCarousel" data-slide="prev">
             <span class="icon-prev"></span>
         </a>
@@ -135,8 +140,7 @@
 
 </div>
 
-<div class="panel panel-login">
-<div class="panel-body">
+
 
 <!-- Page Header -->
 <div class="row">
@@ -261,6 +265,7 @@
                                             <input type="number" id="amount${item.itemID}" name="amount"
                                                    class="form-control bfh-number"
                                                    min="1" max="99999" value="1"
+                                                   step="1" data-bind="value:replyNumber"
                                                    placeholder="Amount">
 
                                             <div id="priceInformation">
@@ -303,7 +308,6 @@
                                 </script>
 
                             </div>
-
 
 
                             <script>

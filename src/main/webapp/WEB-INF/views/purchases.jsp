@@ -82,7 +82,7 @@
                                             </select>
                                             <br>
 
-                                            <button class="btn btn-default" type="submit" id="sub">Submit</button>
+                                            <button class="btn btn-primary" type="submit" id="sub">Submit</button>
                                         </form:form>
                                     </div>
                                 </div>

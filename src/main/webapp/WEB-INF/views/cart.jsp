@@ -30,6 +30,7 @@
             else $('#invalidFormAlert').hide();
         });
     </script>
+    <title> My Cart </title>
 </head>
 
 <body>
@@ -65,8 +66,7 @@
 
                     <c:forEach items="${carts}" var="purchase">
                         <tr>
-                            <td><img src="/shop/img/${purchase.key.itemID}" alt="image with rounded corners"
-                                     class="img-rounded" width="120" height="75"></td>
+                            <td><img src="/shop/img/${purchase.key.itemID}" width="120" height="75"></td>
                             <td id="itemName"> ${purchase.key.itemName} </td>
                             <td> ${purchase.value.amount} </td>
                             <td>
@@ -134,7 +134,7 @@
                 $("#totalPrice").text("Total price: " + price + "$");
             </script>
 
-            <a id="makePurchase" class="btn btn-default" data-toggle="modal" href="#order">Make purchase</a><br>
+            <a id="makePurchase" class="btn btn-primary" data-toggle="modal" href="#order">Make purchase</a><br>
 
             <script>
                 if (price <= 0) {

@@ -31,4 +31,7 @@
 
     <mvc:view-controller path="/redirect:/shop" view-name="/shop"/>
 
+
+
+
 </beans:beans>
