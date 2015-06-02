@@ -24,7 +24,7 @@
 
 <div class="container">
 
-    <jsp:include page="static/navbar.jsp" />
+    <jsp:include page="static/navbar.jsp"/>
 
     <div class="panel panel-login">
         <div class="panel-body">
@@ -70,19 +70,21 @@
                                         <button type="button" class="close" data-dismiss="modal"
                                                 aria-hidden="true">x
                                         </button>
-                                        <h4 id="modal-label">Update</h4>
+                                        <h4 id="modal-label">Update purchase status</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form:form method="post" action="address/update/${purchase.purchaseID}">
+                                        <form:form method="post" action="purchases/update/${purchase.purchaseID}">
 
-                                            <select name="status">
+                                            <select name="status" class="form-control">
                                                 <c:forEach items="${orderStatus}" var="status">
                                                     <option value="${status}">${status}</option>
                                                 </c:forEach>
                                             </select>
                                             <br>
 
-                                            <button class="btn btn-primary" type="submit" id="sub">Submit</button>
+                                            <div class="modal-footer">
+                                                <button id="sub" class="btn btn-primary" type="submit"> Submit </button>
+                                            </div>
                                         </form:form>
                                     </div>
                                 </div>
@@ -92,7 +94,7 @@
 
                         <script>
                             $("#order${purchase.purchaseID}").on('click', function () {
-                                window.location = "purchases/${purchase.purchaseID}";
+                                //window.location = "purchases/${purchase.purchaseID}";
                             });
 
                         </script>

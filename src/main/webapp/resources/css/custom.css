@@ -1,10 +1,6 @@
 body {
-    background-color:
-    /*#8998B1;*/
-    #ededed;
+    background-color: /*#8998B1;*/ #ededed;
 }
-
-
 
 /** bootstrap 'a' **/
 
@@ -15,7 +11,7 @@ body {
 
 .table-curved {
     border: solid #ccc 1px;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 /** our custom input file **/
@@ -61,12 +57,9 @@ body {
     margin-bottom: 30px;
 }
 
-.carousel-control,.item {
+.carousel-control, .item {
     border-radius: 4px;
 }
-
-
-
 
 .btn-primary {
     color: white;
@@ -83,7 +76,6 @@ body {
     box-shadow: none;
 }
 
-
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
     z-index: 2;
     color: white;
@@ -91,12 +83,10 @@ body {
     border-color: darkgreen;
 }
 
-
-
-    .column-wrapper {
-        display: table;
-        width: 100%;
-    }
+.column-wrapper {
+    display: table;
+    width: 100%;
+}
 
 .left-column {
     width: 393px;

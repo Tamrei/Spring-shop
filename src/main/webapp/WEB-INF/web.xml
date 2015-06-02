@@ -63,13 +63,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- Spring security session management -->
-    <listener>
-        <listener-class>
-            org.springframework.security.web.session.HttpSessionEventPublisher
-        </listener-class>
-    </listener>
-
     <!--  	No need for welcome-file declaration here.
     		See inside spring/mvc-core-config.xml : 
     		> <mvc:view-controller path="/" view-name="welcome" /

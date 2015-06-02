@@ -32,7 +32,7 @@ public class PurchasesController {
         return "order";
     }
 
-    @RequestMapping(value = "purchases/update/{purchaseID}", method = RequestMethod.PUT)
+    @RequestMapping(value = "purchases/update/{purchaseID}", method = RequestMethod.POST)
     public String updateOrderStatus(@PathVariable("purchaseID") Integer id, @RequestParam("status") String status) {
         purchaseService.changeOrderStatus(id, status);
 

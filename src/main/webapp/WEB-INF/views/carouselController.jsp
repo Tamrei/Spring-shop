@@ -26,23 +26,9 @@
 
         });
     </script>
-
 </head>
 <body>
 <!-- Page Content -->
-
-<script>
-    /*$.ajax({
-        type: "Get",
-        url: 'homePageImages.html',
-        success: function (data) {
-
-        },
-        error : function (e) {
-            alert("-");
-        }
-    });*/
-</script>
 
 <div class="container">
 
@@ -94,24 +80,6 @@
                     <hr>
 
                 </c:forEach>
-
-                <script>
-                    function deleteImage(id) {
-                        $.ajax({
-                            type: "Post",
-                            url: 'carouselController/delete.html',
-                            data: "id=" + id,
-                            success: function (data) {
-
-                            },
-                            error : function (e) {
-                                alert("-");
-                            }
-                        });
-                    }
-
-                    //carouselController/delete
-                </script>
 
                 <div class="col-md-8">
                     <a href="#">

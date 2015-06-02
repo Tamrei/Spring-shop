@@ -54,7 +54,7 @@
                 }
             });
             /**
-            *  password form
+             *  password form
              */
             $('#password').on('input', function () {
                 var input = $(this);
@@ -72,7 +72,7 @@
                 }
             });
 
-            $("#registration-form").submit(function(e){
+            $("#registration-form").submit(function (e) {
                 isFormValid = isNameValid && isPasswordValid;
                 return isFormValid;
             });
@@ -115,9 +115,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form action="createUser" commandName="customer" method="post" role="form"
-                                  id="registration-form"> <!--style="display: block;"-->
+                                  id="registration-form" >
 
-                                <div class="form-group has-feedback" id="username-form">
+                                <div class="form-grou[ has-feedback" id="username-form">
                                     <label for="username">Username:</label>
 
                                     <div class="controls">
@@ -137,21 +137,18 @@
                                 </div>
 
 
-                                <div class="form-group text-center">
-
-                                </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 ">
 
-                                            <button type="submit" name="submit" value="submit" class="btn btn-default">
+                                            <button type="submit" name="submit" value="submit" class="btn btn-primary">
                                                 Submit
                                             </button>
 
                                             <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
                                                    value="${_csrf.token}"/>
 
-                                            <a href="/login" class="btn btn-primary"> Login </a>
+                                            <a href="/login" class="btn btn-default"> Login </a>
                                         </div>
                                     </div>
                                 </div>

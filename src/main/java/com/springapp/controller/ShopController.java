@@ -56,6 +56,15 @@ public class ShopController {
         }
     }
 
+    //@ModelAttribute("item") Item item
+
+    @RequestMapping(value = "/itemObject", method = RequestMethod.POST)
+    public @ResponseBody
+    void putItemInTheCart(@ModelAttribute("item") Item item) {
+        //itemService.putItemInCart(itemID, activeUser.getUsername(), amount);
+        System.out.println(item);
+    }
+
     @RequestMapping(value = "shop/update/{itemID}", method = RequestMethod.POST)
     public String updateItem(@ModelAttribute("item") @Valid Item item,
                              @RequestParam("file") MultipartFile file) {

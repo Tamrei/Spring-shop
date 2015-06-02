@@ -1,11 +1,11 @@
 package com.springapp.service;
 
 import com.springapp.dao.CartDAO;
+import com.springapp.dao.ItemDAO;
 import com.springapp.dao.generic.GenericDAO;
 import com.springapp.model.Cart;
 import com.springapp.model.Item;
 import com.springapp.util.ImageResizer;
-import com.springapp.util.ImageResizerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
-    private GenericDAO itemDAO;
+    private ItemDAO itemDAO;
 
     @Autowired
     private GenericDAO purchaseDAO;
@@ -42,55 +42,71 @@ public class ItemServiceImpl implements ItemService {
     public void putItemInCart(long itemID, String customerName, long amount) {
         Cart newCart = new Cart(itemID, customerName, amount);
 
+        updateItemQuantityOnStore(itemID, amount);
+
         for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
             if (cart.getItemID() == newCart.getItemID()) {
                 cart.setAmount(newCart.getAmount() + cart.getAmount());
                 purchaseDAO.update(cart);
+
                 return;
             }
         }
         purchaseDAO.add(newCart);
+
+        //----------------------------------------------------------------
+        /*
+        System.out.println("Item Service : ID:" + itemID);
+        Item item = itemDAO.getByID(itemID);
+        System.out.println("Item Service : Name:" + item.getItemName());
+        System.out.println("Item Service : Amount (input):" + amount);
+        System.out.println("Item Service : LeftOnStore: " + item.getLeftOnStore());
+        System.out.println("Item Service : Result of (Left on store - amount) " + (item.getLeftOnStore() - amount));
+        item.setLeftOnStore(item.getLeftOnStore() - amount);
+        itemDAO.updateItem(item);
+        */
+    }
+
+    private void updateItemQuantityOnStore(long itemID, long amount) {
+        Item item = itemDAO.getByID(itemID);
+        item.setLeftOnStore(item.getLeftOnStore() - amount);
+        itemDAO.updateItem(item);
     }
 
     @Override
     @Transactional
     public List<Item> getAllItems() {
-        return itemDAO.getAll();
+        return itemDAO.getAllAvailableItems();
     }
 
     @Override
     @Transactional
     public void deleteItem(long id) {
-        itemDAO.delete(id);
+        itemDAO.deleteItem(id);
     }
 
-    /**
-     * resize image
-     *
-     * @param item
-     */
     @Override
     @Transactional
     public void addItem(Item item) {
-        itemDAO.add(item);
+        itemDAO.addItem(item);
     }
 
     @Override
     @Transactional
     public Item getItem(long id) {
-        return (Item) itemDAO.get(id);
+        return (Item) itemDAO.getByID(id);
     }
 
     @Override
     @Transactional
     public void updateItem(Item item) {
-        itemDAO.update(item);
+        itemDAO.updateItem(item);
     }
 
     @Override
     @Transactional
     public void addItemAndResizeImage(Item item, MultipartFile image, int width, int height) throws IOException{
         item.setImage(imageResizer.resizeImage(image.getBytes(), width, height));
-        itemDAO.add(item);
+        itemDAO.addItem(item);
     }
 }

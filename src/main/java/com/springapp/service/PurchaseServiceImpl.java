@@ -49,7 +49,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public Map<Item, Cart> getAllItemsInTheCart(long cartID) {
         Map<Item, Cart> map = new HashMap<Item, Cart>();
 
-        for(Cart cart : cartDAO.getCartsForPurchase(cartID)) {
+        for (Cart cart : cartDAO.getCartsForPurchase(cartID)) {
             Item item = (Item) itemDAO.get(cart.getItemID());
             map.put(item, cart);
         }
@@ -70,8 +70,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
-     *
-     * @param address that is associated with the order
+     * @param address      that is associated with the order
      * @param customerName of order owner
      */
     @Override
@@ -84,10 +83,10 @@ public class PurchaseServiceImpl implements PurchaseService {
         addressDAO.add(address);
 
         purchase.setAddress(address);
-        purchaseDAO.add(purchase);
+        purchaseDAO.add(purchase); //
 
         // find all items that are not purchased yet and purchase them (give them a purchase id)
-        for(Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
+        for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
             cart.setPurchaseID(purchase.getPurchaseID());
             cartDAO.updateCart(cart);
 
@@ -104,7 +103,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      * this method change purchase status
      *
      * @param purchaseID of purchase to change
-     * @param status that we want to set
+     * @param status     that we want to set
      */
     @Override
     @Transactional

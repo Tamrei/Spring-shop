@@ -112,6 +112,8 @@
                         </div>
 
                         <script>
+
+
                             // cont total price
                             var pricePerOne = ${purchase.key.price};
                             var amount = ${purchase.value.amount};

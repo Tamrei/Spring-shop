@@ -76,12 +76,12 @@
                                     <div class="row">
                                         <div class="col-sm-6 ">
 
-                                            <button type="submit" name="submit" value="submit" class="btn btn-default">Submit</button>
+                                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
 
                                             <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
                                                    value="${_csrf.token}"/>
 
-                                            <a href="/registration" class="btn btn-primary"> Registration </a>
+                                            <a href="/registration" class="btn btn-default"> Registration </a>
                                         </div>
                                     </div>
                                 </div>

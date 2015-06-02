@@ -112,7 +112,7 @@
         </div>
     </div>
 </div>
-<!-- our buy form -->
+<!-- our registration form -->
 
 
 </body>

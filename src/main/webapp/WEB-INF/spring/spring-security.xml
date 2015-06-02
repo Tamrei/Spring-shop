@@ -21,9 +21,6 @@
         <intercept-url pattern="/cartCount" access="isAuthenticated()" />
         <!--<intercept-url pattern="/shop" access="isAuthenticated()" />-->
 
-        <session-management>
-            <concurrency-control expired-url="/login?logout"/>
-        </session-management>
 
         <form-login
                 login-page="/login"

@@ -32,6 +32,32 @@ public class Item implements Serializable {
     @Column(name = "price")
     private float price;
 
+    @Column(name = "leftOnStore")
+    private long leftOnStore;
+
+    @Column(name = "available")
+    private boolean available;
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public long getLeftOnStore() {
+        return leftOnStore;
+    }
+
+    public void setLeftOnStore(long leftOnStore) {
+        if (leftOnStore <= 0) {
+            this.available = false;
+        }
+
+        this.leftOnStore = leftOnStore;
+    }
+
     public Item() {
     }
 
@@ -97,5 +123,17 @@ public class Item implements Serializable {
         int result = (int) (itemID ^ (itemID >>> 32));
 //        result = 31 * result + itemName.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemID=" + itemID +
+                ", itemName='" + itemName + '\'' +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", leftOnStore=" + leftOnStore +
+                ", available=" + available +
+                '}';
     }
 }

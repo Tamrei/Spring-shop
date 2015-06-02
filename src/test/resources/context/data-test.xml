@@ -35,7 +35,7 @@
     <!-- Database properties file -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="classpath:/database.properties"/>
+          p:location="classpath:/hibernate/database.properties"/>
 
     <!-- Configure JDBC Connection -->
     <bean id="dataSource"
@@ -50,7 +50,7 @@
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:/hibernate.cfg.xml"/>
+        <property name="configLocation" value="classpath:/hibernate/hibernate.cfg.xml"/>
         <property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration"/>
         <property name="hibernateProperties">
             <props>
@@ -61,7 +61,7 @@
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
                 <prop key="hibernate.cache.use_query_cache">true</prop>
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
-                <prop key="net.sf.ehcache.configurationResourceName">resources/myehcache.xml</prop>
+                <prop key="net.sf.ehcache.configurationResourceName">resources/hibernate/cache/myehcache.xml</prop>
 
                 <prop key="hibernate.dialect">${database.dialect}</prop>
                 <prop key="hibernate.connection.charSet">UTF-8</prop>
