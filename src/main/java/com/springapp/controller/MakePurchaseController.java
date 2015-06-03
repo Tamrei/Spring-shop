@@ -2,6 +2,7 @@ package com.springapp.controller;
 
 
 import com.springapp.anotation.ActiveUser;
+import com.springapp.exceptions.RunOutOfItemsException;
 import com.springapp.model.Address;
 import com.springapp.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,18 @@ public class MakePurchaseController {
             // open the modal with this form.
             return new ModelAndView("redirect:/cart#error");
         }
-        purchaseService.makeOrder(address, activeUser.getUsername());
+
+        try {
+            purchaseService.makeOrder(address, activeUser.getUsername());
+        } catch (RunOutOfItemsException e) {
+
+            System.out.println("Exception!");
+            System.out.println(purchaseService.getNotAvailableCarts(activeUser.getUsername()).size());
+
+            //System.out.println(purchaseService.getNotAvailableCarts(activeUser.getUsername()));
+
+            return new ModelAndView("ajax", "purchases", purchaseService.getNotAvailableCarts(activeUser.getUsername()));
+        }
 
         return new ModelAndView("redirect:/cart");
     }

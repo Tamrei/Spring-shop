@@ -45,7 +45,6 @@
                         <th>City</th>
                         <th>Customer Name</th>
                         <th>Status</th>
-
                     </tr>
                     </thead>
                     <tbody>
@@ -58,7 +57,7 @@
                             <td> ${purchase.ownerUsername} </td>
                             <td> ${purchase.status}
                             <td><a class="btn btn-default" data-toggle="modal" href="#update${purchase.purchaseID}">Change
-                                status</a><br></td>
+                                status</a></td>
                         </tr>
 
 

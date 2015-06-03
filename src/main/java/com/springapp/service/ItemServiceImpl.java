@@ -42,7 +42,7 @@ public class ItemServiceImpl implements ItemService {
     public void putItemInCart(long itemID, String customerName, long amount) {
         Cart newCart = new Cart(itemID, customerName, amount);
 
-        updateItemQuantityOnStore(itemID, amount);
+        //updateItemQuantityOnStore(itemID, amount);
 
         for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
             if (cart.getItemID() == newCart.getItemID()) {

@@ -8,10 +8,16 @@ body {
 .table-curved {
     border-collapse: separate;
 }
-
+/*
 .table-curved {
     border: solid #ccc 1px;
     border-radius: 3px;
+}
+*/
+
+.table-curved {
+    border: solid #ccc 0px;
+    border-radius: 0px;
 }
 
 /** our custom input file **/

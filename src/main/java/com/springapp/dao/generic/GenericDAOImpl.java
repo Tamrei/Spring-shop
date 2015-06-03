@@ -32,7 +32,7 @@ public class GenericDAOImpl<T, PK extends Serializable>
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public void add(T object) {
         Session session = getSession();
         session.save(object);
@@ -45,7 +45,7 @@ public class GenericDAOImpl<T, PK extends Serializable>
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public void update(T o) {
         Session session = getSession();
         session.update(o);

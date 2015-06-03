@@ -38,6 +38,16 @@
 
     <jsp:include page="static/navbar.jsp" flush="true"/>
 
+    <c:if test="${not empty errorE}">
+        <div class="bs-example">
+            <div class="alert alert-danger alert-error">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> <c:out value="${errorE}"/>
+            </div>
+        </div>
+    </c:if>
+
+
     <div class="panel panel-login">
         <div class="panel-body">
 
@@ -65,7 +75,7 @@
                     </script>
 
                     <c:forEach items="${carts}" var="purchase">
-                        <tr>
+                        <tr style="border: 0px">
                             <td><img src="/shop/img/${purchase.key.itemID}" width="120" height="75"></td>
                             <td id="itemName"> ${purchase.key.itemName} </td>
                             <td> ${purchase.value.amount} </td>
@@ -81,7 +91,7 @@
                                     <button type="submit" class="btn btn-default"> Lay out</button>
                                 </form:form>
                                 <a data-toggle="modal" class="btn btn-default" href="#update${purchase.value.cartID}">Edit
-                                    form</a><br>
+                                    form</a>
                             </td>
                         </tr>
 
@@ -112,8 +122,6 @@
                         </div>
 
                         <script>
-
-
                             // cont total price
                             var pricePerOne = ${purchase.key.price};
                             var amount = ${purchase.value.amount};
@@ -122,7 +130,6 @@
                             price += totalPrice;
 
                             //$("#price${purchase.key.itemID}").text("Total price: " + totalPrice);
-
                         </script>
 
                     </c:forEach>
@@ -131,19 +138,27 @@
                 </table>
             </div>
 
-            <h4 id="totalPrice" style="color: darkgreen"> Test </h4>
-            <script>
-                $("#totalPrice").text("Total price: " + price + "$");
-            </script>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 ">
 
-            <a id="makePurchase" class="btn btn-primary" data-toggle="modal" href="#order">Make purchase</a><br>
+                        <h4 id="totalPrice" style="color: darkgreen"> Test </h4>
+                        <script>
+                            $("#totalPrice").text("Total price: " + price + "$");
+                        </script>
 
-            <script>
-                if (price <= 0) {
-                    $('#makePurchase').hide();
-                    $('#searchByItemName').hide();
-                }
-            </script>
+                        <a id="makePurchase" class="btn btn-primary" data-toggle="modal" href="#order">Make purchase</a><br>
+
+                        <script>
+                            if (price <= 0) {
+                                $('#makePurchase').hide();
+                                $('#searchByItemName').hide();
+                            }
+                        </script>
+
+                    </div>
+                </div>
+            </div>
 
             <!-- our buy form -->
             <div id="order" class="modal fade">
@@ -166,7 +181,7 @@
                                 </div>
                             </div>
 
-                            <form:form action="makePurchase" commandName="address" method="post" role="form">
+                            <form:form action="makePurchase" commandName="address"  role="form">
 
                                 <div class="form-group error">
                                     <label> City: </label>

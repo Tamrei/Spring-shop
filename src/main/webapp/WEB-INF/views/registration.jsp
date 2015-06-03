@@ -35,22 +35,27 @@
 
             var isFormValid = false;
 
+            var passwordLabel = $('#password-label');
+            var usernameLabel = $('#username-label');
+
             /**
              *  username form
              */
             $('#username').on('input', function () {
                 var input = $(this);
-                var is_name = input.val();
+                var usernameValue = input.val();
 
-                isNameValid = (is_name.length > 2);
+                isNameValid = (usernameValue.length > 2);
 
                 if (isNameValid) {
                     usernameForm.removeClass('has-error').addClass('has-success');
                     input.css("border-color", "#3c763d");
+                    usernameLabel.css("color", "#3c763d");
                 }
                 else {
                     usernameForm.removeClass('has-success').addClass('has-error');
                     input.css("border-color", "#a94442");
+                    usernameLabel.css("color", "#a94442");
                 }
             });
             /**
@@ -58,9 +63,9 @@
              */
             $('#password').on('input', function () {
                 var input = $(this);
-                var is_name = input.val();
+                var passwordValue = input.val();
 
-                isPasswordValid = (is_name.length > 3);
+                isPasswordValid = (passwordValue.length > 3);
 
                 if (isPasswordValid) {
                     passwordForm.removeClass('has-error').addClass('has-success');
@@ -72,8 +77,16 @@
                 }
             });
 
+            //$('#FormsAreEmpty').hide();
+
             $("#registration-form").submit(function (e) {
                 isFormValid = isNameValid && isPasswordValid;
+
+                if (!isFormValid) {
+                    //$('#FormsAreEmpty').show();
+                    $('#FormsAreEmpty').removeClass('hidden');
+                }
+
                 return isFormValid;
             });
         });
@@ -104,6 +117,13 @@
                 </div>
             </c:if>
 
+            <div class="bs-example hidden" id="FormsAreEmpty">
+                <div class="alert alert-danger alert-error">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Error!</strong> Please fill all fields.
+                </div>
+            </div>
+
             <div class="panel panel-login">
                 <div class="panel-heading">
                     <div class="row">
@@ -117,8 +137,8 @@
                             <form action="createUser" commandName="customer" method="post" role="form"
                                   id="registration-form" >
 
-                                <div class="form-grou[ has-feedback" id="username-form">
-                                    <label for="username">Username:</label>
+                                <div class="form-group has-feedback" id="username-form">
+                                    <label for="username" id="username-label">Username:</label>
 
                                     <div class="controls">
                                         <input type="text" name="username" class="form-control"
@@ -128,7 +148,7 @@
                                 </div>
 
                                 <div class="form-group has-feedback" id="password-form">
-                                    <label for="password">Password:</label>
+                                    <label for="password" id="password-label">Password:</label>
 
                                     <div class="controls">
                                         <input type="password" name="password" class="form-control"
@@ -136,6 +156,7 @@
                                     </div>
                                 </div>
 
+                                <br>
 
                                 <div class="form-group">
                                     <div class="row">

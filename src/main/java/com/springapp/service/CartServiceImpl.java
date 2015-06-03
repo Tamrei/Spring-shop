@@ -26,7 +26,7 @@ public class CartServiceImpl implements CartService {
     public Map<Item, Cart> getAllItemInTheCart(String customerName) {
         Map<Item, Cart> map = new HashMap<Item, Cart>();
 
-        for(Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
+        for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
             Item item = (Item) itemDAO.get(cart.getItemID());
             map.put(item, cart);
         }
@@ -37,11 +37,13 @@ public class CartServiceImpl implements CartService {
     @Override
     @Transactional
     public void setItemAmountInTheCart(long cartID, long amount) {
-        if(amount > 0) {
+        if (amount <= 0) {
+            cartDAO.deleteCart(cartID);
+        } else {
             Cart cart = cartDAO.getCart(cartID);
             cart.setAmount(amount);
             cartDAO.updateCart(cart);
-        } else cartDAO.deleteCart(cartID);
+        }
     }
 
     @Override
