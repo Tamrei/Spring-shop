@@ -3,6 +3,7 @@ package com.springapp.service;
 import com.springapp.dao.CartDAO;
 import com.springapp.dao.generic.GenericDAO;
 import com.springapp.model.*;
+import com.springapp.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +33,26 @@ public class CartServiceImpl implements CartService {
         }
 
         return map;
+    }
+
+    @Override
+    public Map<Pair<Cart, Item>, Integer> testMethod(String customerName) {
+        Map<Pair<Cart, Item>, Integer> pairLongMap = new HashMap<Pair<Cart, Item>, Integer>();
+
+        for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
+            Item item = (Item) itemDAO.get(cart.getItemID());
+
+            int i = 0;
+
+            if (item.getLeftOnStore() < cart.getAmount()) {
+
+            }
+
+            pairLongMap.put(new Pair(item, cart), i);
+        }
+
+
+        return pairLongMap;
     }
 
     @Override

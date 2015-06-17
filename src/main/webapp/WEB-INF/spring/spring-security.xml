@@ -19,7 +19,12 @@
 
         <intercept-url pattern="/static/navbar" access="isAuthenticated()" />
         <intercept-url pattern="/cartCount" access="isAuthenticated()" />
+
+        <intercept-url pattern="putItemInTheCart" access="isAuthenticated()" />
         <!--<intercept-url pattern="/shop" access="isAuthenticated()" />-->
+
+        <access-denied-handler error-page="/login?denied"/>
+
 
 
         <form-login

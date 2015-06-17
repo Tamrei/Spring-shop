@@ -1,7 +1,10 @@
 package com.springapp.model;
 
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,10 +12,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "purchase")
-@Proxy(lazy = false)
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+@Cache(usage= CacheConcurrencyStrategy.READ_ONLY, region="yourEntityCache")
 public class Purchase implements Serializable {
-
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
     @GeneratedValue(generator = "test")

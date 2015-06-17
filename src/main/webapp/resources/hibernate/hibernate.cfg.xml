@@ -5,8 +5,6 @@
 <hibernate-configuration>
     <session-factory>
 
-
-
         <!-- Mapping (Annotation) -->
         <mapping class="com.springapp.model.Customer"/>
         <mapping class="com.springapp.model.Item"/>
@@ -14,6 +12,7 @@
         <mapping class="com.springapp.model.Purchase"/>
         <mapping class="com.springapp.model.Address"/>
         <mapping class="com.springapp.model.site.HomePageImage"/>
+        <mapping class="com.springapp.model.ItemDelivery"/>
 
     </session-factory>
 </hibernate-configuration>

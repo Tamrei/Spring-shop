@@ -30,10 +30,11 @@ public class CurrentUserHandlerMethodArgumentResolver
         if (this.supportsParameter(methodParameter)) {
             Principal principal = webRequest.getUserPrincipal();
             User user = null;
-            //try {
+            try {
                 user = (User) ((Authentication) principal).getPrincipal();
-            //} catch (NullPointerException e) {
-            //}
+            } catch (NullPointerException e) {
+                return WebArgumentResolver.UNRESOLVED;
+            }
             return user;
         } else {
             return WebArgumentResolver.UNRESOLVED;

@@ -7,6 +7,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "item")
@@ -38,6 +40,17 @@ public class Item implements Serializable {
     @Column(name = "available")
     private boolean available;
 
+    @OneToMany(mappedBy = "item")//, fetch = FetchType.LAZY)
+    private Set<ItemDelivery> itemDeliveries;
+
+    public Set<ItemDelivery> getItemDeliveries() {
+        return itemDeliveries;
+    }
+
+    public void setItemDeliveries(Set<ItemDelivery> itemDeliveries) {
+        this.itemDeliveries = itemDeliveries;
+    }
+
     public boolean isAvailable() {
         return available;
     }
@@ -51,10 +64,6 @@ public class Item implements Serializable {
     }
 
     public void setLeftOnStore(long leftOnStore) {
-        if (leftOnStore <= 0) {
-            this.available = false;
-        }
-
         this.leftOnStore = leftOnStore;
     }
 
@@ -121,19 +130,19 @@ public class Item implements Serializable {
     @Override
     public int hashCode() {
         int result = (int) (itemID ^ (itemID >>> 32));
-//        result = 31 * result + itemName.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "Item{" +
+        /*return "Item{" +
                 "itemID=" + itemID +
                 ", itemName='" + itemName + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", leftOnStore=" + leftOnStore +
                 ", available=" + available +
-                '}';
+                '}';*/
+        return " empty! ";
     }
 }

@@ -26,7 +26,7 @@
 
     <jsp:include page="static/navbar.jsp"/>
 
-    <div class="panel panel-login">
+    <div class="panel">
         <div class="panel-body">
 
             <!-- Page Header -->

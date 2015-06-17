@@ -9,7 +9,7 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/box.css" %>
+        <%@ include file="../../resources/css/panel.css" %>
 
         #center {
             margin-left: auto;
@@ -25,7 +25,9 @@
     <title> Add new item </title>
 </head>
 <body>
-<div class="container" id="center">
+<div class="container">
+
+    <div class="col-md-6 col-md-offset-3">
 
     <c:if test="${not empty notAnImage}">
         <div class="bs-example">
@@ -45,7 +47,8 @@
         </div>
     </c:if>
 
-    <div class="panel panel-login">
+    <div class="panel">
+
         <div class="panel-heading">
             <div class="row">
                 <h3 align="center">Add new item</h3>
@@ -82,7 +85,7 @@
             </form:form>
         </div>
     </div>
-
+</div>
 </div>
 </body>
 </html>

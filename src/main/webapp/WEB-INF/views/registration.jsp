@@ -9,7 +9,7 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.min.css" %>
         <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/box.css" %>
+        <%@ include file="../../resources/css/panel.css" %>
 
         .success-color {
             border-color: #3c763d;
@@ -49,13 +49,14 @@
 
                 if (isNameValid) {
                     usernameForm.removeClass('has-error').addClass('has-success');
-                    input.css("border-color", "#3c763d");
-                    usernameLabel.css("color", "#3c763d");
+                    /*input.css("border-color", "#3c763d");
+                    usernameLabel.css("color", "#3c763d");*/
+
                 }
                 else {
                     usernameForm.removeClass('has-success').addClass('has-error');
-                    input.css("border-color", "#a94442");
-                    usernameLabel.css("color", "#a94442");
+                    /*input.css("border-color", "#a94442");
+                    usernameLabel.css("color", "#a94442");*/
                 }
             });
             /**
@@ -69,11 +70,11 @@
 
                 if (isPasswordValid) {
                     passwordForm.removeClass('has-error').addClass('has-success');
-                    input.css("border-color", "#3c763d");
+                    //input.css("border-color", "#3c763d");
                 }
                 else {
                     passwordForm.removeClass('has-success').addClass('has-error');
-                    input.css("border-color", "#a94442");
+                    //input.css("border-color", "#a94442");
                 }
             });
 
@@ -124,59 +125,53 @@
                 </div>
             </div>
 
-            <div class="panel panel-login">
+            <div class="panel">
                 <div class="panel-heading">
                     <div class="row">
                         <h3 align="center">Registration</h3>
                     </div>
                     <hr>
                 </div>
+
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form action="createUser" commandName="customer" method="post" role="form"
-                                  id="registration-form" >
 
-                                <div class="form-group has-feedback" id="username-form">
-                                    <label for="username" id="username-label">Username:</label>
+                    <form action="createUser" commandName="customer" method="post" role="form"
+                          id="registration-form">
 
-                                    <div class="controls">
-                                        <input type="text" name="username" class="form-control"
-                                               placeholder="Enter Username" id="username">
-                                    </div>
-                                    <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
-                                </div>
+                        <div class="form-group has-feedback" id="username-form">
+                            <label class="control-label" for="username" id="username-label">Username:</label>
 
-                                <div class="form-group has-feedback" id="password-form">
-                                    <label for="password" id="password-label">Password:</label>
-
-                                    <div class="controls">
-                                        <input type="password" name="password" class="form-control"
-                                               placeholder="Enter Password" id="password">
-                                    </div>
-                                </div>
-
-                                <br>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6 ">
-
-                                            <button type="submit" name="submit" value="submit" class="btn btn-primary">
-                                                Submit
-                                            </button>
-
-                                            <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
-                                                   value="${_csrf.token}"/>
-
-                                            <a href="/login" class="btn btn-default"> Login </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </form>
+                            <div class="controls">
+                                <input type="text" name="username" class="form-control"
+                                       placeholder="Enter Username" id="username">
+                            </div>
+                            <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
                         </div>
-                    </div>
+
+                        <div class="form-group has-feedback" id="password-form">
+                            <label class="control-label" for="password" id="password-label">Password:</label>
+
+                            <div class="controls">
+                                <input type="password" name="password" class="form-control"
+                                       placeholder="Enter Password" id="password">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-group">
+                            <button type="submit" name="submit" value="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+
+                            <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
+                                   value="${_csrf.token}"/>
+
+                            <a href="/login" class="btn btn-default"> Login </a>
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
         </div>

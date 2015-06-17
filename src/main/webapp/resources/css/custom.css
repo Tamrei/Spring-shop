@@ -2,56 +2,14 @@ body {
     background-color: /*#8998B1;*/ #ededed;
 }
 
-/** bootstrap 'a' **/
-
 /** out custom table **/
 .table-curved {
     border-collapse: separate;
 }
-/*
-.table-curved {
-    border: solid #ccc 1px;
-    border-radius: 3px;
-}
-*/
 
 .table-curved {
     border: solid #ccc 0px;
     border-radius: 0px;
-}
-
-/** our custom input file **/
-.btn-file {
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
-}
-
-.inputFile {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    filter: alpha(opacity=0);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    opacity: 0;
-    background-color: transparent;
-    color: transparent;
 }
 
 .list-group-item {
@@ -59,14 +17,11 @@ body {
     color: #000000;
 }
 
-.carousel-holder {
-    margin-bottom: 30px;
-}
-
 .carousel-control, .item {
     border-radius: 4px;
 }
 
+/** Custom buttons **/
 .btn-primary {
     color: white;
     background-color: darkgreen;
@@ -89,20 +44,26 @@ body {
     border-color: darkgreen;
 }
 
-.column-wrapper {
-    display: table;
-    width: 100%;
+
+
+
+
+
+
+
+
+
+/** DELETE **/
+
+img {
+    border-radius: 3px;
 }
 
-.left-column {
-    width: 393px;
-    padding-right: 52px;
-    background-color: #ededed;
-    border-right: 1px solid #e3e3e3;
+.table {
+    margin-bottom: 0;
+    border: none;
 }
 
-.right-column {
-    padding-left: 52px;
-    width: 743px;
-    background-color: #f7f7f7;
+.borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+    border: none;
 }

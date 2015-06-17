@@ -13,7 +13,7 @@
     <style>
         <%@ include file="/resources/css/bootstrap.css" %>
         <%@ include file="/resources/css/custom.css" %>
-        <%@ include file="/resources/css/box.css" %>
+        <%@ include file="/resources/css/panel.css" %>
     </style>
 
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
@@ -39,8 +39,10 @@
         </div>
 
         <ul class="nav navbar-nav">
-            <li role="presentation"><a href="/cart">Cart <sec:authorize access="isAuthenticated()"> <span
+            <!-- Popover -->
+            <li role="presentation"><a href="/cart" id="navCart" data-original-title="" data-content="" data-placement="bottom" rel="popover">Cart <sec:authorize access="isAuthenticated()"> <span
                     class="badge" id="cartCount"> </span> </sec:authorize> </a></li>
+            <!-- Popover -->
 
             <li role="presentation"><a href="/myPurchases">My purchases</a></li>
 
@@ -54,7 +56,7 @@
                         <li><a href="/addItem">Add new item</a></li>
                         <li><a href="/purchases">All orders</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Store (coming soon)</a></li>
+                        <li><a href="/store">Store (alpha)</a></li>
                     </ul>
                 </li>
             </sec:authorize>

@@ -8,7 +8,7 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/box.css" %>
+        <%@ include file="../../resources/css/panel.css" %>
     </style>
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
@@ -47,47 +47,45 @@
                 </div>
             </c:if>
 
-            <div class="panel panel-login">
+            <div class="panel">
                 <div class="panel-heading">
                     <div class="row">
                         <h3 align="center">Login</h3>
                     </div>
                     <hr>
                 </div>
+
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form role="form"
-                                  action="<c:url value='/j_spring_security_check' />" method="post">
 
-                                <div class="form-group">
-                                    <label>Username:</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Enter Username">
-                                </div>
-                                <div class="form-group">
-                                    <label>Password:</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Enter password">
-                                </div>
+                    <form role="form"
+                          action="<c:url value='/j_spring_security_check' />" method="post">
 
-                                <div class="form-group text-center">
-
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6 ">
-
-                                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-
-                                            <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
-                                                   value="${_csrf.token}"/>
-
-                                            <a href="/registration" class="btn btn-default"> Registration </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="form-group">
+                            <label>Username:</label>
+                            <input type="text" name="username" class="form-control" placeholder="Enter Username">
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" class="form-control" name="password" placeholder="Enter password">
+                        </div>
+
+                        <div class="form-group text-center">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit
+                            </button>
+
+                            <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
+                                   value="${_csrf.token}"/>
+
+                            <a href="/registration" class="btn btn-default"> Registration </a>
+
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

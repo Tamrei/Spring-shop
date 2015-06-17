@@ -33,8 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * if user with the same username already exist in the system throws UserAlreadyExistsException
-     * if username is unique add customer object to db (register new customer)
+     * Register new customer in system
      *
      * @param customer instance that we want to register
      * @throws UserAlreadyExistsException if username not unique

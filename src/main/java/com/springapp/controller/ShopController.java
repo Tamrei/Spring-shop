@@ -10,6 +10,7 @@ import com.springapp.service.site.HomePageImageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -29,6 +30,7 @@ public class ShopController {
     @Autowired
     private ItemService itemService;
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "shop")
     public String itemsList(ModelMap modelMap) {
         //modelMap.put("item", new Item());
@@ -37,6 +39,7 @@ public class ShopController {
         return "shop";
     }
 
+    //@PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/putItemInTheCart", method = RequestMethod.POST)
     public @ResponseBody
     void putItemInTheCart(@RequestParam("itemID") Integer itemID, @RequestParam("amount") long amount, @ActiveUser User activeUser) {

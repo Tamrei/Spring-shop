@@ -14,7 +14,7 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/box.css" %>
+        <%@ include file="../../resources/css/panel.css" %>
     </style>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
@@ -58,8 +58,7 @@
 
                     <c:forEach items="${purchases}" var="purchase">
                         <tr>
-                            <td><img src="/shop/img/${purchase.key.itemID}" alt="image with rounded corners"
-                                     class="img-rounded" width="120" height="75"></td>
+                            <td><img src="/shop/img/${purchase.key.itemID}" alt="image with rounded corners" width="120" height="75"></td>
                             <td> ${purchase.key.itemName} </td>
                             <td> ${purchase.value.amount} </td>
                             <td>
@@ -85,7 +84,7 @@
                 </table>
             </div>
 
-            <h3 id="totalPrice" style="color: greenyellow"> Empty </h3>
+            <h3 id="totalPrice" style="color: darkgreen"> Empty </h3>
             <script>
                 $("#totalPrice").text("Total price: " + price + "$");
             </script>

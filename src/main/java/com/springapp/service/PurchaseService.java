@@ -8,6 +8,7 @@ import com.springapp.model.Item;
 import com.springapp.model.Purchase;
 import com.springapp.util.Pair;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,5 +28,11 @@ public interface PurchaseService {
 
 
 
-    public Map <Pair<Cart, Item>, Long> getNotAvailableCarts(String username);
+    //public Map <Pair<Cart, Item>, Long> getNotAvailableCarts(String username);
+
+    public Map <Cart, Item> getNotAvailableCarts(String username);
+
+    public Map <HashMap<Cart, Item>, String> getNotAvailableCartsStr(String username);
+
+    public Map <Pair<Cart, Item>, String> getNotAvailableCartsPair(String username);
 }

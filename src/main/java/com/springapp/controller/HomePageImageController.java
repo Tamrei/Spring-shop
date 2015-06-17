@@ -33,9 +33,8 @@ public class HomePageImageController {
 
     @RequestMapping(value = "homePageImages")
     public
-    //@ResponseBody
+    @ResponseBody
     void HomePageImagesList(ModelMap modelMap) {
-        System.out.println("GET IMAGES FROM CAROUSEL!!! REQUEST!!! SIZE IS : " + homePageImageService.getAllHomePageImages().size());
         modelMap.addAttribute("homePageImages", homePageImageService.getAllHomePageImages());
     }
 
@@ -50,15 +49,12 @@ public class HomePageImageController {
             return new ModelAndView("carouselController", "notAnImage", "Woops! seams like its not an image!");
         }
 
-        System.out.println("DISPLAY IMAGE ADD NEW| ID:" + homePageImage.getId());
-
         return new ModelAndView("redirect:/carouselController");
     }
 
     @RequestMapping(value = "homePageImage/img/{id}")
     @Transactional
     public void displayImage(@PathVariable Integer id, HttpServletResponse response) {
-        System.out.println("DISPLAY IMAGE ID: " + id);
         HomePageImage homePageImage = homePageImageService.getHomePageImage(id);
         response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
 
@@ -67,14 +63,12 @@ public class HomePageImageController {
             response.getOutputStream().close();
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("DISPLAY IMAGE ERROR ID: " + id);
         }
     }
 
 
     @RequestMapping(value = "carouselController/delete/{id}", method = RequestMethod.DELETE)
     public String deleteImage(@PathVariable Integer id) {
-        System.out.println("DISPLAY IMAGE DELETE ID:" + id);
         homePageImageService.deleteHomePageImage(id);
 
         return "redirect:/carouselController";

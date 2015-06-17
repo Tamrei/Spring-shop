@@ -14,7 +14,8 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/box.css" %>
+        <%@ include file="../../resources/css/panel.css" %>
+
     </style>
 
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
@@ -24,7 +25,6 @@
 </head>
 <body>
 
-
 <div class="container">
 
     <jsp:include page="static/navbar.jsp" flush="true"/>
@@ -33,7 +33,7 @@
            placeholder="Search by username" onkeyup="searchValue('#username', this.id)">
 
     <div class="table">
-        <table class="table table-curved">
+        <table class="table borderless">
             <thead>
             <tr>
                 <th>ID</th>
@@ -75,16 +75,16 @@
                                     <p>delete or disable yourself</p>
                                 </c:when>
                                 <c:otherwise>
-                                    <p class="pull-right">
+                                <div class="btn-group">
                                         <form:form action="http://localhost:8080/users/${user.id}">
-                                            <input type="submit" name="submit" class="btn btn-primary"
+                                            <input type="submit" name="submit" class="btn btn-default"
                                                    value="enable/disable">
                                         </form:form>
 
                                         <form:form method="delete" action="users/delete/${user.id}">
-                                            <input type="submit" name="submit" class="btn btn-primary" value="delete">
+                                            <input type="submit" name="submit" class="btn btn-default" value="delete">
                                         </form:form>
-                                    </p>
+                                            <div class="btn-group">
                                     <!--<div class="btn-group">
                                     <button type="button" data-toggle="dropdown" class="btn btn-default"> Options <span
                                     class="caret"></span></button>
