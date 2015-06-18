@@ -61,11 +61,10 @@ public class HomePageImageController {
         try {
             response.getOutputStream().write(homePageImage.getImage());
             response.getOutputStream().close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
     @RequestMapping(value = "carouselController/delete/{id}", method = RequestMethod.DELETE)
     public String deleteImage(@PathVariable Integer id) {
@@ -73,10 +72,4 @@ public class HomePageImageController {
 
         return "redirect:/carouselController";
     }
-
-    // delete ajax
-    /*@RequestMapping(value = "carouselController/delete", method = RequestMethod.POST)
-    public void deleteImage(@RequestParam Integer id) {
-        homePageImageService.deleteHomePageImage(id);
-    }*/
 }

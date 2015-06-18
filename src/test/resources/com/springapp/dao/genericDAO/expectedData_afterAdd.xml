@@ -8,4 +8,6 @@
     <cart/>
     <customer/>
     <purchase/>
+    <itemdelivery/>
+    <homepageimage/>
 </dataset>

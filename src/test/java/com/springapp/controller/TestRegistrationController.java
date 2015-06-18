@@ -57,7 +57,7 @@ public class TestRegistrationController {
     }
 
     @Test
-    public void testSuccessRegistration() throws Exception{
+    public void testSuccessRegistration() throws Exception {
         mockMvc.perform(post("/createUser")
                 .param("username", "TestRegisterUser")
                 .param("password", "1")

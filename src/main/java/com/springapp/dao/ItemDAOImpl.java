@@ -57,14 +57,4 @@ public class ItemDAOImpl implements ItemDAO {
         String sql = "from Item where available = true ";
         return getSession().createQuery(sql).setCacheable(true).list();
     }
-
-    public List<Item> getAllNotAvailableItems(String customerName) {
-        //Query query = getSession().createQuery("from Item where customerName = :customerName and purchaseID = null")
-        //        .setCacheable(true);
-        //query.setString("ownerUsername", ownerUsername);
-        //return (List<Cart>) query.list();
-
-        return null;
-    }
-
 }

@@ -58,7 +58,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void testLogout() throws Exception{
+    public void testLogout() throws Exception {
         mockMvc.perform(get("/login")
                 .param("logout", ""))
                 .andExpect(model().attributeDoesNotExist("error"))

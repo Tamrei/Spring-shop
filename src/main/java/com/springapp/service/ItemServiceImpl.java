@@ -103,6 +103,15 @@ public class ItemServiceImpl implements ItemService {
         itemDAO.updateItem(item);
     }
 
+    /**
+     * Add new item in to the shop and resize it
+     *
+     * @param item item entity that we want to add
+     * @param image image to resize
+     * @param width desired width in pixels
+     * @param height desired height in pixels
+     * @throws IOException
+     */
     @Override
     @Transactional
     public void addItemAndResizeImage(Item item, MultipartFile image, int width, int height) throws IOException{

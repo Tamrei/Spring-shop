@@ -70,7 +70,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     /**
      * @param address      that is associated with the order
-     * @param customerName of order owner
+     * @param customerName username of order owner
      */
     @Override
     @Transactional(rollbackFor={RunOutOfItemsException.class})
@@ -78,24 +78,29 @@ public class PurchaseServiceImpl implements PurchaseService {
         List<Cart> carts = cartDAO.getNotOrderedCartByCustomerName(customerName);
 
         Purchase purchase = new Purchase();
+
+        /* final price of full purchase */
         double totalPrice = 0.0;
 
         address.setOwnerUsername(customerName);
         addressDAO.add(address);
 
         purchase.setAddress(address);
-        purchaseDAO.add(purchase); //
+        /* We new  */
+        purchaseDAO.add(purchase);
 
-        // find all items that are not purchased yet and purchase them (give them a purchase id)
+        /* find all items that are not purchased yet and purchase them (give them a purchase id) */
         for (Cart cart : carts) {
             Item item = (Item) itemDAO.get(cart.getItemID());
 
             checkForAvailability(cart, item);
 
+            /*  */
             cart.setPurchaseID(purchase.getPurchaseID());
 
             item.setLeftOnStore(item.getLeftOnStore() - cart.getAmount());
-            // count the price
+
+            /* count the price */
             totalPrice += item.getPrice() * cart.getAmount();
         }
 
@@ -110,83 +115,8 @@ public class PurchaseServiceImpl implements PurchaseService {
         }
     }
 
-    /*@Override
-    @Transactional
-    public Map <Pair<Cart, Item>, Long> getNotAvailableCarts(String username) {
-        List<Cart> carts = cartDAO.getNotOrderedCartByCustomerName(username);
-
-        Map <Pair<Cart, Item>, Long> pairLongMap = new HashMap<Pair<Cart, Item>, Long>();
-
-        for (Cart cart : carts) {
-            Item item = (Item) itemDAO.get(cart.getItemID());
-            long left = item.getLeftOnStore() - cart.getAmount();
-            if (item.getLeftOnStore() < cart.getAmount()) {
-                pairLongMap.put(new Pair(cart, item), left);
-            }
-        }
-
-        return pairLongMap;
-    }*/
-
-    @Override
-    @Transactional
-    public Map <Cart, Item> getNotAvailableCarts(String username) {
-        List<Cart> carts = cartDAO.getNotOrderedCartByCustomerName(username);
-
-        Map <Cart, Item> pairLongMap = new HashMap<Cart, Item>();
-
-        for (Cart cart : carts) {
-            Item item = (Item) itemDAO.get(cart.getItemID());
-            if (item.getLeftOnStore() < cart.getAmount()) {
-                pairLongMap.put(cart, item);
-            }
-        }
-
-        return pairLongMap;
-    }
-
-    @Override
-    public Map<HashMap<Cart, Item>, String> getNotAvailableCartsStr(String username) {
-        List<Cart> carts = cartDAO.getNotOrderedCartByCustomerName(username);
-
-        Map <HashMap<Cart, Item>, String> pairLongMapStr = new HashMap<HashMap<Cart, Item>, String>();
-
-        for (Cart cart : carts) {
-            Item item = (Item) itemDAO.get(cart.getItemID());
-            if (item.getLeftOnStore() < cart.getAmount()) {
-                HashMap <Cart, Item> pairLongMap = new HashMap<Cart, Item>();
-                pairLongMap.put(cart, item);
-                String str = "";
-                long left = item.getLeftOnStore();
-                str += left;
-                pairLongMapStr.put(pairLongMap, str);
-            }
-        }
-
-        return pairLongMapStr;
-    }
-
-    @Override
-    public Map<Pair<Cart, Item>, String> getNotAvailableCartsPair(String username) {
-        List<Cart> carts = cartDAO.getNotOrderedCartByCustomerName(username);
-
-        Map<Pair<Cart, Item>, String> pairLongMap = new HashMap<Pair<Cart, Item>, String>();
-
-        for (Cart cart : carts) {
-            Item item = (Item) itemDAO.get(cart.getItemID());
-            if (item.getLeftOnStore() < cart.getAmount()) {
-                String str = "";
-                long left = item.getLeftOnStore();
-                str += left;
-                pairLongMap.put(new Pair(cart, item), str);
-            }
-        }
-
-        return pairLongMap;
-    }
-
     /**
-     * this method change purchase status
+     * This method change purchase status
      *
      * @param purchaseID of purchase to change
      * @param status     that we want to set
@@ -194,6 +124,10 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @Transactional
     public void changeOrderStatus(long purchaseID, String status) {
+        if (status.isEmpty()) {
+            throw new IllegalArgumentException("Status is empty.");
+        }
+
         Purchase purchase = (Purchase) purchaseDAO.get(purchaseID);
         purchase.setStatus(PurchaseStatus.valueOf(status));
         purchaseDAO.update(purchase);

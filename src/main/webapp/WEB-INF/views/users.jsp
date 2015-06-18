@@ -29,63 +29,72 @@
 
     <jsp:include page="static/navbar.jsp" flush="true"/>
 
-    <input type="search" id="searchByUsername" class="form-control" style="margin-bottom:15px;"
-           placeholder="Search by username" onkeyup="searchValue('#username', this.id)">
+    <div class="panel">
+        <div class="panel-body">
 
-    <div class="table">
-        <table class="table borderless">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <sec:authorize access="hasRole('ADMIN')">
-                    <th>Password</th>
-                </sec:authorize>
-                <th>Role</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
+            <input type="search" id="searchByUsername" class="form-control" style="margin-bottom:15px;"
+                   placeholder="Search by username" onkeyup="searchValue('#username', this.id)">
 
-            <c:forEach items="${users}" var="user">
-                <tr>
-                    <td> ${user.id} </td>
-                    <td id="username"> ${user.username} </td>
-                    <sec:authorize access="hasRole('ADMIN')">
-                        <td> ${user.password} </td>
-                    </sec:authorize>
-                    <td> ${user.role} </td>
+            <div class="table">
+                <table class="table table-curved table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <sec:authorize access="hasRole('ADMIN')">
+                            <th>Password</th>
+                        </sec:authorize>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                    <c:choose>
-                        <c:when test="${user.enabled == true}">
-                            <td><font color="blue"> enabled </font></td>
-                        </c:when>
-                        <c:otherwise>
-                            <td><font color="red"> disabled </font></td>
-                        </c:otherwise>
-                    </c:choose>
+                    <c:forEach items="${users}" var="user">
 
-                    <sec:authorize access="hasRole('ADMIN')">
-                        <c:set var="userName"><security:authentication property="name"/></c:set>
-                        <!-- control pane -->
-                        <td>
+                        <script>
+                            alert('${user.username}' + " +");
+                        </script>
+
+                        <tr>
+                            <td> ${user.id} </td>
+                            <td id="username"> ${user.username} </td>
+                            <sec:authorize access="hasRole('ADMIN')">
+                                <td> ${user.password} </td>
+                            </sec:authorize>
+                            <td> ${user.role} </td>
+
                             <c:choose>
-                                <c:when test="${userName == user.username}">
-                                    <p>Sorry, but you cant </p>
-                                    <p>delete or disable yourself</p>
+                                <c:when test="${user.enabled == true}">
+                                    <td><font color="blue"> enabled </font></td>
                                 </c:when>
                                 <c:otherwise>
-                                <div class="btn-group">
+                                    <td><font color="red"> disabled </font></td>
+                                </c:otherwise>
+                            </c:choose>
+
+                            <sec:authorize access="hasRole('ADMIN')">
+                                <c:set var="userName"><security:authentication property="name"/></c:set>
+                                <!-- control pane -->
+                                <td>
+                                    <c:choose>
+                                    <c:when test="${userName == user.username}">
+                                        <p>Sorry, but you cant </p>
+
+                                        <p>delete or disable yourself</p>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <div class="btn-group">
                                         <form:form action="http://localhost:8080/users/${user.id}">
-                                            <input type="submit" name="submit" class="btn btn-default"
-                                                   value="enable/disable">
+                                        <input type="submit" name="submit" class="btn btn-default"
+                                               value="enable/disable">
                                         </form:form>
 
                                         <form:form method="delete" action="users/delete/${user.id}">
-                                            <input type="submit" name="submit" class="btn btn-default" value="delete">
+                                        <input type="submit" name="submit" class="btn btn-default" value="delete">
                                         </form:form>
-                                            <div class="btn-group">
-                                    <!--<div class="btn-group">
+                                        <div class="btn-group">
+                                            <!--<div class="btn-group">
                                     <button type="button" data-toggle="dropdown" class="btn btn-default"> Options <span
                                     class="caret"></span></button>
                                     <ul class="dropdown-menu">
@@ -101,18 +110,20 @@
                                     </ul>
                                     </div>-->
 
-                                </c:otherwise>
+                                            </c:otherwise>
 
-                            </c:choose>
-                            <!-- control pane -->
-                        </td>
+                                            </c:choose>
+                                            <!-- control pane -->
+                                </td>
 
-                    </sec:authorize>
-                </tr>
-            </c:forEach>
+                            </sec:authorize>
+                        </tr>
+                    </c:forEach>
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 

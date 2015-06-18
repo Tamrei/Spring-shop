@@ -55,22 +55,6 @@ public class Purchase implements Serializable {
         this.setOwnerUsername(address.getOwnerUsername());
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Set<Cart> getCarts() {
-        return carts;
-    }
-
-    public void setCarts(Set<Cart> carts) {
-        this.carts = carts;
-    }
-
     public long getPurchaseID() {
         return purchaseID;
     }
@@ -79,20 +63,20 @@ public class Purchase implements Serializable {
         this.purchaseID = purchaseID;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getOwnerUsername() {
         return ownerUsername;
     }
 
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public long getAddressID() {
@@ -109,6 +93,22 @@ public class Purchase implements Serializable {
 
     public void setStatus(PurchaseStatus status) {
         this.status = status;
+    }
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Address getAddress() {
@@ -140,5 +140,19 @@ public class Purchase implements Serializable {
         int result = (int) (purchaseID ^ (purchaseID >>> 32));
         result = 31 * result + (int) (addressID ^ (addressID >>> 32));
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Purchase{" +
+                "purchaseID=" + purchaseID +
+                ", ownerUsername='" + ownerUsername + '\'' +
+                ", price=" + price +
+                ", addressID=" + addressID +
+                ", status=" + status +
+                ", carts=" + carts +
+                ", customer=" + customer +
+                ", address=" + address +
+                '}';
     }
 }

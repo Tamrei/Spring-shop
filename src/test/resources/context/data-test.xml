@@ -96,11 +96,19 @@
     <bean id="addressDAO" class="com.springapp.dao.generic.GenericDAOImpl">
         <constructor-arg value="com.springapp.model.Address"/>
     </bean>
+
+    <bean id="homePageImageDAO" class="com.springapp.dao.generic.GenericDAOImpl">
+        <constructor-arg value="com.springapp.model.site.HomePageImage"/>
+    </bean>
+
+    <bean id="itemDeliveryDAO" class="com.springapp.dao.generic.GenericDAOImpl">
+        <constructor-arg value="com.springapp.model.ItemDelivery"/>
+    </bean>
     <!-- generic dao beans end -->
 
-    <!--sql script executor-->
+    <!--sql script executor
     <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="classpath:/create_testDb.sql"/>
-    </jdbc:initialize-database>
+    </jdbc:initialize-database>-->
 
 </beans>

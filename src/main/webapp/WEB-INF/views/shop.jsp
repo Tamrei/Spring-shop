@@ -157,12 +157,6 @@
             <div class="row">
                 <c:forEach items="${items}" var="item">
 
-
-                    <script>
-                        var item = ${item};
-                        alert(item.itemID + "  " + item.Type);
-                    </script>
-
                     <div class="type" id="${item.type}">
                         <div class="col-sm-6 col-md-3" id="${item.type}">
                             <div class="thumbnail" style="height: 222px; padding: 1px;">
@@ -266,7 +260,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-primary" id="putButton"
-                                                    onclick="putItemInCart(${item.itemID})"> Buy
+                                                    onclick="putItemInCart(${item.itemID}, '${item.itemName}')"> Buy
                                             </button>
                                         </div>
                                     </div>
@@ -296,7 +290,7 @@
                 </c:forEach>
 
                 <script>
-                    function putItemInCart(itemID) {
+                    function putItemInCart(itemID, itemName) {
                         var amount = $('#amount' + itemID).val();
 
                         $.ajax({
@@ -305,14 +299,12 @@
                             data: "itemID=" + itemID + "&amount=" + amount,
                             success: function (data) {
                                 showCartCount('cartCount'); // update cart count
-                                $('.modal.in').modal('hide') // hide modal
-                                //$('#cartNotification').show();
-                                //$('#cartNotificationMessage').text(itemID + 'successfully added to your cart!');
+                                $('.modal.in').modal('hide'); // hide modal
 
                                 // display popover with info
                                 var cartPopover = $('#navCart');
-                                var success = "Test long message here ! test test LOL";
-                                cartPopover.attr("data-original-title", success).attr("data-content", itemID);
+                                var success = "Success!";
+                                cartPopover.attr("data-original-title", success).attr("data-content", "You successful added " + amount + " " + itemName + "'s.");
 
                                 cartPopover.popover("show");
 
@@ -320,11 +312,12 @@
 
                                 setTimeout(function () {
                                     cartPopover.popover('hide');
-                                }, 3000);
-                            }//,
-                            //error: function (e) {
+                                }, 3500);
+                            },
+                            error: function (e) {
                             //window.location.href = "/login";
-                            //}
+                                alert("error! make sure your amount is integer.");
+                            }
                         });
                     }
                 </script>

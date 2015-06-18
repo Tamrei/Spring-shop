@@ -35,26 +35,12 @@ public class CartServiceImpl implements CartService {
         return map;
     }
 
-    @Override
-    public Map<Pair<Cart, Item>, Integer> testMethod(String customerName) {
-        Map<Pair<Cart, Item>, Integer> pairLongMap = new HashMap<Pair<Cart, Item>, Integer>();
-
-        for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
-            Item item = (Item) itemDAO.get(cart.getItemID());
-
-            int i = 0;
-
-            if (item.getLeftOnStore() < cart.getAmount()) {
-
-            }
-
-            pairLongMap.put(new Pair(item, cart), i);
-        }
-
-
-        return pairLongMap;
-    }
-
+    /**
+     * Set the amount of items in the cart.
+     *
+     * @param cartID cart id to perform operation
+     * @param amount that we want to set
+     */
     @Override
     @Transactional
     public void setItemAmountInTheCart(long cartID, long amount) {

@@ -7,9 +7,16 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Cart entity have specific logic :
+ * if addressID is null that mean that cart no ordered
+ * and waiting to be ordered.
+ * also cart entity don't have
+ *
+ */
 @Entity
 @Table(name = "cart")
-@org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)
+//@org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true) //???
 @Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Cart implements Serializable {
     @Id

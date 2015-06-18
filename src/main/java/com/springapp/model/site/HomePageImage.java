@@ -8,9 +8,13 @@ import org.hibernate.annotations.Proxy;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Home Page Image entity
+ * holds image for home page carousel
+ *
+ */
 @Entity
 @Table(name = "homepageimage")
-//@Proxy(lazy = false)
 @Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class HomePageImage implements Serializable {
 
@@ -54,5 +58,12 @@ public class HomePageImage implements Serializable {
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
+    }
+
+    @Override
+    public String toString() {
+        return "HomePageImage{" +
+                "id=" + id +
+                '}';
     }
 }

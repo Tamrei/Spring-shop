@@ -28,11 +28,4 @@ public interface PurchaseService {
 
 
 
-    //public Map <Pair<Cart, Item>, Long> getNotAvailableCarts(String username);
-
-    public Map <Cart, Item> getNotAvailableCarts(String username);
-
-    public Map <HashMap<Cart, Item>, String> getNotAvailableCartsStr(String username);
-
-    public Map <Pair<Cart, Item>, String> getNotAvailableCartsPair(String username);
 }

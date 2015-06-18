@@ -74,12 +74,12 @@ public class TestShopController {
     protected WebApplicationContext wac;
 
     @Autowired
-    @Mock
-    private ItemService itemService;
-
-    @Autowired
     @InjectMocks
     private ShopController shopController;
+
+    @Autowired
+    @Mock
+    private ItemService itemService;
 
     private TestingAuthenticationToken testingAuthenticationToken;
 
@@ -106,7 +106,7 @@ public class TestShopController {
 
     //@Ignore
     @Test
-    public void TestUpdateItem() throws Exception{
+    public void TestUpdateItem() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "image1.jpg", null, "image".getBytes());
 
         Item item = new Item();

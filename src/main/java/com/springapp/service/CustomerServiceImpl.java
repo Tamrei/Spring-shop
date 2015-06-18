@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerDAO customerDAO;
 
     /**
-     * This method disable or enable the user selected by id
+     * This method disable or enable the user selected by id.
      *
      * @param customerID the user ID on which we want to perform the operation
      */
@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * Register new customer in system
+     * Register new customer in system.
      *
      * @param customer instance that we want to register
      * @throws UserAlreadyExistsException if username not unique

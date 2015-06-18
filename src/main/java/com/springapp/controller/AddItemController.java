@@ -43,6 +43,7 @@ public class AddItemController {
             e.printStackTrace();
             System.out.println("No Image ???");
         }
+        // official java dock says that null pointer will be thrown if image is not an image
         catch (NullPointerException e) {
             return new ModelAndView("addItem", "notAnImage", "Woops! seams like it's not an image!");
         }

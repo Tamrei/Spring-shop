@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "customer")
 @Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
@@ -40,14 +41,6 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer")
     private Set<Purchase> purchases;
 
-    public Set<Purchase> getPurchases() {
-        return purchases;
-    }
-
-    public void setPurchases(Set<Purchase> purchases) {
-        this.purchases = purchases;
-    }
-
     public Customer() {
         role = UserRoles.USER;
         enabled = true;
@@ -73,28 +66,12 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public Set<Cart> getCarts() {
-        return carts;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCarts(Set<Cart> carts) {
-        this.carts = carts;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public UserRoles getRole() {
-        return role;
-    }
-
-    public void setRole(UserRoles role) {
-        this.role = role;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -105,12 +82,36 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public UserRoles getRole() {
+        return role;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setRole(UserRoles role) {
+        this.role = role;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public Set<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<Purchase> purchases) {
+        this.purchases = purchases;
     }
 
     @Override
@@ -136,7 +137,13 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "Customer{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", enabled=" + enabled +
+                ", carts=" + carts +
+                ", purchases=" + purchases +
                 '}';
     }
 }

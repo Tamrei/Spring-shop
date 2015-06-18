@@ -15,6 +15,4 @@ public interface ItemDAO {
     public List<Item> getAllItems();
 
     public List<Item> getAllAvailableItems();
-
-    public List<Item> getAllNotAvailableItems(String customerName);
 }

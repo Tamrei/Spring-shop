@@ -1,10 +1,7 @@
 package com.springapp.util;
 
 
-import com.springapp.exceptions.ImageFormatException;
-import org.imgscalr.Scalr;
-import org.springframework.stereotype.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Repository;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,6 +13,15 @@ import java.io.IOException;
 @Repository
 public class ImageResizerImpl implements ImageResizer {
 
+    /**
+     * Resize image.
+     *
+     * @param image  image represented as a byte array
+     * @param width  desired width in pixels
+     * @param height desired height in pixels
+     * @return resized image as a byte array
+     * @throws IOException
+     */
     @Override
     public byte[] resizeImage(byte[] image, int width, int height) throws IOException {
         BufferedImage newImage = getScaledInstance

@@ -47,11 +47,11 @@ public class TestCustomerController {
     }
 
     @Test
-    public void testEnableDisableUser() throws Exception{
+    public void testEnableDisableUser() throws Exception {
         final long updateID = 999;
 
         mockMvc.perform(post("/users/{id}", updateID))
-                .andExpect(redirectedUrl(""));
+                .andExpect(redirectedUrl("/users"));
 
         verify(customerService).enableDisableUser(updateID);
     }

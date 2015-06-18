@@ -16,7 +16,4 @@ public interface CartService {
     public Cart getCart(long id);
     public void updateCart(Cart cart);
     public void setItemAmountInTheCart(long id, long amount);
-
-
-    public Map <Pair<Cart, Item>, Integer> testMethod(String customerName);
 }

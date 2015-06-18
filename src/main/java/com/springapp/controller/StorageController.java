@@ -39,14 +39,7 @@ public class StorageController {
 
     @RequestMapping(value="store/add/{itemID}")
     public ModelAndView addNewItemDelivery(@ModelAttribute("itemDelivery") @Valid ItemDelivery itemDelivery) {
-        //for (ItemDelivery delivery : itemDeliveryService.getAllItemDeliveries()) {
-        //    System.out.println(delivery.getItem().toString());
-        //}
-
-        //itemDelivery.setItem(itemService.getItem(itemDelivery.getItemID()));
         itemDeliveryService.addItemDelivery(itemDelivery);
-
-        //System.out.println(itemDelivery.getItem().toString());
 
         return new ModelAndView("redirect:/store");
     }

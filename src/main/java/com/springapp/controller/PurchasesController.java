@@ -19,13 +19,13 @@ public class PurchasesController {
     @RequestMapping(value = "purchases")
     public String getPurchaseList(ModelMap modelMap) {
         //modelMap.put("purchase", new Purchase());
-        modelMap.put("purchases", purchaseService.getPurchase());
+        modelMap.addAttribute("purchases", purchaseService.getPurchase());
 
         return "purchases";
     }
 
-    @RequestMapping(value = "purchases/{id}", method = RequestMethod.GET)
-    public String getPurchaseForAddress(@PathVariable("id") Integer id, ModelMap modelMap) {
+    @RequestMapping(value = "purchases/{purchaseID}", method = RequestMethod.GET)
+    public String getPurchaseForAddress(@PathVariable("purchaseID") Integer id, ModelMap modelMap) {
         modelMap.addAttribute("address", purchaseService.getPurchase(id).getAddress());
         modelMap.addAttribute("purchases", purchaseService.getAllItemsInTheCart(id));
 

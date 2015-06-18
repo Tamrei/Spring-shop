@@ -23,8 +23,8 @@ public class ItemDelivery implements Serializable {
     @Column(name = "itemID")
     private long itemID;
 
-    @Column(name="itemsLeft")
-    private long itemsLeft;
+    @Column(name="itemQuantity")
+    private long itemQuantity;
 
     @ManyToOne
     @JoinColumn(name = "itemID", insertable = false, updatable = false)
@@ -33,6 +33,7 @@ public class ItemDelivery implements Serializable {
     //@Temporal(TemporalType.TIME)
     @Column(name = "dateOfDelivery")
     private Date dateOfDelivery;
+
 
     public Date getDateOfDelivery() {
         return dateOfDelivery;
@@ -70,11 +71,49 @@ public class ItemDelivery implements Serializable {
         this.itemID = itemID;
     }
 
-    public long getItemsLeft() {
-        return itemsLeft;
+    public long getItemQuantity() {
+        return itemQuantity;
     }
 
-    public void setItemsLeft(long itemsLeft) {
-        this.itemsLeft = itemsLeft;
+    public void setItemQuantity(long itemQuantity) {
+        this.itemQuantity = itemQuantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ItemDelivery)) return false;
+
+        ItemDelivery that = (ItemDelivery) o;
+
+        if (itemDeliveryID != that.itemDeliveryID) return false;
+        if (itemID != that.itemID) return false;
+        if (itemQuantity != that.itemQuantity) return false;
+        if (dateOfDelivery != null ? !dateOfDelivery.equals(that.dateOfDelivery) : that.dateOfDelivery != null)
+            return false;
+        if (item != null ? !item.equals(that.item) : that.item != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (itemDeliveryID ^ (itemDeliveryID >>> 32));
+        result = 31 * result + (int) (itemID ^ (itemID >>> 32));
+        result = 31 * result + (int) (itemQuantity ^ (itemQuantity >>> 32));
+        result = 31 * result + (item != null ? item.hashCode() : 0);
+        result = 31 * result + (dateOfDelivery != null ? dateOfDelivery.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemDelivery{" +
+                "itemDeliveryID=" + itemDeliveryID +
+                ", itemID=" + itemID +
+                ", itemQuantity=" + itemQuantity +
+                ", item=" + item +
+                ", dateOfDelivery=" + dateOfDelivery +
+                '}';
     }
 }

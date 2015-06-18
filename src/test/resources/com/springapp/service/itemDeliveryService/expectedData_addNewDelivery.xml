@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <customer customerID="1" username="customer1" password="123" role="USER" enabled="true" />
+    <customer customerID="2" username="customer2" password="1234" role="ADMIN" enabled="true"/>
+
+    <item itemID="1" itemName="empty" image="empty" price="1" type="test" leftOnStore="150" available="true"/>
+    <item itemID="2" itemName="empty" image="empty" price="1" type="test" leftOnStore="100" available="true"/>
+    <item itemID="3" itemName="empty" image="empty" price="1" type="test" leftOnStore="100" available="true"/>
+    <item itemID="4" itemName="empty" image="empty" price="1" type="test" leftOnStore="100" available="true"/>
+
+    <cart/>
+    <address/>
+    <purchase/>
+    <itemdelivery itemDeliveryID="1" itemID="1" itemQuantity="50" dateOfDelivery="2015-06-16 16:41:47"/>
+    <homepageimage/>
+</dataset>

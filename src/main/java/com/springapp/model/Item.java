@@ -43,14 +43,6 @@ public class Item implements Serializable {
     @OneToMany(mappedBy = "item")//, fetch = FetchType.LAZY)
     private Set<ItemDelivery> itemDeliveries;
 
-    public Set<ItemDelivery> getItemDeliveries() {
-        return itemDeliveries;
-    }
-
-    public void setItemDeliveries(Set<ItemDelivery> itemDeliveries) {
-        this.itemDeliveries = itemDeliveries;
-    }
-
     public boolean isAvailable() {
         return available;
     }
@@ -86,16 +78,16 @@ public class Item implements Serializable {
         return itemName;
     }
 
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
     }
 
     public byte[] getImage() {
@@ -112,6 +104,14 @@ public class Item implements Serializable {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public Set<ItemDelivery> getItemDeliveries() {
+        return itemDeliveries;
+    }
+
+    public void setItemDeliveries(Set<ItemDelivery> itemDeliveries) {
+        this.itemDeliveries = itemDeliveries;
     }
 
     @Override
@@ -135,14 +135,13 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        /*return "Item{" +
+        return "Item{" +
                 "itemID=" + itemID +
                 ", itemName='" + itemName + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", leftOnStore=" + leftOnStore +
                 ", available=" + available +
-                '}';*/
-        return " empty! ";
+                '}';
     }
 }

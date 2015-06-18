@@ -115,7 +115,7 @@
 
                                     <div class="form-group">
                                         <label> Amount </label>
-                                        <input type="number" name="itemsLeft" class="form-control"
+                                        <input type="number" name="itemQuantity" class="form-control"
                                                placeholder="Quntity">
                                     </div>
 

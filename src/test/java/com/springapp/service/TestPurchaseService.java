@@ -3,6 +3,7 @@ package com.springapp.service;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.springapp.exceptions.RunOutOfItemsException;
 import com.springapp.model.Address;
 import com.springapp.model.Cart;
 import com.springapp.model.Item;
@@ -49,10 +50,10 @@ public class TestPurchaseService {
     @Test
     @DatabaseSetup("classpath:/com/springapp/service/orderService/dataSet.xml")
     @ExpectedDatabase(value = "classpath:/com/springapp/service/orderService/expectedData_makeOrder.xml")
-    public void testMakeOrder() {
+    public void testMakeOrder() throws RunOutOfItemsException{
         final String customerName = "customer1";
         Address address = new Address(customerName, "Kiev", "My street 14");
-        //purchaseService.makeOrder(address, customerName);
+        purchaseService.makeOrder(address, customerName);
     }
 
     @Test

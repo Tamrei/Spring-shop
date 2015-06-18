@@ -13,6 +13,11 @@ public class RunOutOfItemsException extends Exception {
         this.message = message;
     }
 
+    public RunOutOfItemsException(int itemsToPurchase, int itemLeftOnStore) {
+        this.message = "Attempt to order " + itemsToPurchase + " items where there is only"
+                + itemLeftOnStore + " left on store.";
+    }
+
     @Override
     public String getMessage() {
         return message;

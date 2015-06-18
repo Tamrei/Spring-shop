@@ -11,8 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "address")
-@Proxy(lazy = false)
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Address {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
@@ -55,14 +54,6 @@ public class Address {
         this.street = street;
     }
 
-    public void setPurchases(Set<Purchase> purchases) {
-        this.purchases = purchases;
-    }
-
-    public Set<Purchase> getPurchases() {
-        return purchases;
-    }
-
     public long getAddressID() {
         return addressID;
     }
@@ -95,6 +86,14 @@ public class Address {
         this.street = street;
     }
 
+    public void setPurchases(Set<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
+    public Set<Purchase> getPurchases() {
+        return purchases;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,5 +109,16 @@ public class Address {
     @Override
     public int hashCode() {
         return (int) (addressID ^ (addressID >>> 32));
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressID=" + addressID +
+                ", ownerUsername='" + ownerUsername + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", purchases=" + purchases +
+                '}';
     }
 }

@@ -7,4 +7,6 @@
     <cart/>
     <address/>
     <purchase/>
+    <itemdelivery/>
+    <homepageimage/>
 </dataset>

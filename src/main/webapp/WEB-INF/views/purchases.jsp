@@ -93,7 +93,7 @@
 
                         <script>
                             $("#order${purchase.purchaseID}").on('click', function () {
-                                //window.location = "purchases/${purchase.purchaseID}";
+                                window.location = "purchases/${purchase.purchaseID}";
                             });
 
                         </script>

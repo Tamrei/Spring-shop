@@ -39,8 +39,7 @@ public class MakePurchaseController {
         try {
             purchaseService.makeOrder(address, activeUser.getUsername());
         } catch (RunOutOfItemsException e) {
-            //return new ModelAndView("ajax", "purchases", purchaseService.getNotAvailableCarts(activeUser.getUsername()));
-            return new ModelAndView("ajax", "purchases", purchaseService.getNotAvailableCartsPair(activeUser.getUsername()));
+            return new ModelAndView("redirect:/cart");
         }
 
         return new ModelAndView("redirect:/cart");

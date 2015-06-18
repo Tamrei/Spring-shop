@@ -22,12 +22,18 @@ public class ItemDeliveryServiceImpl implements ItemDeliveryService {
     @Autowired
     private ItemDAO itemDAO;
 
+    /**
+     * This method add new item delivery
+     * and update item amount that available for customers to order.
+     *
+     * @param itemDelivery item entity
+     */
     @Override
     @Transactional
     public void addItemDelivery(ItemDelivery itemDelivery) {
         itemDeliveryDAO.add(itemDelivery);
         Item item = itemDAO.getByID(itemDelivery.getItemID());
-        item.setLeftOnStore(item.getLeftOnStore() + itemDelivery.getItemsLeft());
+        item.setLeftOnStore(item.getLeftOnStore() + itemDelivery.getItemQuantity());
     }
 
     @Override

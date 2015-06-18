@@ -24,75 +24,15 @@
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
     <script src="<c:url value="/resources/js/jquery.validate.js" />"></script>
+    <script src="<c:url value="/resources/js/validation/registrationFormValidator.js" />"></script>
+
     <script>
         $(document).ready(function () {
-
-            var usernameForm = $('#username-form');
-            var isNameValid = false;
-
-            var passwordForm = $('#password-form');
-            var isPasswordValid = false;
-
-            var isFormValid = false;
-
-            var passwordLabel = $('#password-label');
-            var usernameLabel = $('#username-label');
-
-            /**
-             *  username form
-             */
-            $('#username').on('input', function () {
-                var input = $(this);
-                var usernameValue = input.val();
-
-                isNameValid = (usernameValue.length > 2);
-
-                if (isNameValid) {
-                    usernameForm.removeClass('has-error').addClass('has-success');
-                    /*input.css("border-color", "#3c763d");
-                    usernameLabel.css("color", "#3c763d");*/
-
-                }
-                else {
-                    usernameForm.removeClass('has-success').addClass('has-error');
-                    /*input.css("border-color", "#a94442");
-                    usernameLabel.css("color", "#a94442");*/
-                }
-            });
-            /**
-             *  password form
-             */
-            $('#password').on('input', function () {
-                var input = $(this);
-                var passwordValue = input.val();
-
-                isPasswordValid = (passwordValue.length > 3);
-
-                if (isPasswordValid) {
-                    passwordForm.removeClass('has-error').addClass('has-success');
-                    //input.css("border-color", "#3c763d");
-                }
-                else {
-                    passwordForm.removeClass('has-success').addClass('has-error');
-                    //input.css("border-color", "#a94442");
-                }
-            });
-
-            //$('#FormsAreEmpty').hide();
-
-            $("#registration-form").submit(function (e) {
-                isFormValid = isNameValid && isPasswordValid;
-
-                if (!isFormValid) {
-                    //$('#FormsAreEmpty').show();
-                    $('#FormsAreEmpty').removeClass('hidden');
-                }
-
-                return isFormValid;
-            });
+            validateRegistrationForm();
         });
 
     </script>
+
 </head>
 <body>
 <div class="container">

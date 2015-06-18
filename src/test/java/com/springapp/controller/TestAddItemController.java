@@ -79,7 +79,7 @@ public class TestAddItemController {
     }
 
     @Test
-    public void TestAddItem() throws Exception{
+    public void TestAddItem() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "image1.jpg", null, "image".getBytes());
 
         Item item = new Item();
@@ -99,7 +99,7 @@ public class TestAddItemController {
     }
 
     @Test
-    public void TestAddItem_NullFile() throws Exception{
+    public void TestAddItem_NullFile() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "image1.jpg", null, "".getBytes());
 
         Item item = new Item();
