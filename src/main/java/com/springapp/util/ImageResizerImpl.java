@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ImageResizerImpl implements ImageResizer {
 
     /**
-     * Resize image.
+     * This method return resized image as a byte array.
      *
      * @param image  image represented as a byte array
      * @param width  desired width in pixels

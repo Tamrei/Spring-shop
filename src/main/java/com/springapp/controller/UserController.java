@@ -5,14 +5,12 @@ import com.springapp.model.Customer;
 import com.springapp.model.Item;
 import com.springapp.service.CartService;
 import com.springapp.service.CustomerService;
+import org.apache.avro.data.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -29,17 +27,24 @@ public class UserController {
         return "users";
     }
 
-    @RequestMapping(value = "users/{id}", method = RequestMethod.POST)
-    public String enableDisableUser(@PathVariable Integer id) {
-        customerService.enableDisableUser(id);
-
-        return "redirect:/users";
-    }
-
-    @RequestMapping(value = "users/delete/{id}", method = RequestMethod.DELETE)
-    public String deleteUser(@PathVariable Integer id) {
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public @ResponseBody
+    void deleteUser (@RequestParam("userID") Integer id) {
         customerService.deleteCustomer(id);
-
-        return "redirect:/users";
     }
+
+    @RequestMapping(value = "/enableDisableUser", method = RequestMethod.POST)
+    public @ResponseBody
+    String enableDisableUser(@RequestParam("userID") Integer id) {
+        //if (customerService.enableDisableCustomer(id)) {
+        //    return "true";
+        //}
+        //else return "false";
+
+        //return Bool.TRUE.toString();
+
+        return customerService.enableDisableCustomer(id);
+
+    }
+
 }

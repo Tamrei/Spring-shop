@@ -1,7 +1,6 @@
 package com.springapp.controller;
 
 import com.springapp.anotation.ActiveUser;
-import com.springapp.model.*;
 import com.springapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -17,8 +16,8 @@ public class CartController {
 
     @RequestMapping(value = "cart")
     public String cartList(@ActiveUser User activeUser, ModelMap modelMap) {
-        modelMap.addAttribute("cart", new Cart());
-        modelMap.addAttribute("carts", cartService.getAllItemInTheCart(activeUser.getUsername()));
+        //modelMap.addAttribute("cart", new Cart());
+        modelMap.addAttribute("carts", cartService.getAllItemsInTheCart(activeUser.getUsername()));
 
         return "cart";
     }

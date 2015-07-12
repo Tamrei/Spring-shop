@@ -1,10 +1,12 @@
 package com.springapp.model;
 
+import com.springapp.util.StringTrimmer;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
@@ -22,28 +24,28 @@ public class Customer implements Serializable {
 
     @Column(name="username")
     @Size(min=1, max=20, message = "Invalid username")
+    //@Pattern(regexp = "/ /g", message = "Username contains spaces")
     private String username;
 
     @Column(name="password")
     @Size(min=1, max=20, message = "Invalid password")
+    //@Pattern(regexp = "/ /g")
     private String password;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private UserRoles role;
+    private UserRoles role = UserRoles.USER;
 
     @Column(name = "enabled")
-    private boolean enabled;
+    private boolean enabled = true;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Cart> carts;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Purchase> purchases;
 
     public Customer() {
-        role = UserRoles.USER;
-        enabled = true;
     }
 
     public Customer(String username, String password) {
@@ -71,7 +73,10 @@ public class Customer implements Serializable {
     }
 
     public void setUsername(String username) {
+        System.out.println("Set Username");
+
         this.username = username;
+        //this.username = StringTrimmer.Trim(username);
     }
 
     public String getPassword() {
@@ -79,7 +84,12 @@ public class Customer implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+
+        System.out.println("Set password");
+
+        //this.password = password;
+
+        this.password = StringTrimmer.TrimAll(password);
     }
 
     public UserRoles getRole() {
@@ -146,5 +156,10 @@ public class Customer implements Serializable {
                 ", purchases=" + purchases +
                 '}';
     }
-}
 
+    //@PrePersist
+    protected void repair(){
+        System.out.println("=== Post Load ===");
+        //if(username != null) username = username.trim();
+    }
+}

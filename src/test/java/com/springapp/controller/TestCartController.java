@@ -58,13 +58,13 @@ public class TestCartController {
     }
 
     @Test
-    public void testCart() throws Exception {
+    public void testCartList() throws Exception {
         mockMvc.perform(get("/cart")
                 .principal(testingAuthenticationToken))
                 .andExpect(model().attributeExists("carts"))
                 .andExpect(view().name("cart"));
 
-        verify(cartService).getAllItemInTheCart("Test");
+        verify(cartService).getAllItemsInTheCart("Test");
     }
 
     @Test

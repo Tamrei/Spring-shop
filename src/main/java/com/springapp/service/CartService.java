@@ -12,7 +12,7 @@ public interface CartService {
 
     public void layOutItemFromCart(long id);
 
-    public Map<Item, Cart> getAllItemInTheCart(String customerName);
+    public Map<Item, Cart> getAllItemsInTheCart(String customerName);
     public Cart getCart(long id);
     public void updateCart(Cart cart);
     public void setItemAmountInTheCart(long id, long amount);

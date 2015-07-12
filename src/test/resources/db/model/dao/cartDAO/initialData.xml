@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <cart cartID="1" itemID="1" ownerUsername="customer1" amount="15"/>
+    <cart cartID="2" itemID="2" ownerUsername="customer1" amount="35"/>
+    <cart cartID="3" itemID="2" ownerUsername="customer1" purchaseID="1" amount="5"/>
+    <cart cartID="4" itemID="3" ownerUsername="customer1" purchaseID="1" amount="15"/>
+
+    <purchase purchaseID="1" ownerUsername="customer1" price="75" addressID="1" status="SENT" />
+    <address addressID="1" ownerUsername="customer1" street="my str.14" city="Kiev"/>
+
+    <item/>
+    <customer/>
+    <itemdelivery/>
+    <homepageimage/>
+</dataset>

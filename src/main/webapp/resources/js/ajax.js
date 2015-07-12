@@ -1,6 +1,4 @@
-/**
- * Created by Александр on 20.05.2015.
- */
+
 function showCartCount(id) {
     $.ajax({
         url: 'cartCount.html',

@@ -1,3 +1,4 @@
+
 CREATE DATABASE IF NOT EXISTS shop;
 
 USE shop;
@@ -28,13 +29,28 @@ CREATE TABLE IF NOT EXISTS `customer` (
   PRIMARY KEY (`customerID`)
 );
 
+CREATE TABLE IF NOT EXISTS `homepageimage` (
+  `id` INT(11) NOT NULL,
+  `image` LONGBLOB NULL,
+  PRIMARY KEY (`id`)
+);
+
 CREATE TABLE IF NOT EXISTS `item` (
   `itemID` INT(11) NOT NULL,
   `itemName` VARCHAR(255) NULL DEFAULT NULL,
   `type` VARCHAR(50) NULL DEFAULT NULL,
   `image` MEDIUMBLOB NULL,
   `price` FLOAT NULL DEFAULT NULL,
+  `leftOnStore` INT(11) NULL DEFAULT NULL,
+  `available` TINYINT(4) NULL DEFAULT NULL,
   PRIMARY KEY (`itemID`)
+);
+
+CREATE TABLE IF NOT EXISTS `itemdelivery` (
+  `itemDeliveryID` INT(11) NULL DEFAULT NULL,
+  `itemID` INT(11) NULL DEFAULT NULL,
+  `itemQuantity` INT(11) NULL DEFAULT NULL,
+  `dateOfDelivery` TIMESTAMP NULL DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `purchase` (
@@ -45,4 +61,3 @@ CREATE TABLE IF NOT EXISTS `purchase` (
   `status` TEXT NULL,
   PRIMARY KEY (`purchaseID`)
 );
-

@@ -4,6 +4,7 @@ import com.springapp.dao.CartDAO;
 import com.springapp.dao.CustomerDAO;
 import com.springapp.dao.generic.GenericDAO;
 import com.springapp.exceptions.RunOutOfItemsException;
+import com.springapp.exceptions.UserAlreadyExistsException;
 import com.springapp.model.*;
 import com.springapp.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
+     * This method ...
+     *
      * @param address      that is associated with the order
      * @param customerName username of order owner
      */
@@ -77,16 +80,20 @@ public class PurchaseServiceImpl implements PurchaseService {
     public void makeOrder(Address address, String customerName) throws RunOutOfItemsException {
         List<Cart> carts = cartDAO.getNotOrderedCartByCustomerName(customerName);
 
+        if (carts.isEmpty()) {
+            //throw new EmptyStackException();
+            return;
+        }
+
         Purchase purchase = new Purchase();
 
-        /* final price of full purchase */
+        /* price of full purchase */
         double totalPrice = 0.0;
 
         address.setOwnerUsername(customerName);
         addressDAO.add(address);
 
         purchase.setAddress(address);
-        /* We new  */
         purchaseDAO.add(purchase);
 
         /* find all items that are not purchased yet and purchase them (give them a purchase id) */
@@ -95,11 +102,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 
             checkForAvailability(cart, item);
 
-            /*  */
+            /* carts with purchase id considered as a purchased */
             cart.setPurchaseID(purchase.getPurchaseID());
 
+            /*  */
             item.setLeftOnStore(item.getLeftOnStore() - cart.getAmount());
-
             /* count the price */
             totalPrice += item.getPrice() * cart.getAmount();
         }
@@ -108,9 +115,8 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchase.setPrice(totalPrice);
     }
 
-
     private void checkForAvailability(Cart cart, Item item) throws RunOutOfItemsException{
-        if (item.getLeftOnStore() < cart.getAmount()) {
+        if (item.getLeftOnStore() < cart.getAmount() || !item.isAvailable()) {
             throw new RunOutOfItemsException();
         }
     }

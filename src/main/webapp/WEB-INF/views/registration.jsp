@@ -10,27 +10,17 @@
         <%@ include file="../../resources/css/bootstrap.min.css" %>
         <%@ include file="../../resources/css/custom.css" %>
         <%@ include file="../../resources/css/panel.css" %>
-
-        .success-color {
-            border-color: #3c763d;
-        }
-
-        .error-color {
-            border-color: #a94442;
-        }
-
     </style>
 
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.validate.js" />"></script>
     <script src="<c:url value="/resources/js/validation/registrationFormValidator.js" />"></script>
 
     <script>
         $(document).ready(function () {
             validateRegistrationForm();
-        });
 
+        });
     </script>
 
 </head>
@@ -66,12 +56,14 @@
             </div>
 
             <div class="panel">
+                <!-- Page header -->
                 <div class="panel-heading">
                     <div class="row">
                         <h3 align="center">Registration</h3>
                     </div>
                     <hr>
                 </div>
+                <!-- Page header -->
 
                 <div class="panel-body">
 
@@ -85,7 +77,6 @@
                                 <input type="text" name="username" class="form-control"
                                        placeholder="Enter Username" id="username">
                             </div>
-                            <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
                         </div>
 
                         <div class="form-group has-feedback" id="password-form">
@@ -97,26 +88,44 @@
                             </div>
                         </div>
 
+                        <div class="form-group has-feedback" id="confirmPassword-form">
+                            <label class="control-label" for="confirmPassword" id="confirmPassword-label">Confirm Password:</label>
+
+                            <div class="controls">
+                                <input type="password" class="form-control"
+                                       placeholder="Enter Password" id="confirmPassword">
+                            </div>
+                        </div>
+
                         <br>
 
                         <div class="form-group">
-                            <button type="submit" name="submit" value="submit" class="btn btn-primary">
+                            <button type="submit" name="submit" value="submit" class="btn btn-primary btn-block">
                                 Submit
                             </button>
 
+                            <!--
                             <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
                                    value="${_csrf.token}"/>
+                            -->
 
-                            <a href="/login" class="btn btn-default"> Login </a>
+                            <a href="/login" style="text-align: center; display: block; padding-top: 15px">
+                                Login </a>
                         </div>
+                        <hr>
 
                     </form>
+<!--
 
+-->
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<jsp:include page="static/footer.jsp" flush="true"/>
 
 </body>
 </html>

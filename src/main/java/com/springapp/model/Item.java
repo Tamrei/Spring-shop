@@ -35,13 +35,16 @@ public class Item implements Serializable {
     private float price;
 
     @Column(name = "leftOnStore")
-    private long leftOnStore;
+    private long leftOnStore = 0;
 
     @Column(name = "available")
     private boolean available;
 
-    @OneToMany(mappedBy = "item")//, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ItemDelivery> itemDeliveries;
+
+    public Item() {
+    }
 
     public boolean isAvailable() {
         return available;
@@ -57,9 +60,6 @@ public class Item implements Serializable {
 
     public void setLeftOnStore(long leftOnStore) {
         this.leftOnStore = leftOnStore;
-    }
-
-    public Item() {
     }
 
     public Item(String itemName) {

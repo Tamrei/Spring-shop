@@ -45,7 +45,8 @@ public class TestCartDAO {
 
     @Test
     @Transactional
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
+    //@DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/dao/cartDAO/initialData.xml")
     public void testGetNotOrderedCarts() {
         final String customerName = "customer1";
         List<Cart> list = cartDAO.getNotOrderedCartByCustomerName(customerName);
@@ -59,7 +60,8 @@ public class TestCartDAO {
 
     @Test
     @Transactional
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
+    //@DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/dao/cartDAO/initialData.xml")
     public void testGetOrderedCarts() {
         final String customerName = "customer1";
         List<Cart> list = cartDAO.getOrderedCartByCustomerName(customerName);
@@ -73,14 +75,14 @@ public class TestCartDAO {
 
     @Test
     @Transactional
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
+    //@DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/dao/cartDAO/initialData.xml")
     public void testGetNotOrderedCartsByID() {
         final long id = 1;
         List<Cart> list = cartDAO.getCartsForPurchase(id);
         assertNotNull(list);
 
         for (Cart cart : list) {
-            System.out.println(cart);
             assertEquals((long)cart.getPurchaseID(), id);
         }
     }

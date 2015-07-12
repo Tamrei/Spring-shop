@@ -18,48 +18,22 @@
             height: 185px;
         }
 
-        #img-rounded {
-            border-radius: 3px;
-        }
-
         #priceInformation {
             color: darkgreen;
             padding-left: 5px;
         }
 
-        .pagination > li > a, .pagination > li > span {
-            border-radius: 50% !important;
-            margin: 0 5px;
-        }
     </style>
 
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
     <script src="<c:url value="/resources/js/ajax.js" />"></script>
+    <script src="<c:url value="/resources/js/view/shop.js" />"></script>
     <script>
         $(document).ready(function () {
             $('#cartNotification').hide();
-            var rows = $('div.type');
-
-            $("#searchBar").children().click(function () {
-                var col = $(this).text();
-                var ww = rows.filter("#" + col).show();
-                rows.not(ww).hide();
-
-                $("#searchBar").children().each(function () {
-                    if ($(this).text() != col) {
-                        $(this).removeClass("list-group-item active").addClass("list-group-item");
-                    }
-                    else {
-                        $(this).removeClass("list-group-item").addClass("list-group-item active");
-                    }
-                });
-            });
-
-            $('#All').click(function () {
-                rows.show();
-            });
+            sortPanel();
         });
     </script>
     <title> Shop </title>
@@ -68,24 +42,14 @@
 <body>
 
 <script>
-    // get carousel
-    $.ajax({
-        type: "Get",
-        url: 'carouselController.html',
-        async: false,
-        success: function (data) {
-            //alert("+");
-            //$(document).ajaxStop(function() { location.reload(true); });
-        },
-        error: function (e) {
-            alert("-");
-        }
-    });
+    getHomePageImages();
 </script>
+
 
 <div class="container">
 
-<jsp:include page="static/navbar.jsp" flush="true"/>
+
+<c:import url="static/navbar.jsp"></c:import>
 
 <div class="bs-example" id="cartNotification" style="display:none;">
     <div class="alert alert-success">
@@ -96,23 +60,21 @@
     </div>
 </div>
 
+<!-- Carousel -->
 <div style="padding-bottom: 1%;">
-    <!-- Header Carousel -->
+
     <header id="myCarousel" class="carousel slide">
-        <!-- Wrapper for slides -->
         <div class="carousel-inner">
 
             <div class="item active">
                 <img class="slide-image"
-                     src="http://healthybliss.net/bliss/wp-content/uploads/2015/01/nooderslide1500-1500x430.jpg"
-                     id="img-rounded" alt="">
+                     src="http://healthybliss.net/bliss/wp-content/uploads/2015/01/nooderslide1500-1500x430.jpg">
             </div>
 
             <c:forEach items="${homePageImages}" var="image">
                 <div class="item">
                     <img class="slide-image"
-                         src="homePageImage/img/${image.id}"
-                         id="img-rounded" alt="">
+                         src="homePageImage/img/${image.id}">
                 </div>
             </c:forEach>
         </div>
@@ -123,9 +85,10 @@
         <a class="right carousel-control" href="#myCarousel" data-slide="next">
             <span class="icon-next"></span>
         </a>
+        <!-- Carousel controls -->
     </header>
-
 </div>
+<!-- Carousel -->
 
 <div class="panel" style="margin-top: 20px; padding-top: 1%;">
     <div class="panel-body">
@@ -136,6 +99,7 @@
                 <h2 class="page-header"> Shop </h2>
             </div>
         </div>
+        <!-- Page Header -->
 
         <div class="col-md-2 sidebar" style="padding-right: 15px;">
             <div class="list-group" id="searchBar">
@@ -156,33 +120,40 @@
 
             <div class="row">
                 <c:forEach items="${items}" var="item">
-
                     <div class="type" id="${item.type}">
                         <div class="col-sm-6 col-md-3" id="${item.type}">
                             <div class="thumbnail" style="height: 222px; padding: 1px;">
-                                <img src="/shop/img/${item.itemID}"
-                                     id="img-rounded">
+                                <img src="/shop/img/${item.itemID}">
 
                                 <div class="caption">
                                     <h4 class="pull-right">$${item.price}</h4>
                                     <h4 id="itemName">${item.itemName}</h4>
 
                                     <p>
-                                        <a data-toggle="modal" role="button" class="btn btn-default"
-                                           href="#buy${item.itemID}">Buy</a>
-                                        <sec:authorize access="hasRole('ADMIN')"><a data-toggle="modal"
-                                                                                    role="button"
-                                                                                    class="btn btn-default"
-                                                                                    href="#update${item.itemID}">
-                                            Edit form</a></sec:authorize>
+                                        <c:choose>
+                                            <c:when test="${empty pageContext.request.userPrincipal}">
+                                                <a data-toggle="modal" role="button" class="btn btn-default btn-block"
+                                                   href="/login"> Put item in the cart </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a data-toggle="modal" role="button" class="btn btn-default btn-block"
+                                                   href="#buy${item.itemID}"> Put item in the cart </a>
+                                            </c:otherwise>
+                                        </c:choose>
 
+                                        <!--
+                                        <sec:authorize access="hasRole('ADMIN')"><a data-toggle="modal"
+                                           class="btn btn-default" href="#update${item.itemID}">
+                                           Edit form</a></sec:authorize>
+                                        -->
                                     </p>
                                 </div>
                             </div>
 
-                            <!-- out update form -->
+
+                            <!-- out update form (remove to store) -->
                             <div id="update${item.itemID}" class="modal fade">
-                                <div class="modal-dialog" style="padding-top: 165px;">
+                                <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"
@@ -227,10 +198,10 @@
                             </div>
                             <!-- out update form -->
 
-                            <!-- our buy form -->
-                            <!-- Modal -->
+
+                            <!-- Put in the cart modal -->
                             <div id="buy${item.itemID}" class="modal fade">
-                                <div class="modal-dialog" style="padding-top: 165px;">
+                                <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"
@@ -256,16 +227,15 @@
                                                     <h4 id="result${item.itemID}"></h4>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-primary" id="putButton"
-                                                    onclick="putItemInCart(${item.itemID}, '${item.itemName}')"> Buy
+                                            <button class="btn btn-primary btn-md" id="putButton"
+                                                    onclick="putItemInCart(${item.itemID}, '${item.itemName}')"> Put Item in the cart
                                             </button>
                                         </div>
                                     </div>
-
                                 </div>
+                                <!-- Put in the cart modal -->
 
                                 <!-- price information script -->
                                 <script>
@@ -282,50 +252,19 @@
                                         $("#buy${item.itemID}").modal('hide');
                                     });
                                 </script>
-                                <!-- -->
+                                <!-- price information script -->
+
                             </div>
-                            <!-- our buy form -->
                         </div>
                     </div>
                 </c:forEach>
-
-                <script>
-                    function putItemInCart(itemID, itemName) {
-                        var amount = $('#amount' + itemID).val();
-
-                        $.ajax({
-                            type: "Post",
-                            url: 'putItemInTheCart.html',
-                            data: "itemID=" + itemID + "&amount=" + amount,
-                            success: function (data) {
-                                showCartCount('cartCount'); // update cart count
-                                $('.modal.in').modal('hide'); // hide modal
-
-                                // display popover with info
-                                var cartPopover = $('#navCart');
-                                var success = "Success!";
-                                cartPopover.attr("data-original-title", success).attr("data-content", "You successful added " + amount + " " + itemName + "'s.");
-
-                                cartPopover.popover("show");
-
-                                $('.popover').css("position", "fixed").css("top", "50px");
-
-                                setTimeout(function () {
-                                    cartPopover.popover('hide');
-                                }, 3500);
-                            },
-                            error: function (e) {
-                            //window.location.href = "/login";
-                                alert("error! make sure your amount is integer.");
-                            }
-                        });
-                    }
-                </script>
 
             </div>
         </div>
     </div>
 </div>
+
+<jsp:include page="static/footer.jsp" flush="true"/>
 
 </body>
 </html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <address addressID="1" ownerUsername="customer1" street="testStreet1" city="testCity1"/>
+
+    <!-- This must be updated                                old value of city="testCity2" -->
+    <address addressID="2" ownerUsername="customer2" street="testStreet2" city="cityAfterUpdate"/>
+    <!-- This must be updated -->
+
+    <item/>
+    <cart/>
+    <customer/>
+    <purchase/>
+    <itemdelivery/>
+    <homepageimage/>
+</dataset>

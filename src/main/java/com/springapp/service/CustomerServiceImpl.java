@@ -33,6 +33,41 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
+     * This method disable or enable the user selected by id.
+     *
+     * @param id the user ID on which we want to perform the operation.
+     * @return returns status that will be set.
+     * as example: if customer currently disable(false) set his status to enabled(true) and return true.
+     */
+    /*
+    @Override
+    @Transactional
+    public boolean enableDisableCustomer(long id) {
+        Customer customer = customerDAO.getByID(id);
+        if (customer.isEnabled()) {
+            customer.setEnabled(false);
+            return false;
+        } else {
+            customer.setEnabled(true);
+            return true;
+        }
+    }
+    */
+
+    @Override
+    @Transactional
+    public String enableDisableCustomer(long id) {
+        Customer customer = customerDAO.getByID(id);
+        if (customer.isEnabled()) {
+            customer.setEnabled(false);
+            return "false";
+        } else {
+            customer.setEnabled(true);
+            return "true";
+        }
+    }
+
+    /**
      * Register new customer in system.
      *
      * @param customer instance that we want to register

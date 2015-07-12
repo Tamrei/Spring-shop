@@ -12,32 +12,13 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <tx:annotation-driven/>
-
-    <context:component-scan base-package="com.springapp" />
-
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
-
-    <!-- allows for integration of file upload functionality -->
-    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
-        <property name="maxUploadSize" value="100000000"/>
-    </bean>
-
-    <mvc:annotation-driven>
-        <mvc:argument-resolvers>
-            <bean class="com.springapp.anotation.CurrentUserHandlerMethodArgumentResolver"/>
-        </mvc:argument-resolvers>
-    </mvc:annotation-driven>
 
     <!-- Database properties file -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
           p:location="classpath:/hibernate/database.properties"/>
 
-    <!-- Configure JDBC Connection -->
+    <!-- Configure JDBC Connection
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${database.driver}"/>
@@ -45,6 +26,22 @@
         <property name="username" value="${database.username}"/>
         <property name="password" value="${database.password}"/>
     </bean>
+    -->
+
+
+    <bean id="dataSource" class="org.h2.jdbcx.JdbcConnectionPool" destroy-method="dispose">
+        <constructor-arg>
+            <bean class="org.h2.jdbcx.JdbcDataSource">
+                <property name="URL" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+                <property name="user" value="user"/>
+                <property name="password" value="password"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:/create_testDb.sql"/>
+    </jdbc:initialize-database>
 
     <!-- Session Factory -->
     <bean id="sessionFactory"
@@ -56,7 +53,7 @@
             <props>
                 <prop key="hibernate.show_sql">${database.show_sql}</prop>
 
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
                 <prop key="hibernate.cache.use_query_cache">true</prop>
@@ -69,12 +66,34 @@
         </property>
     </bean>
 
-
     <!-- TransactionManager -->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+
+
+    <tx:annotation-driven/>
+    <context:component-scan base-package="com.springapp" />
+
+
+
+
+    <!-- allows for integration of file upload functionality
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+        <property name="maxUploadSize" value="100000000"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="com.springapp.anotation.CurrentUserHandlerMethodArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven> -->
 
     <!-- generic dao beans -->
     <bean id="customerDAO" class="com.springapp.dao.generic.GenericDAOImpl">

@@ -19,7 +19,6 @@
 
     <title>All Purchases</title>
 </head>
-
 <body>
 
 <div class="container">
@@ -35,6 +34,7 @@
                     <h2 class="page-header"> All purchases </h2>
                 </div>
             </div>
+            <!-- Page Header -->
 
             <div class="table">
                 <table class="table table-curved table-hover">
@@ -56,12 +56,11 @@
                             <td> ${purchase.address.city} </td>
                             <td> ${purchase.ownerUsername} </td>
                             <td> ${purchase.status}
-                            <td><a class="btn btn-default" data-toggle="modal" href="#update${purchase.purchaseID}">Change
+                            <td><a class="btn btn-default" data-toggle="modal" href="#update${purchase.purchaseID}" id="btn${purchase.purchaseID}">Change
                                 status</a></td>
                         </tr>
 
-
-                        <!-- out update form -->
+                        <!-- Update purchase status modal -->
                         <div id="update${purchase.purchaseID}" class="modal fade">
                             <div class="modal-dialog" style="padding-top: 165px;">
                                 <div class="modal-content">
@@ -89,15 +88,24 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- out update form -->
+                        <!-- Update purchase status modal -->
 
                         <script>
-                            $("#order${purchase.purchaseID}").on('click', function () {
-                                window.location = "purchases/${purchase.purchaseID}";
+                            var isThisAStatusButton = false;
+
+                            $('#btn${purchase.purchaseID}').on('click', function () {
+                                isThisAStatusButton = true;
                             });
 
-                        </script>
+                            $("#order${purchase.purchaseID}").on('click', function () {
+                                if (!isThisAStatusButton) {
+                                    window.location = "purchases/${purchase.purchaseID}";
+                                }
+                                isThisAStatusButton = false;
+                            });
 
+                            isThisAStatusButton = false;
+                        </script>
                     </c:forEach>
 
                     </tbody>
@@ -106,5 +114,8 @@
         </div>
     </div>
 </div>
+
+<jsp:include page="static/footer.jsp" flush="true"/>
+
 </body>
 </html>

@@ -30,10 +30,12 @@ body {
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
     background: green;
+    border-color: green;
 }
 
 .btn-primary:active, .btn-primary.active {
     background: green;
+    border-color: green;
     box-shadow: none;
 }
 
@@ -51,6 +53,17 @@ body {
 
 
 
+#footer {
+    color: #6d6d6d;
+    font-size: 12px;
+    text-align: center;
+}
+#footer p {
+    margin-bottom: 0;
+}
+#footer a {
+    color: inherit;
+}
 
 
 /** DELETE **/
@@ -62,8 +75,42 @@ img {
 .table {
     margin-bottom: 0;
     border: none;
+    padding: 0;
 }
 
 .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
     border: none;
 }
+
+.modal-dialog {
+    padding-top: 165px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+img {
+    border: 1px solid darkgrey;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 3px;
+}
+*/

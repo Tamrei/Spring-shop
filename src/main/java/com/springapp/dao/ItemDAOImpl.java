@@ -57,4 +57,10 @@ public class ItemDAOImpl implements ItemDAO {
         String sql = "from Item where available = true ";
         return getSession().createQuery(sql).setCacheable(true).list();
     }
+
+    @Override
+    public List<Item> getNotAvailableITems() {
+        String sql = "from Item where available = false";
+        return getSession().createQuery(sql).setCacheable(true).list();
+    }
 }

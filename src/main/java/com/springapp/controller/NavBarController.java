@@ -22,7 +22,6 @@ public class NavBarController {
     public
     @ResponseBody
     String getCartCount(@ActiveUser User activeUser) {
-        System.out.println("request to get cartCount!");
-        return cartService.getAllItemInTheCart(activeUser.getUsername()).size() + "";
+        return cartService.getAllItemsInTheCart(activeUser.getUsername()).size() + "";
     }
 }

@@ -23,10 +23,10 @@ public class ItemDeliveryServiceImpl implements ItemDeliveryService {
     private ItemDAO itemDAO;
 
     /**
-     * This method add new item delivery
+     * This method add new item delivery.
      * and update item amount that available for customers to order.
      *
-     * @param itemDelivery item entity
+     * @param itemDelivery item entity.
      */
     @Override
     @Transactional

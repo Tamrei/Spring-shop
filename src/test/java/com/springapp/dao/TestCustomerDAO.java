@@ -17,6 +17,7 @@ import org.dbunit.dataset.datatype.DefaultDataTypeFactory;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -56,13 +57,11 @@ public class TestCustomerDAO {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-
-        //iDatabaseConnection.getConfig().setProperty(DatabaseConfig.PROPERTY_ESCAPE_PATTERN, "['order']");
     }
 
     @Test
     @Transactional
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/dao/customerDAO/initialData.xml")
     public void testGetCustomerByUsername() {
         final long id = 1;
         final String username = "customer1";
@@ -70,22 +69,26 @@ public class TestCustomerDAO {
         assertNotNull(customer);
         assertEquals(customer.getId(), id);
         assertEquals(customer.getUsername(), username);
+
+        System.out.println(customer);
     }
 
     @Test
     @Transactional
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/dao/customerDAO/initialData.xml")
     public void testGetCustomerByID() {
         final long id = 2;
         final String username = "customer2";
         Customer customer = customerDAO.getByID(id);
         assertEquals(customer.getId(), id);
         assertEquals(customer.getUsername(), username);
+
+        System.out.println(customer);
     }
 
     @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
-    @ExpectedDatabase("classpath:/com/springapp/dao/customerDAO/expectedData_afterAdd.xml")
+    @DatabaseSetup("classpath:/db/model/dao/customerDAO/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/dao/customerDAO/expectedData_addCustomer.xml")
     public void testAddCustomer() {
         Customer customer = new Customer();
         customer.setUsername("customer3");
@@ -93,8 +96,9 @@ public class TestCustomerDAO {
         customerDAO.addCustomer(customer);
     }
 
+
     @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/dao/customerDAO/initialData.xml")
     @ExpectedDatabase("classpath:/com/springapp/dao/customerDAO/expectedData_afterDelete.xml")
     public void testDeleteCustomer() {
         final long id = 1;
@@ -102,13 +106,13 @@ public class TestCustomerDAO {
     }
 
     @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/dao/customerDAO/initialData.xml")
     public void testGetAllCustomers() {
         assertEquals(customerDAO.getAllCustomers().size(), 2);
     }
 
     @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/dao/customerDAO/initialData.xml")
     @ExpectedDatabase("classpath:/com/springapp/dao/customerDAO/expectedData_afterUpdate.xml")
     public void testUpdateCustomer() throws Exception {
         final long id = 2;

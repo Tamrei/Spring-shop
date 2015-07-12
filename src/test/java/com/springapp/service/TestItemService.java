@@ -1,94 +1,97 @@
 package com.springapp.service;
 
 
-import com.springapp.dao.generic.GenericDAO;
-import com.springapp.dao.generic.GenericDAOImpl;
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.springapp.model.Item;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.web.context.WebApplicationContext;
-
-import static org.mockito.Mockito.*;
-
-//@RunWith(SpringJUnit4ClassRunner.class)
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
-@SuppressWarnings("unchecked")
+@ContextConfiguration(locations = {"file:src/test/resources/context/data-test.xml"})
+@TestExecutionListeners({
+        DependencyInjectionTestExecutionListener.class,
+        DbUnitTestExecutionListener.class,
+        TransactionalTestExecutionListener.class})
 public class TestItemService {
 
-    //@Autowired
-    @InjectMocks
-    private ItemService itemService = new ItemServiceImpl();
-
-    //@Autowired
-    @Mock
-    private GenericDAO itemDAO;
-
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
+    @Autowired
+    private ItemService itemService;
+/*
+    @Test
+    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
+    @ExpectedDatabase("classpath:/com/springapp/service/purchaseService/expectedData_samePurchase.xml")
+    public void testAddPurchase_SamePurchaseInUserCart() {
+        itemService.putItemInCart(1, "customer1", 10);
     }
 
     @Test
-    public void testAddItem() {
+    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
+    @ExpectedDatabase("classpath:/com/springapp/service/purchaseService/expectedData_noSamePurchase.xml")
+    public void testAddPurchase_NoSamePurchaseInUserCart() {
+        itemService.putItemInCart(2, "customer1", 5);
+    }
+*/
+    @Test
+    @DatabaseSetup("classpath:/db/model/service/itemService/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/service/itemService/expectedData_putItemInTheCart.xml")
+    public void testPutItemInTheCart() {
+        itemService.putItemInCart(1, "customer1", 50);
+    }
+
+    @Test
+    @DatabaseSetup("classpath:/db/model/service/itemService/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/service/itemService/expectedData_putItemInTheCart_sameItemInTheCart.xml")
+    public void testPutItemInTheCart_sameItemInTheCart() {
+        itemService.putItemInCart(2, "customer1", 50);
+    }
+
+    @Test
+    @DatabaseSetup("classpath:/db/model/service/itemService/initialData.xml")
+    //@ExpectedDatabase("classpath:/db/model/service/itemService/expectedData_addItemAndResizeImage.xml")
+    public void testAddItemAndResizeImage() throws IOException {
+
+        final int desiredWidth = 480;
+        final int desiredHeight = 300;
+
         Item item = new Item();
-        itemService.addItem(item);
-        verify(itemDAO, times(1)).add(item);
+        item.setItemName("TestName3");
+        item.setType("TestType3");
+        item.setLeftOnStore(100);
+
+        final String path = getClass().getResource("test_image_350x282.jpg").getPath();
+
+        BufferedImage image = ImageIO.read(new File(path));
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "jpg", baos);
+
+        byte[] imageInByte = baos.toByteArray();
+
+        itemService.addItemAndResizeImage(item, imageInByte, desiredWidth, desiredHeight);
+
+        BufferedImage desiredImage = ImageIO.read(new ByteArrayInputStream(item.getImage()));
+
+        assertEquals(desiredImage.getWidth(), desiredWidth);
+        assertEquals(desiredImage.getHeight(), desiredHeight);
     }
-
-    @Test
-    public void testGetItem() {
-        Item item = new Item();
-        itemService.getItem(item.getItemID());
-        verify(itemDAO, times(1)).get(item.getItemID());
-    }
-
-    @Test
-    public void testDeleteItem() {
-        Item item = new Item();
-        itemService.deleteItem(item.getItemID());
-        verify(itemDAO, times(1)).delete(item.getItemID());
-    }
-
-
-    @Test
-    public void testUpdateItem() {
-        Item item = new Item();
-        itemService.updateItem(item);
-        verify(itemDAO, times(1)).update(item);
-    }
-
-    @Test
-    public void testGetAllItems() {
-        itemService.getAllItems();
-        verify(itemDAO, times(1)).getAll();
-    }
-
-
 }

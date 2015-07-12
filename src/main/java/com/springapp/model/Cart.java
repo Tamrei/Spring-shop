@@ -43,12 +43,12 @@ public class Cart implements Serializable {
     @Column(name="amount")
     private long amount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ownerUsername", referencedColumnName = "username", insertable = false, updatable = false)
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "purchaseID", referencedColumnName = "purchaseID", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "purchaseID", insertable = false, updatable = false)
     private Purchase purchase;
 
     public Cart() {
@@ -153,7 +153,7 @@ public class Cart implements Serializable {
 
     @Override
     public String toString() {
-        return "Cart{" +
+        return "";/*"Cart{" +
                 "cartID=" + cartID +
                 ", itemID=" + itemID +
                 ", ownerUsername='" + ownerUsername + '\'' +
@@ -161,6 +161,6 @@ public class Cart implements Serializable {
                 ", amount=" + amount +
                 ", customer=" + customer +
                 ", purchase=" + purchase +
-                '}';
+                '}';*/
     }
 }

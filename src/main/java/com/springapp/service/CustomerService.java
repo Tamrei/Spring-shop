@@ -15,5 +15,7 @@ public interface CustomerService {
 
     public void registerNewCustomer(Customer customer) throws UserAlreadyExistsException;
     public void enableDisableUser(long id);
-    //public Customer getCurrentCustomerInstance() throws NullPointerException;
+
+    //public boolean enableDisableCustomer(long id);
+    public String enableDisableCustomer(long id);
 }

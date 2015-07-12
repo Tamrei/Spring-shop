@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <!-- This must be deleted -->
+    <!--<address addressID="1" ownerUsername="customer1" street="testStreet1" city="testCity1"/>-->
+    <!-- This must be deleted -->
+
+    <address addressID="2" ownerUsername="customer2" street="testStreet2" city="testCity2"/>
+
+    <item/>
+    <cart/>
+    <customer/>
+    <purchase/>
+    <itemdelivery/>
+    <homepageimage/>
+</dataset>

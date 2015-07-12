@@ -18,7 +18,6 @@ public class PurchasesController {
 
     @RequestMapping(value = "purchases")
     public String getPurchaseList(ModelMap modelMap) {
-        //modelMap.put("purchase", new Purchase());
         modelMap.addAttribute("purchases", purchaseService.getPurchase());
 
         return "purchases";

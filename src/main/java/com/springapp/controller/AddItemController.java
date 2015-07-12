@@ -33,19 +33,16 @@ public class AddItemController {
     public ModelAndView createItem(@ModelAttribute("item") @Valid Item item, BindingResult result,
                              @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
-            return new ModelAndView("addItem", "invalidInputData", "Woops! seams like you have some errors!");
+            return new ModelAndView("redirect:/addItem", "invalidInputData", "Woops! seams like you have some errors!");
         }
 
         try {
-            itemService.addItemAndResizeImage(item, file, 240, 150);
-            System.out.println("File Name : " + file.getOriginalFilename());
+            itemService.addItemAndResizeImage(item, file.getBytes(), 240, 150);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("No Image ???");
         }
-        // official java dock says that null pointer will be thrown if image is not an image
         catch (NullPointerException e) {
-            return new ModelAndView("addItem", "notAnImage", "Woops! seams like it's not an image!");
+            return new ModelAndView("redirect:/addItem", "notAnImage", "Woops! seams like it's not an image!");
         }
 
         return new ModelAndView("redirect:/shop");

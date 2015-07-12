@@ -48,15 +48,18 @@
             </c:if>
 
             <div class="panel">
+
+                <!-- Page header -->
                 <div class="panel-heading">
                     <div class="row">
                         <h3 align="center">Login</h3>
                     </div>
                     <hr>
                 </div>
+                <!-- Page header -->
 
+                <!-- Login form -->
                 <div class="panel-body">
-
                     <form role="form"
                           action="<c:url value='/j_spring_security_check' />" method="post">
 
@@ -70,27 +73,28 @@
                         </div>
 
                         <div class="form-group text-center">
-
                         </div>
 
                         <div class="form-group">
-
-                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit
+                            <button type="submit" name="submit" value="submit" class="btn btn-primary btn-block"> Login
                             </button>
 
                             <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
                                    value="${_csrf.token}"/>
 
-                            <a href="/registration" class="btn btn-default"> Registration </a>
-
+                            <a href="/registration" style="text-align: center; display: block; padding-top: 15px">
+                                Registration </a>
                         </div>
+                        <hr>
                     </form>
-
+                    <!-- Login form -->
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<jsp:include page="static/footer.jsp" flush="true"/>
 
 </body>
 </html>

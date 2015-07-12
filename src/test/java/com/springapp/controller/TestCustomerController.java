@@ -1,5 +1,6 @@
 package com.springapp.controller;
 
+import com.springapp.model.Customer;
 import com.springapp.service.CustomerService;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,9 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -47,6 +46,42 @@ public class TestCustomerController {
     }
 
     @Test
+    public void testUsersList() throws Exception {
+        mockMvc.perform(get("/users"))
+                .andExpect(model().attributeExists("users"))
+                .andExpect(view().name("users"));
+
+        verify(customerService).getAllCustomers();
+    }
+
+
+
+    /* AJAX methods */
+    @Test
+    public void testDeleteUser() throws Exception {
+        mockMvc.perform(post("/deleteUser")
+                .param("userID", "999"));
+                //.andExpect(redirectedUrl("/users"));
+
+        verify(customerService).deleteCustomer(999);
+    }
+
+    @Test
+    public void testEnableDisableUser() throws Exception {
+        mockMvc.perform(post("/enableDisableUser")
+                .param("userID", "999"));
+
+        verify(customerService).enableDisableCustomer(999);
+
+
+    }
+
+
+
+
+    /* Old methods */
+    /*
+    @Test
     public void testEnableDisableUser() throws Exception {
         final long updateID = 999;
 
@@ -54,15 +89,6 @@ public class TestCustomerController {
                 .andExpect(redirectedUrl("/users"));
 
         verify(customerService).enableDisableUser(updateID);
-    }
-
-    @Test
-    public void testUsersList() throws Exception {
-        mockMvc.perform(get("/users"))
-                .andExpect(model().attributeExists("users"))
-                .andExpect(view().name("users"));
-
-        verify(customerService).getAllCustomers();
     }
 
     @Test
@@ -74,4 +100,6 @@ public class TestCustomerController {
 
         verify(customerService).deleteCustomer(deleteID);
     }
+    */
+    /* Old methods */
 }

@@ -18,9 +18,6 @@
     </style>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
-    <script>
-
-    </script>
     <title>My purchase</title>
 </head>
 
@@ -39,79 +36,95 @@
                     <h2 class="page-header"> Order </h2>
                 </div>
             </div>
+            <!-- Page Header -->
 
-            <div class="table">
-                <table class="table table-curved">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Item Name</th>
-                        <th>Amount</th>
-                        <th>Price</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <script>
-                        var price = 0;
-                    </script>
-
-                    <c:forEach items="${purchases}" var="purchase">
+            <div class="col-md-9 content" style="margin-top: 20px">
+                <div class="table">
+                    <table class="table table-curved">
+                        <thead>
                         <tr>
-                            <td><img src="/shop/img/${purchase.key.itemID}" alt="image with rounded corners" width="120" height="75"></td>
-                            <td> ${purchase.key.itemName} </td>
-                            <td> ${purchase.value.amount} </td>
-                            <td>
-                                <p> Price for ${purchase.value.amount}
-                                    is ${purchase.key.price * purchase.value.amount} </p>
-
-                                <p style="color: green"> Current price per one: ${purchase.key.price} </p>
-                            </td>
+                            <th>ID</th>
+                            <th>Item Name</th>
+                            <th>Amount</th>
+                            <th>Price</th>
                         </tr>
+                        </thead>
+                        <tbody>
 
                         <script>
-                            var pricePerOne = ${purchase.key.price};
-                            var amount = ${purchase.value.amount};
-                            var totalPrice = pricePerOne * amount;
-
-                            price += totalPrice;
-
+                            var price = 0;
                         </script>
 
-                    </c:forEach>
+                        <c:forEach items="${purchases}" var="purchase">
+                            <tr>
+                                <td><img src="/shop/img/${purchase.key.itemID}" alt="image with rounded corners"
+                                         width="120" height="75"></td>
+                                <td> ${purchase.key.itemName} </td>
+                                <td> ${purchase.value.amount} </td>
+                                <td>
+                                    <p> Price for ${purchase.value.amount}
+                                        is ${purchase.key.price * purchase.value.amount} </p>
 
-                    </tbody>
-                </table>
+                                    <p style="color: green"> Current price per one: ${purchase.key.price} </p>
+                                </td>
+                            </tr>
+
+                            <script>
+                                var pricePerOne = ${purchase.key.price};
+                                var amount = ${purchase.value.amount};
+                                var totalPrice = pricePerOne * amount;
+
+                                price += totalPrice;
+                            </script>
+
+                        </c:forEach>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--
+                <div class="table">
+                    <table class="table table-curved">
+                        <thead>
+                        <tr>
+                            <th>Address ID</th>
+                            <th>City</th>
+                            <th>Street</th>
+                            <th>Customer Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                -->
             </div>
+            <div class="col-md-3 sidebar" style="margin-top: 45px">
+                <h4> <strong> Address ID: </strong> ${address.addressID} </h4>
+                <h4> <strong> City: </strong> ${address.city}</h4>
+                <h4> <strong> Street: </strong> ${address.street}</h4>
+                <h4> <strong> Customer Name: </strong> ${address.ownerUsername}</h4>
 
-            <h3 id="totalPrice" style="color: darkgreen"> Empty </h3>
-            <script>
-                $("#totalPrice").text("Total price: " + price + "$");
-            </script>
-            <div class="table">
-                <table class="table table-curved">
-                    <thead>
-                    <tr>
-                        <th>Address ID</th>
-                        <th>City</th>
-                        <th>Street</th>
-                        <th>Customer Name</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <h3 id="totalPrice" style="color: darkgreen"> Empty </h3>
+                <script>
+                    $("#totalPrice").text("Total price: " + price + "$");
+                </script>
 
-                    <tr>
-                        <td> ${address.addressID} </td>
-                        <td> ${address.city} </td>
-                        <td> ${address.street} </td>
-                        <td> ${address.ownerUsername} </td>
-                    </tr>
-
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
 </div>
+
+<jsp:include page="static/footer.jsp" flush="true"/>
+
 </body>
 </html>

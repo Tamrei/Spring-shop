@@ -18,6 +18,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.mockito.Mockito.never;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
@@ -92,15 +93,17 @@ public class TestAddItemController {
                 .param("itemName", "TestName")
                 .param("type", "TestType")
                 .param("price", "999"))
+                //.andExpect(status().isOk())
+                .andExpect(model().hasNoErrors())
                 .andExpect(redirectedUrl("/shop"));
 
-        verify(itemService).addItemAndResizeImage(item, file, 240, 150);
+        verify(itemService).addItemAndResizeImage(item, file.getBytes(), 240, 150);
 
     }
 
     @Test
-    public void TestAddItem_NullFile() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("file", "image1.jpg", null, "".getBytes());
+    public void TestAddItem_hasNoPrice() throws Exception {
+        MockMultipartFile file = new MockMultipartFile("file", "image1.jpg", null, "image".getBytes());
 
         Item item = new Item();
         item.setItemName("TestName");
@@ -111,10 +114,12 @@ public class TestAddItemController {
         mockMvc.perform(fileUpload("/createItem").file(file)
                 .param("itemName", "TestName")
                 .param("type", "TestType")
-                .param("price", "999"))
-                .andExpect(redirectedUrl("/shop"));
+                .param("price", ""))
+                //.andExpect(status().isOk())
+                .andExpect(model().hasErrors());
+                //.andExpect(redirectedUrl("/"));
 
-        verify(itemService).addItemAndResizeImage(item, file, 240, 150);
+        verify(itemService, never()).addItemAndResizeImage(item, file.getBytes(), 240, 150);
 
     }
 }

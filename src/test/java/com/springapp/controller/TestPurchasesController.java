@@ -100,7 +100,7 @@ public class TestPurchasesController {
     public void testGetPurchase() throws Exception {
         final long ID = 1;
 
-        mockMvc.perform(get("purchases/{id}", 1)
+        mockMvc.perform(get("purchases/{id}", ID)
                 .principal(testingAuthenticationToken))
                 .andDo(print())
                 .andExpect(model().attributeExists("address"))

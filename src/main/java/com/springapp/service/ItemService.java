@@ -9,12 +9,15 @@ import java.util.List;
 
 public interface ItemService {
     public List<Item> getAllItems();
+    public List<Item> getAllAvailableItems();
+    public List<Item> getAllNotAvailableItems();
+
     public void addItem(Item item);
     public Item getItem(long id);
     public void updateItem(Item item);
     public void deleteItem(long id);
 
+    public String enableDisableItem(long id);
     public void putItemInCart(long itemID, String customerName, long amount);
-
-    public void addItemAndResizeImage(Item item, MultipartFile image, int width, int height) throws IOException;
+    public void addItemAndResizeImage(Item item, byte[] image, int width, int height) throws IOException;
 }

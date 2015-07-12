@@ -31,7 +31,7 @@ public class ItemServiceImpl implements ItemService {
     private ImageResizer imageResizer;
 
     /**
-     * This method adds purchase data in database
+     * This method adds purchase data in database.
      *
      * @param itemID       id of the item that was bought
      * @param customerName who bought this item
@@ -42,8 +42,6 @@ public class ItemServiceImpl implements ItemService {
     public void putItemInCart(long itemID, String customerName, long amount) {
         Cart newCart = new Cart(itemID, customerName, amount);
 
-        //updateItemQuantityOnStore(itemID, amount);
-
         for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
             if (cart.getItemID() == newCart.getItemID()) {
                 cart.setAmount(newCart.getAmount() + cart.getAmount());
@@ -53,30 +51,71 @@ public class ItemServiceImpl implements ItemService {
             }
         }
         purchaseDAO.add(newCart);
-
-        //----------------------------------------------------------------
-        /*
-        System.out.println("Item Service : ID:" + itemID);
-        Item item = itemDAO.getByID(itemID);
-        System.out.println("Item Service : Name:" + item.getItemName());
-        System.out.println("Item Service : Amount (input):" + amount);
-        System.out.println("Item Service : LeftOnStore: " + item.getLeftOnStore());
-        System.out.println("Item Service : Result of (Left on store - amount) " + (item.getLeftOnStore() - amount));
-        item.setLeftOnStore(item.getLeftOnStore() - amount);
-        itemDAO.updateItem(item);
-        */
     }
 
+    /**
+     * Add new item in to the shop and resize it.
+     *
+     * @param item item entity that we want to add
+     * @param image image to resize
+     * @param width desired width in pixels
+     * @param height desired height in pixels
+     * @throws IOException
+     */
+    @Override
+    @Transactional
+    public void addItemAndResizeImage(Item item, byte[] image, int width, int height) throws IOException {
+        if(item.getLeftOnStore() > 0) {
+            item.setAvailable(true);
+        }
+
+        item.setImage(imageResizer.resizeImage(image, width, height));
+        itemDAO.addItem(item);
+    }
+
+    /**
+     * Enable or disable item.
+     *
+     * @param id of item
+     * @return the value that will be set
+     */
+    @Override
+    @Transactional
+    public String enableDisableItem(long id) {
+        Item item = itemDAO.getByID(id);
+        if (item.isAvailable()) {
+            item.setAvailable(false);
+            return "false";
+        } else {
+            item.setAvailable(true);
+            return "true";
+        }
+    }
+
+    /*
     private void updateItemQuantityOnStore(long itemID, long amount) {
         Item item = itemDAO.getByID(itemID);
         item.setLeftOnStore(item.getLeftOnStore() - amount);
         itemDAO.updateItem(item);
     }
+    */
 
     @Override
     @Transactional
     public List<Item> getAllItems() {
+        return itemDAO.getAllItems();
+    }
+
+    @Override
+    @Transactional
+    public List<Item> getAllAvailableItems() {
         return itemDAO.getAllAvailableItems();
+    }
+
+    @Override
+    @Transactional
+    public List<Item> getAllNotAvailableItems() {
+        return itemDAO.getNotAvailableITems();
     }
 
     @Override
@@ -103,19 +142,5 @@ public class ItemServiceImpl implements ItemService {
         itemDAO.updateItem(item);
     }
 
-    /**
-     * Add new item in to the shop and resize it
-     *
-     * @param item item entity that we want to add
-     * @param image image to resize
-     * @param width desired width in pixels
-     * @param height desired height in pixels
-     * @throws IOException
-     */
-    @Override
-    @Transactional
-    public void addItemAndResizeImage(Item item, MultipartFile image, int width, int height) throws IOException{
-        item.setImage(imageResizer.resizeImage(image.getBytes(), width, height));
-        itemDAO.addItem(item);
-    }
+
 }

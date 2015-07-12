@@ -26,7 +26,7 @@ public class ItemDelivery implements Serializable {
     @Column(name="itemQuantity")
     private long itemQuantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "itemID", insertable = false, updatable = false)
     private Item item;
 

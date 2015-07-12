@@ -24,7 +24,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public Map<Item, Cart> getAllItemInTheCart(String customerName) {
+    public Map<Item, Cart> getAllItemsInTheCart(String customerName) {
         Map<Item, Cart> map = new HashMap<Item, Cart>();
 
         for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {

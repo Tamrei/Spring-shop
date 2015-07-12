@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,8 +24,6 @@ public class StorageController {
 
     @RequestMapping(value="store")
     public String storage(ModelMap modelMap) {
-        //modelMap.put("itemDeliveries", itemDeliveryService.getAllItemDeliveries());
-
         modelMap.put("items", itemService.getAllItems());
 
         return "store";
@@ -44,4 +39,22 @@ public class StorageController {
         return new ModelAndView("redirect:/store");
     }
 
+    @RequestMapping(value = "/enableDisableItem", method = RequestMethod.POST)
+    public @ResponseBody
+    String enableDisableItem (@RequestParam("itemID") Integer id) {
+        /*
+        if (itemService.enableDisableItem(id)) {
+            return "true";
+        }
+        else return "false";
+        */
+        return itemService.enableDisableItem(id);
+    }
+
+    @RequestMapping(value = "/enableDisableItem/{itemID}", method = RequestMethod.POST)
+    public String enableDisableItem2(@PathVariable("itemID") Integer id) {
+        itemService.enableDisableItem(id);
+
+        return "redirect:/store";
+    }
 }

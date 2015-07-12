@@ -15,13 +15,12 @@
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
         <%@ include file="../../resources/css/panel.css" %>
-
     </style>
 
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
     <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
-
+    <script src="<c:url value="/resources/js/view/user.js" />"></script>
 </head>
 <body>
 
@@ -31,6 +30,16 @@
 
     <div class="panel">
         <div class="panel-body">
+
+            <!-- Page Header -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Home page controller
+                        <small></small>
+                    </h2>
+                </div>
+            </div>
+            <!-- Page Header -->
 
             <input type="search" id="searchByUsername" class="form-control" style="margin-bottom:15px;"
                    placeholder="Search by username" onkeyup="searchValue('#username', this.id)">
@@ -51,12 +60,7 @@
                     <tbody>
 
                     <c:forEach items="${users}" var="user">
-
-                        <script>
-                            alert('${user.username}' + " +");
-                        </script>
-
-                        <tr>
+                        <tr id="table${user.id}">
                             <td> ${user.id} </td>
                             <td id="username"> ${user.username} </td>
                             <sec:authorize access="hasRole('ADMIN')">
@@ -64,56 +68,48 @@
                             </sec:authorize>
                             <td> ${user.role} </td>
 
-                            <c:choose>
-                                <c:when test="${user.enabled == true}">
-                                    <td><font color="blue"> enabled </font></td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td><font color="red"> disabled </font></td>
-                                </c:otherwise>
-                            </c:choose>
+                            <td id="status${user.id}"></td>
+
+                            <script>
+                                function setStatusColor() {
+                                    var status = $("#status${user.id}");
+
+                                    if (${user.enabled}) {
+                                        status.css("color", "darkgreen").text("enabled");
+                                    } else {
+                                        status.css("color", "darkred").text("disabled");
+                                    }
+                                }
+                            </script>
+
+                            <script>
+                                setStatusColor();
+                            </script>
+
 
                             <sec:authorize access="hasRole('ADMIN')">
                                 <c:set var="userName"><security:authentication property="name"/></c:set>
-                                <!-- control pane -->
+                                <!-- control panel -->
                                 <td>
                                     <c:choose>
-                                    <c:when test="${userName == user.username}">
-                                        <p>Sorry, but you cant </p>
+                                        <c:when test="${userName == user.username}">
+                                            <p>Sorry, but you cant delete or disable yourself.</p>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button"
+                                                        data-toggle="dropdown"> Options
+                                                    <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li onclick="deleteUser(${user.id})"><a href="#">Delete</a></li>
+                                                    <li onclick="enableDisableUser(${user.id})"><a href="#">Enable/Disable</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </c:otherwise>
 
-                                        <p>delete or disable yourself</p>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <div class="btn-group">
-                                        <form:form action="http://localhost:8080/users/${user.id}">
-                                        <input type="submit" name="submit" class="btn btn-default"
-                                               value="enable/disable">
-                                        </form:form>
-
-                                        <form:form method="delete" action="users/delete/${user.id}">
-                                        <input type="submit" name="submit" class="btn btn-default" value="delete">
-                                        </form:form>
-                                        <div class="btn-group">
-                                            <!--<div class="btn-group">
-                                    <button type="button" data-toggle="dropdown" class="btn btn-default"> Options <span
-                                    class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <form:form action="http://localhost:8080/users/${user.id}" method="post"
-                                               commandName="customer">
-                                        <li><input type="submit" name="submit" class="btn btn-default"
-                                        value="enable/disable"></li>
-                                    </form:form>
-                                    <li>
-
-                                    </li>
-                                    </ul>
-                                    </div>-->
-
-                                            </c:otherwise>
-
-                                            </c:choose>
-                                            <!-- control pane -->
+                                    </c:choose>
+                                    <!-- control panel -->
                                 </td>
 
                             </sec:authorize>
@@ -126,6 +122,8 @@
         </div>
     </div>
 </div>
+
+<jsp:include page="static/footer.jsp" flush="true"/>
 
 </body>
 </html>

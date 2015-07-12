@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <customer customerID="1" username="customer1" password="123" role="USER" enabled="true" />
+
+    <item itemID="1" itemName="empty" image="empty" price="1" type="test" leftOnStore="100" available="true"/>
+    <item itemID="2" itemName="empty" image="empty" price="1" type="test" leftOnStore="100" available="true"/>
+
+    <cart cartID="1" itemID="2" ownerUsername="customer1" purchaseID="1" amount="75"/>
+    <cart cartID="2" itemID="2" ownerUsername="customer1" amount="5"/>
+    <cart cartID="3" itemID="1" ownerUsername="customer1" amount="50"/>
+
+
+    <address addressID="1" ownerUsername="customer1" street="my str.14" city="Kiev"/>
+    <purchase purchaseID="1" ownerUsername="customer1" price="75" addressID="1" status="SENT" />
+    <itemdelivery/>
+    <homepageimage/>
+</dataset>

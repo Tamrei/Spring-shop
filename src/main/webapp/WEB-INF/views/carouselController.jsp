@@ -14,21 +14,14 @@
     <style>
         <%@ include file="../../resources/css/bootstrap.css" %>
         <%@ include file="../../resources/css/custom.css" %>
-
         <%@ include file="../../resources/css/panel.css" %>
     </style>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/search.js" />"></script>
-    <script>
-        $(document).ready(function () {
-
-
-        });
-    </script>
 </head>
 <body>
-<!-- Page Content -->
+
 
 <div class="container">
 
@@ -49,18 +42,17 @@
             <!-- Page Header -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Page Heading
-                        <small>Secondary Text</small>
+                    <h1 class="page-header">Home page controller
+                        <small></small>
                     </h1>
                 </div>
             </div>
-            <!-- /.row -->
+            <!-- Page Header -->
 
 
-            <!-- Projects Row -->
+            <!-- Home page image Row -->
             <div class="row">
                 <c:forEach items="${homePageImages}" var="image">
-
                     <div style="padding-bottom: 300px;">
                         <div class="col-md-8">
                             <a href="#">
@@ -77,7 +69,6 @@
                     </div>
 
                     <hr>
-
                 </c:forEach>
 
                 <div class="col-md-8">
@@ -98,15 +89,13 @@
                     </form:form>
                 </div>
             </div>
-
             <!-- /.row -->
-
-
-            <!-- Footer -->
-
         </div>
     </div>
 
 </div>
+
+<jsp:include page="static/footer.jsp" flush="true"/>
+
 </body>
 </html>

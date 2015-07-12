@@ -69,7 +69,7 @@ public class TestMakePurchaseController {
                 .principal(testingAuthenticationToken)
                 .param("city", testCity)
                 .param("street", testStreet))
-                .andExpect(redirectedUrl("/cart"));
+                .andExpect(view().name(("cart")));
 
         verify(purchaseService).makeOrder(address, testingAuthenticationToken.getName());
     }

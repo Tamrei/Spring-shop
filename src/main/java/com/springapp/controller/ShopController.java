@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Random;
 
@@ -30,16 +31,13 @@ public class ShopController {
     @Autowired
     private ItemService itemService;
 
-    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "shop")
     public String itemsList(ModelMap modelMap) {
-        //modelMap.put("item", new Item());
-        modelMap.put("items", itemService.getAllItems());
+        modelMap.put("items", itemService.getAllAvailableItems());
 
         return "shop";
     }
 
-    //@PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/putItemInTheCart", method = RequestMethod.POST)
     public @ResponseBody
     void putItemInTheCart(@RequestParam("itemID") Integer itemID, @RequestParam("amount") long amount, @ActiveUser User activeUser) {
@@ -59,21 +57,12 @@ public class ShopController {
         }
     }
 
-    //@ModelAttribute("item") Item item
-
-    @RequestMapping(value = "/itemObject", method = RequestMethod.POST)
-    public @ResponseBody
-    void putItemInTheCart(@ModelAttribute("item") Item item) {
-        //itemService.putItemInCart(itemID, activeUser.getUsername(), amount);
-        System.out.println(item);
-    }
-
     @RequestMapping(value = "shop/update/{itemID}", method = RequestMethod.POST)
     public String updateItem(@ModelAttribute("item") @Valid Item item,
                              @RequestParam("file") MultipartFile file) {
         try {
             item.setImage(file.getBytes());
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         itemService.updateItem(item);

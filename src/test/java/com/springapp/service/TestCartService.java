@@ -35,28 +35,11 @@ public class TestCartService {
     @Autowired
     private CartService cartService;
 
-    @Autowired
-    private ItemService itemService;
-
     @Test
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
-    @ExpectedDatabase(value = "classpath:/com/springapp/service/purchaseService/expectedData_samePurchase.xml")
-    public void testAddPurchase_SamePurchaseInUserCart () {
-        itemService.putItemInCart(1, "customer1", 10);
-    }
-
-    @Test
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
-    @ExpectedDatabase(value = "classpath:/com/springapp/service/purchaseService/expectedData_noSamePurchase.xml")
-    public void testAddPurchase_NoSamePurchaseInUserCart () {
-        itemService.putItemInCart(2, "customer1", 5);
-    }
-
-    @Test
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
-    public void testGetPurchases() {
+    @DatabaseSetup("classpath:/db/model/service/cartService/initialData.xml")
+    public void testGetAllItemsInTheCart() {
         final String customerName = "customer1";
-        Map<Item, Cart> map = cartService.getAllItemInTheCart(customerName);
+        Map<Item, Cart> map = cartService.getAllItemsInTheCart(customerName);
 
         assertNotNull(map);
 
@@ -68,9 +51,9 @@ public class TestCartService {
     }
 
     @Test
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
-    @ExpectedDatabase(value = "classpath:/com/springapp/service/purchaseService/expectedData_updatePurchase.xml")
-    public void testUpdatePurchaseAmount() {
+    @DatabaseSetup("classpath:/db/model/service/cartService/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/service/cartService/expectedData_setItemAmountInTheCart.xml")
+    public void testSetItemAmountInTheCart() {
         cartService.setItemAmountInTheCart(2, 55);
     }
 }

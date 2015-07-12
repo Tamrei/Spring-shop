@@ -49,33 +49,19 @@ public class TestCustomerService {
     }
 
     @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
-    @ExpectedDatabase("classpath:/com/springapp/service/customerService/expectedData_originalCustomer.xml")
-    public void testAddCustomer() throws UserAlreadyExistsException {
+    @DatabaseSetup("classpath:/db/model/service/customerService/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/service/customerService/expectedData_registerNewCustomer.xml")
+    public void testRegisterNewCustomer() throws UserAlreadyExistsException {
         Customer customer = new Customer();
         customer.setUsername("customer4");
         customer.setPassword("12345");
         customerService.registerNewCustomer(customer);
     }
 
-    @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
-    @ExpectedDatabase("classpath:/com/springapp/service/customerService/expectedData_enableCustomer.xml")
-    public void testEnableDisableCustomer_Enable() throws Exception{
-        customerService.enableDisableUser((long)1);
-    }
-
-    @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
-    @ExpectedDatabase("classpath:/com/springapp/service/customerService/expectedData_disableCustomer.xml")
-    public void testEnableDisableCustomer_Disable() throws Exception{
-        customerService.enableDisableUser((long)2);
-    }
-
     @Test(expected = UserAlreadyExistsException.class)
-    @DatabaseSetup("classpath:/com/springapp/dao/customerDAO/dataSet.xml")
-    @ExpectedDatabase("classpath:/com/springapp/service/customerService/expectedData_sameCustomer.xml")
-    public void testAddCustomer_sameCustomer() throws UserAlreadyExistsException {
+    @DatabaseSetup("classpath:/db/model/service/customerService/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/service/customerService/expectedData_registerNewCustomer_sameUsername.xml")
+    public void testRegisterNewCustomer_sameUsername() throws UserAlreadyExistsException {
         final String username = "customer3";
 
         Customer originalCustomer = new Customer();
@@ -89,4 +75,20 @@ public class TestCustomerService {
         customerService.registerNewCustomer(originalCustomer);
         customerService.registerNewCustomer(customerWithSameUsername);
     }
+
+    @Test
+    @DatabaseSetup("classpath:/db/model/service/customerService/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/service/customerService/expectedData_enableCustomer.xml")
+    public void testEnableDisableCustomer_Enable() throws Exception{
+        customerService.enableDisableUser((long)1);
+    }
+
+    @Test
+    @DatabaseSetup("classpath:/db/model/service/customerService/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/service/customerService/expectedData_disableCustomer.xml")
+    public void testEnableDisableCustomer_Disable() throws Exception{
+        customerService.enableDisableUser((long)2);
+    }
+
+
 }

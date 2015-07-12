@@ -50,46 +50,46 @@ public class TestGenericDAO {
     private GenericDAO addressDAO;
 
     @Test
-    @Transactional
-    @DatabaseSetup("classpath:/com/springapp/dao/genericDAO/dataSet.xml")
-    public void testGetAddress() {
-        long id = 1;
-        Address address = (Address) addressDAO.get(id);
-        assertNotNull(address);
-        assertEquals(address.getAddressID(), id);
-        assertEquals(address.getCity(), "testCity1");
-    }
-
-    @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/genericDAO/dataSet.xml")
-    @ExpectedDatabase("classpath:/com/springapp/dao/genericDAO/expectedData_afterAdd.xml")
-    public void testAddCustomer() {
+    @DatabaseSetup("classpath:/db/model/dao/genericDAO/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/dao/genericDAO/expectedData_add.xml")
+    public void testAdd() {
         Address testAddress = new Address();
         addressDAO.add(testAddress);
     }
 
     @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/genericDAO/dataSet.xml")
-    @ExpectedDatabase(value = "classpath:/com/springapp/dao/genericDAO/expectedData_afterDelete.xml")
-    public void testDeleteCustomer() {
-        addressDAO.delete((long)2);
+    @Transactional
+    @DatabaseSetup("classpath:/db/model/dao/genericDAO/initialData.xml")
+    public void testGet() {
+        final long id = 1;
+        Address address = (Address) addressDAO.get(id);
+        assertNotNull(address);
+        assertEquals(address.getAddressID(), id);
+        assertEquals(address.getStreet(), "testStreet1");
+        assertEquals(address.getCity(), "testCity1");
     }
 
     @Test
-    @DatabaseSetup("classpath:/com/springapp/dao/genericDAO/dataSet.xml")
-    public void testGetAllUsers() {
+    @DatabaseSetup("classpath:/db/model/dao/genericDAO/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/dao/genericDAO/expectedData_delete.xml")
+    public void testDelete() {
+        addressDAO.delete((long)1);
+    }
+
+    @Test
+    @DatabaseSetup("classpath:/db/model/dao/genericDAO/initialData.xml")
+    public void testGetAll() {
         assertEquals(addressDAO.getAll().size(), 2);
     }
 
     @Test
     @Transactional
-    @DatabaseSetup("classpath:/com/springapp/dao/genericDAO/dataSet.xml")
-    @ExpectedDatabase(value = "classpath:/com/springapp/dao/genericDAO/expectedData_afterUpdate.xml")
-    public void updateData() {
+    @DatabaseSetup("classpath:/db/model/dao/genericDAO/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/dao/genericDAO/expectedData_update.xml")
+    public void testUpdate() {
         Address address = new Address();
-        address.setOwnerUsername("testName2");
-
         address.setCity("cityAfterUpdate");
+        address.setOwnerUsername("customer2");
         address.setStreet("testStreet2");
         address.setAddressID((long)2);
         addressDAO.update(address);

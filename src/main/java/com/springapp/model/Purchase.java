@@ -5,7 +5,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -34,14 +33,14 @@ public class Purchase implements Serializable {
     @Enumerated(EnumType.STRING)
     private PurchaseStatus status;
 
-    @OneToMany(mappedBy = "purchase")
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
     private Set<Cart> carts;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ownerUsername", referencedColumnName = "username", insertable = false, updatable = false)
     private Customer customer;
 
-    @ManyToOne//(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(cascade = CascadeType.ALL)//(fetch = FetchType.LAZY, optional = true)(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressID", insertable = false, updatable = false)
     private Address address;
 

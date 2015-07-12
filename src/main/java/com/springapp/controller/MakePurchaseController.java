@@ -30,7 +30,7 @@ public class MakePurchaseController {
             if(url.endsWith('#error')) {
                 $('#order').modal('show');
             }
-             */
+            */
             // If form is not valid JavaScript will automatically
             // open the modal with this form.
             return new ModelAndView("redirect:/cart#error");
@@ -38,11 +38,10 @@ public class MakePurchaseController {
 
         try {
             purchaseService.makeOrder(address, activeUser.getUsername());
+            return new ModelAndView("cart", "successfulPurchase", "");
         } catch (RunOutOfItemsException e) {
             return new ModelAndView("redirect:/cart");
         }
 
-        return new ModelAndView("redirect:/cart");
     }
-
 }

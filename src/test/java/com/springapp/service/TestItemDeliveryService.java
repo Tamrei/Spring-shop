@@ -45,7 +45,6 @@ public class TestItemDeliveryService {
 
         itemDelivery.setDateOfDelivery(date);
 
-
         itemDeliveryService.addItemDelivery(itemDelivery);
     }
 

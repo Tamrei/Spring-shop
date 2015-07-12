@@ -9,7 +9,6 @@
 
 <html>
 <head>
-
     <style>
         <%@ include file="/resources/css/bootstrap.css" %>
         <%@ include file="/resources/css/custom.css" %>
@@ -79,7 +78,7 @@
 </nav>
 
 
-<!-- our registration form -->
+<!-- Login modal -->
 <div id="login" class="modal fade">
     <div class="modal-dialog" style="padding-top: 165px;">
         <div class="modal-content">
@@ -103,18 +102,20 @@
                         <input type="password" class="form-control" name="password" placeholder="Enter password">
                     </div>
 
-                    <button type="submit" name="submit" value="submit" class="btn btn-default">Submit</button>
+                    <hr>
+
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary"> Submit </button>
 
                     <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
                            value="${_csrf.token}"/>
 
-                    <a href="/registration" class="btn btn-primary"> Registration </a>
+                    <a href="/registration" class="btn btn-link"> Don't have account? Registration </a>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<!-- our registration form -->
+<!-- Login modal -->
 
 
 </body>
