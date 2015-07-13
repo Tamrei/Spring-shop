@@ -1,14 +1,12 @@
 package com.springapp.service;
 
 
-import com.springapp.exceptions.RunOutOfItemsException;
+import com.springapp.exceptions.NotAvailableItemException;
 import com.springapp.model.Address;
 import com.springapp.model.Cart;
 import com.springapp.model.Item;
 import com.springapp.model.Purchase;
-import com.springapp.util.Pair;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +18,7 @@ public interface PurchaseService {
 
     public void updatePurchase(Purchase purchase);
 
-    public void makeOrder(Address address, String customerName) throws RunOutOfItemsException;
+    public void makePurchase(Address address, String customerName) throws NotAvailableItemException;
 
     public void changeOrderStatus(long id, String status);
 

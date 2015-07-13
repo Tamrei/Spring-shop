@@ -5,8 +5,11 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.springapp.model.Item;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -36,38 +40,24 @@ public class TestItemService {
 
     @Autowired
     private ItemService itemService;
-/*
-    @Test
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
-    @ExpectedDatabase("classpath:/com/springapp/service/purchaseService/expectedData_samePurchase.xml")
-    public void testAddPurchase_SamePurchaseInUserCart() {
-        itemService.putItemInCart(1, "customer1", 10);
-    }
 
-    @Test
-    @DatabaseSetup("classpath:/com/springapp/service/purchaseService/dataSet.xml")
-    @ExpectedDatabase("classpath:/com/springapp/service/purchaseService/expectedData_noSamePurchase.xml")
-    public void testAddPurchase_NoSamePurchaseInUserCart() {
-        itemService.putItemInCart(2, "customer1", 5);
-    }
-*/
     @Test
     @DatabaseSetup("classpath:/db/model/service/itemService/initialData.xml")
     @ExpectedDatabase("classpath:/db/model/service/itemService/expectedData_putItemInTheCart.xml")
     public void testPutItemInTheCart() {
-        itemService.putItemInCart(1, "customer1", 50);
+        itemService.putItemInCart(2, "customer1", 50);
     }
 
     @Test
     @DatabaseSetup("classpath:/db/model/service/itemService/initialData.xml")
     @ExpectedDatabase("classpath:/db/model/service/itemService/expectedData_putItemInTheCart_sameItemInTheCart.xml")
     public void testPutItemInTheCart_sameItemInTheCart() {
-        itemService.putItemInCart(2, "customer1", 50);
+        itemService.putItemInCart(1, "customer1", 50);
     }
 
+    @Ignore
     @Test
-    @DatabaseSetup("classpath:/db/model/service/itemService/initialData.xml")
-    //@ExpectedDatabase("classpath:/db/model/service/itemService/expectedData_addItemAndResizeImage.xml")
+    //@DatabaseSetup("classpath:/db/model/service/itemService/initialData.xml")
     public void testAddItemAndResizeImage() throws IOException {
 
         final int desiredWidth = 480;
@@ -94,4 +84,5 @@ public class TestItemService {
         assertEquals(desiredImage.getWidth(), desiredWidth);
         assertEquals(desiredImage.getHeight(), desiredHeight);
     }
+
 }

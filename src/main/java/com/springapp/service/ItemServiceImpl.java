@@ -9,7 +9,6 @@ import com.springapp.util.ImageResizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +30,11 @@ public class ItemServiceImpl implements ItemService {
     private ImageResizer imageResizer;
 
     /**
-     * This method adds purchase data in database.
+     * This method creates new cart entity or update existing one that is associated with customer.
+     *
+     * New cart will be create only if customer don't have not ordered cart with same item (itemID).
+     * Otherwise if customer have not ordered cart with same item,
+     * the existing cart's amount will be increased by @param amount.
      *
      * @param itemID       id of the item that was bought
      * @param customerName who bought this item
@@ -56,16 +59,16 @@ public class ItemServiceImpl implements ItemService {
     /**
      * Add new item in to the shop and resize it.
      *
-     * @param item item entity that we want to add
-     * @param image image to resize
-     * @param width desired width in pixels
+     * @param item   item entity that we want to add
+     * @param image  image to resize
+     * @param width  desired width in pixels
      * @param height desired height in pixels
      * @throws IOException
      */
     @Override
     @Transactional
     public void addItemAndResizeImage(Item item, byte[] image, int width, int height) throws IOException {
-        if(item.getLeftOnStore() > 0) {
+        if (item.getLeftOnStore() > 0) {
             item.setAvailable(true);
         }
 

@@ -99,7 +99,7 @@ public class TestCustomerDAO {
 
     @Test
     @DatabaseSetup("classpath:/db/model/dao/customerDAO/initialData.xml")
-    @ExpectedDatabase("classpath:/com/springapp/dao/customerDAO/expectedData_afterDelete.xml")
+    @ExpectedDatabase("classpath:/db/model/dao/customerDAO/expectedData_deleteCustomer.xml")
     public void testDeleteCustomer() {
         final long id = 1;
         customerDAO.deleteCustomerByID(id);
@@ -113,7 +113,7 @@ public class TestCustomerDAO {
 
     @Test
     @DatabaseSetup("classpath:/db/model/dao/customerDAO/initialData.xml")
-    @ExpectedDatabase("classpath:/com/springapp/dao/customerDAO/expectedData_afterUpdate.xml")
+    @ExpectedDatabase("classpath:/db/model/dao/customerDAO/expectedData_updateCustomer.xml")
     public void testUpdateCustomer() throws Exception {
         final long id = 2;
         Customer customer = new Customer();

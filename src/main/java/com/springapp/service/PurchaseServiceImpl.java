@@ -3,10 +3,9 @@ package com.springapp.service;
 import com.springapp.dao.CartDAO;
 import com.springapp.dao.CustomerDAO;
 import com.springapp.dao.generic.GenericDAO;
-import com.springapp.exceptions.RunOutOfItemsException;
-import com.springapp.exceptions.UserAlreadyExistsException;
+import com.springapp.exceptions.EmptyCartException;
+import com.springapp.exceptions.NotAvailableItemException;
 import com.springapp.model.*;
-import com.springapp.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,19 +69,19 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
-     * This method ...
+     *
      *
      * @param address      that is associated with the order
      * @param customerName username of order owner
+     * @throws NotAvailableItemException
      */
     @Override
-    @Transactional(rollbackFor={RunOutOfItemsException.class})
-    public void makeOrder(Address address, String customerName) throws RunOutOfItemsException {
+    @Transactional(rollbackFor={NotAvailableItemException.class})
+    public void makePurchase(Address address, String customerName) throws NotAvailableItemException {
         List<Cart> carts = cartDAO.getNotOrderedCartByCustomerName(customerName);
 
         if (carts.isEmpty()) {
-            //throw new EmptyStackException();
-            return;
+            throw new EmptyCartException();
         }
 
         Purchase purchase = new Purchase();
@@ -96,18 +95,17 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchase.setAddress(address);
         purchaseDAO.add(purchase);
 
-        /* find all items that are not purchased yet and purchase them (give them a purchase id) */
         for (Cart cart : carts) {
             Item item = (Item) itemDAO.get(cart.getItemID());
 
             checkForAvailability(cart, item);
 
-            /* carts with purchase id considered as a purchased */
+            // carts with purchase id considered as a purchased
             cart.setPurchaseID(purchase.getPurchaseID());
 
-            /*  */
             item.setLeftOnStore(item.getLeftOnStore() - cart.getAmount());
-            /* count the price */
+
+            // count the price
             totalPrice += item.getPrice() * cart.getAmount();
         }
 
@@ -115,9 +113,9 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchase.setPrice(totalPrice);
     }
 
-    private void checkForAvailability(Cart cart, Item item) throws RunOutOfItemsException{
+    private void checkForAvailability(Cart cart, Item item) throws NotAvailableItemException {
         if (item.getLeftOnStore() < cart.getAmount() || !item.isAvailable()) {
-            throw new RunOutOfItemsException();
+            throw new NotAvailableItemException();
         }
     }
 

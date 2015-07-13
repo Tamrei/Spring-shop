@@ -29,6 +29,7 @@
     -->
 
 
+    <!-- H2 in memory db for tests -->
     <bean id="dataSource" class="org.h2.jdbcx.JdbcConnectionPool" destroy-method="dispose">
         <constructor-arg>
             <bean class="org.h2.jdbcx.JdbcDataSource">
@@ -38,6 +39,7 @@
             </bean>
         </constructor-arg>
     </bean>
+    <!-- -->
 
     <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="classpath:/create_testDb.sql"/>
@@ -60,7 +62,7 @@
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
                 <prop key="net.sf.ehcache.configurationResourceName">resources/hibernate/cache/myehcache.xml</prop>
 
-                <prop key="hibernate.dialect">${database.dialect}</prop>
+                <!--<prop key="hibernate.dialect">${database.dialect}</prop>-->
                 <prop key="hibernate.connection.charSet">UTF-8</prop>
             </props>
         </property>
@@ -124,10 +126,5 @@
         <constructor-arg value="com.springapp.model.ItemDelivery"/>
     </bean>
     <!-- generic dao beans end -->
-
-    <!--sql script executor
-    <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="classpath:/create_testDb.sql"/>
-    </jdbc:initialize-database>-->
 
 </beans>

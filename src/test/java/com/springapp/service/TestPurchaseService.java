@@ -3,7 +3,7 @@ package com.springapp.service;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
-import com.springapp.exceptions.RunOutOfItemsException;
+import com.springapp.exceptions.NotAvailableItemException;
 import com.springapp.model.Address;
 import com.springapp.model.Cart;
 import com.springapp.model.Item;
@@ -20,7 +20,6 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -42,22 +41,25 @@ public class TestPurchaseService {
     @Autowired
     private PurchaseService purchaseService;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
-    @DatabaseSetup("classpath:/com/springapp/service/orderService/dataSet.xml")
-    @ExpectedDatabase(value = "classpath:/com/springapp/service/orderService/expectedData_makeOrder.xml")
-    public void testMakeOrder() throws RunOutOfItemsException{
+    @DatabaseSetup("classpath:/db/model/service/purchaseService/initialData.xml")
+    @ExpectedDatabase("classpath:/db/model/service/purchaseService/expectedData_makePurchase.xml")
+    public void testMakePurchase() throws NotAvailableItemException {
         final String customerName = "customer1";
         Address address = new Address(customerName, "Kiev", "My street 14");
-        purchaseService.makeOrder(address, customerName);
+        purchaseService.makePurchase(address, customerName);
+    }
+
+    @Test(expected = NotAvailableItemException.class)
+    @DatabaseSetup("classpath:/db/model/service/purchaseService/initialData.xml")
+    public void testMakePurchase_notAvailableItemInTheCart() throws NotAvailableItemException{
+        final String customerName = "customer2";
+        Address address = new Address(customerName, "Kiev", "My street 15");
+        purchaseService.makePurchase(address, customerName);
     }
 
     @Test
-    @DatabaseSetup("classpath:/com/springapp/service/orderService/dataSet.xml")
+    @DatabaseSetup("classpath:/db/model/service/purchaseService/initialData.xml")
     public void testGetAllItemsInTheCart() {
         final long id = 1;
 

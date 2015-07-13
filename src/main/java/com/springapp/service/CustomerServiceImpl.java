@@ -68,7 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * Register new customer in system.
+     * Register new unique (unique customer name) customer in system.
      *
      * @param customer instance that we want to register
      * @throws UserAlreadyExistsException if username not unique

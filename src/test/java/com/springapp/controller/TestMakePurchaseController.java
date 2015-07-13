@@ -1,10 +1,8 @@
 package com.springapp.controller;
 
 import com.springapp.model.Address;
-import com.springapp.service.CartService;
 import com.springapp.service.PurchaseService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -71,6 +69,6 @@ public class TestMakePurchaseController {
                 .param("street", testStreet))
                 .andExpect(view().name(("cart")));
 
-        verify(purchaseService).makeOrder(address, testingAuthenticationToken.getName());
+        verify(purchaseService).makePurchase(address, testingAuthenticationToken.getName());
     }
 }

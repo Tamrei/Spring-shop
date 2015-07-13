@@ -3,6 +3,10 @@ CREATE DATABASE IF NOT EXISTS shop_test;
 
 USE shop_test;
 */
+
+
+SET REFERENTIAL_INTEGRITY FALSE;
+
 CREATE TABLE IF NOT EXISTS `address` (
   `addressID`     INT(11) NOT NULL,
   `ownerUsername` TEXT    NULL,
@@ -39,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `itemID`      INT(11)      NOT NULL,
   `itemName`    VARCHAR(255) NULL DEFAULT NULL,
   `type`        VARCHAR(50)  NULL DEFAULT NULL,
-  `image`       MEDIUMBLOB   NULL,
+  `image`       LONGBLOB   NULL,
   `price`       FLOAT        NULL DEFAULT NULL,
   `leftOnStore` INT(11)      NULL DEFAULT NULL,
   `available`   TINYINT(4)   NULL DEFAULT NULL,

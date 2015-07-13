@@ -11,8 +11,6 @@ import java.io.Serializable;
  * Cart entity have specific logic :
  * if addressID is null that mean that cart no ordered
  * and waiting to be ordered.
- * also cart entity don't have
- *
  */
 @Entity
 @Table(name = "cart")

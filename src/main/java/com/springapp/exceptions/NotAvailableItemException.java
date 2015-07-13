@@ -1,19 +1,19 @@
 package com.springapp.exceptions;
 
 
-public class RunOutOfItemsException extends Exception {
+public class NotAvailableItemException extends Exception {
 
     public String message;
 
-    public RunOutOfItemsException() {
+    public NotAvailableItemException() {
 
     }
 
-    public RunOutOfItemsException(String message) {
+    public NotAvailableItemException(String message) {
         this.message = message;
     }
 
-    public RunOutOfItemsException(int itemsToPurchase, int itemLeftOnStore) {
+    public NotAvailableItemException(int itemsToPurchase, int itemLeftOnStore) {
         this.message = "Attempt to order " + itemsToPurchase + " items where there is only"
                 + itemLeftOnStore + " left on store.";
     }

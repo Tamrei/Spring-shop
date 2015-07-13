@@ -9,10 +9,6 @@ public class EmptyCartException extends RuntimeException {
         this.message = "Cart is empty.";
     }
 
-    //public EmptyCartException(String message) {
-    //
-    //}
-
     @Override
     public String getMessage() {
         return message;

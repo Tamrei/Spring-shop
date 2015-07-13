@@ -11,6 +11,7 @@
 
     <address addressID="1" ownerUsername="customer1" street="my str.14" city="Kiev"/>
     <purchase purchaseID="1" ownerUsername="customer1" price="75" addressID="1" status="SENT" />
+
     <itemdelivery/>
     <homepageimage/>
 </dataset>
