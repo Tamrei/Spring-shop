@@ -3,14 +3,12 @@ package com.springapp.service;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
-import com.springapp.exceptions.NotAvailableItemException;
+import com.springapp.exceptions.ItemNotAvailableException;
 import com.springapp.model.Address;
 import com.springapp.model.Cart;
 import com.springapp.model.Item;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -44,15 +42,15 @@ public class TestPurchaseService {
     @Test
     @DatabaseSetup("classpath:/db/model/service/purchaseService/initialData.xml")
     @ExpectedDatabase("classpath:/db/model/service/purchaseService/expectedData_makePurchase.xml")
-    public void testMakePurchase() throws NotAvailableItemException {
+    public void testMakePurchase() throws ItemNotAvailableException {
         final String customerName = "customer1";
         Address address = new Address(customerName, "Kiev", "My street 14");
         purchaseService.makePurchase(address, customerName);
     }
 
-    @Test(expected = NotAvailableItemException.class)
+    @Test(expected = ItemNotAvailableException.class)
     @DatabaseSetup("classpath:/db/model/service/purchaseService/initialData.xml")
-    public void testMakePurchase_notAvailableItemInTheCart() throws NotAvailableItemException{
+    public void testMakePurchase_notAvailableItemInTheCart() throws ItemNotAvailableException {
         final String customerName = "customer2";
         Address address = new Address(customerName, "Kiev", "My street 15");
         purchaseService.makePurchase(address, customerName);

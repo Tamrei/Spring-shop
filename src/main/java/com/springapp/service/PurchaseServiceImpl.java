@@ -4,7 +4,7 @@ import com.springapp.dao.CartDAO;
 import com.springapp.dao.CustomerDAO;
 import com.springapp.dao.generic.GenericDAO;
 import com.springapp.exceptions.EmptyCartException;
-import com.springapp.exceptions.NotAvailableItemException;
+import com.springapp.exceptions.ItemNotAvailableException;
 import com.springapp.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,15 +69,17 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
+     * This method purchases all items which are located in this customer cart.
      *
+     * Carts without purchase id are considered as a not purchased and only them will be
      *
      * @param address      that is associated with the order
      * @param customerName username of order owner
-     * @throws NotAvailableItemException
+     * @throws ItemNotAvailableException
      */
     @Override
-    @Transactional(rollbackFor={NotAvailableItemException.class})
-    public void makePurchase(Address address, String customerName) throws NotAvailableItemException {
+    @Transactional(rollbackFor={ItemNotAvailableException.class})
+    public void makePurchase(Address address, String customerName) throws ItemNotAvailableException {
         List<Cart> carts = cartDAO.getNotOrderedCartByCustomerName(customerName);
 
         if (carts.isEmpty()) {
@@ -86,7 +88,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
         Purchase purchase = new Purchase();
 
-        /* price of full purchase */
+        // price of full purchase
         double totalPrice = 0.0;
 
         address.setOwnerUsername(customerName);
@@ -103,19 +105,21 @@ public class PurchaseServiceImpl implements PurchaseService {
             // carts with purchase id considered as a purchased
             cart.setPurchaseID(purchase.getPurchaseID());
 
+            // decrease the item amount in the store by amount of items in this cart
             item.setLeftOnStore(item.getLeftOnStore() - cart.getAmount());
 
             // count the price
             totalPrice += item.getPrice() * cart.getAmount();
         }
 
+        // round the number
         totalPrice = (double) Math.round(totalPrice * 1000) / 1000;
         purchase.setPrice(totalPrice);
     }
 
-    private void checkForAvailability(Cart cart, Item item) throws NotAvailableItemException {
+    private void checkForAvailability(Cart cart, Item item) throws ItemNotAvailableException {
         if (item.getLeftOnStore() < cart.getAmount() || !item.isAvailable()) {
-            throw new NotAvailableItemException();
+            throw new ItemNotAvailableException();
         }
     }
 
@@ -128,9 +132,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @Transactional
     public void changeOrderStatus(long purchaseID, String status) {
-        if (status.isEmpty()) {
-            throw new IllegalArgumentException("Status is empty.");
-        }
+        //if (status.isEmpty()) {
+        //    throw new IllegalArgumentException("Status is empty.");
+        //}
 
         Purchase purchase = (Purchase) purchaseDAO.get(purchaseID);
         purchase.setStatus(PurchaseStatus.valueOf(status));

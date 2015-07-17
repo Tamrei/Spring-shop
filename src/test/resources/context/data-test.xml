@@ -78,9 +78,6 @@
     <tx:annotation-driven/>
     <context:component-scan base-package="com.springapp" />
 
-
-
-
     <!-- allows for integration of file upload functionality
     <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
         <property name="maxUploadSize" value="100000000"/>

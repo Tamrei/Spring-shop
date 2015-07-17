@@ -2,7 +2,7 @@ package com.springapp.controller;
 
 
 import com.springapp.anotation.ActiveUser;
-import com.springapp.exceptions.NotAvailableItemException;
+import com.springapp.exceptions.ItemNotAvailableException;
 import com.springapp.model.Address;
 import com.springapp.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class MakePurchaseController {
         try {
             purchaseService.makePurchase(address, activeUser.getUsername());
             return new ModelAndView("cart", "successfulPurchase", "");
-        } catch (NotAvailableItemException e) {
+        } catch (ItemNotAvailableException e) {
             return new ModelAndView("redirect:/cart");
         }
 
