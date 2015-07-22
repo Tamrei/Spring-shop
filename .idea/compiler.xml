@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="grocerystore" />
         <module name="spring-petclinic" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="grocerystore" target="1.6" />
       <module name="spring-petclinic" target="1.6" />
     </bytecodeTargetLevel>
   </component>

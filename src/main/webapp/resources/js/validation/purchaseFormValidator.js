@@ -51,3 +51,13 @@ function validatePurchaseForm() {
         return isFormValid;
     });
 }
+
+function validationMarkup (condition, form, label, validText, invalidText) {
+    if (condition) {
+        form.removeClass('has-error').addClass('has-success');
+        label.text(validText);
+    } else {
+        form.removeClass('has-success').addClass('has-error');
+        label.text(invalidText);
+    }
+}

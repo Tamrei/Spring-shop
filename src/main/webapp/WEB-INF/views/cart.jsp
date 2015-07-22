@@ -23,8 +23,7 @@
                 $('#invalidFormAlert').show();
             }
             else $('#invalidFormAlert').hide();
-
-            validatePurchaseForm();
+            //validatePurchaseForm();
         });
     </script>
 </head>
