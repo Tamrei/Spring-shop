@@ -78,4 +78,11 @@ public class CartDAOImpl implements CartDAO {
         return (List<Cart>) query.list();
     }
 
+    @Override
+    @Transactional
+    public List<Cart> getAllPurchasedCart() {
+        Query query = getSession().createQuery("from Cart where purchaseID != NULL")
+                .setCacheable(true);
+        return (List<Cart>) query.list();
+    }
 }

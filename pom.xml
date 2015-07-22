@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.springframework.samples</groupId>
-    <artifactId>spring-petclinic</artifactId>
+    <groupId>com.springapp</groupId>
+    <artifactId>grocerystore</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <name>grocerystore</name>
@@ -90,19 +90,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.9</version>
         </dependency>
-        <!--
-                <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                    <version>1.5.6</version>
-                </dependency>
-
-                     <dependency>
-                         <groupId>org.slf4j</groupId>
-                         <artifactId>slf4j-api</artifactId>
-                         <version>1.5.6</version>
-                     </dependency>
-                     -->
 
         <dependency>
             <groupId>javassist</groupId>
@@ -396,7 +383,20 @@
             <artifactId>h2</artifactId>
             <version>1.4.187</version>
         </dependency>
+        <!-- -->
 
+        <!-- Datatables -->
+        <dependency>
+            <groupId>com.github.dandelion</groupId>
+            <artifactId>datatables-jsp</artifactId>
+            <version>0.10.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.dandelion</groupId>
+            <artifactId>datatables-export-itext</artifactId>
+            <version>0.10.1</version>
+        </dependency>
 
     </dependencies>
 

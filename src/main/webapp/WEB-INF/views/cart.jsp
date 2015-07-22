@@ -6,34 +6,15 @@
 <%@page session="true" %>
 <%@taglib prefix="sec"
           uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="h3" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="td" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
-    <style>
-        <%@ include file="../../resources/css/bootstrap.css" %>
-        <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/panel.css" %>
-
-        .btn-group {
-            display: flex;
-        }
-
-        .test {
-            background-color: #F2DEDE;
-        }
-
-    </style>
-    <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
-    <script src="<c:url value="/resources/js/search.js" />"></script>
-    <script src="<c:url value="/resources/js/validation/purchaseFormValidatior.js" />"></script>
+    <title> My Cart </title>
+    <jsp:include page="static/staticFiles.jsp"/>
+    <script src="<c:url value="/resources/js/validation/purchaseFormValidator.js" />"></script>
     <script src="<c:url value="/resources/js/view/cart.js" />"></script>
-
-
     <script>
-
         $(document).ready(function () {
             var url = window.location.href; // get current url
             if (url.endsWith('#error')) {
@@ -42,16 +23,15 @@
             }
             else $('#invalidFormAlert').hide();
 
-            validatePurchaseForm();
+            //validatePurchaseForm();
         });
     </script>
-    <title> My Cart </title>
 </head>
 
 <body>
 <div class="container">
 
-<c:import url="static/navbar.jsp"></c:import>
+<jsp:include page="static/navbar.jsp"/>
 
 <c:if test="${not empty errorE}">
     <div class="bs-example">
@@ -122,7 +102,7 @@
 
         <tr id="table${purchase.key.itemID}">
             <td><img src="/shop/img/${purchase.key.itemID}" width="120" height="75"></td>
-            <td id="itemName"> <h4> ${purchase.key.itemName} </h4>
+            <td id="itemName"><h4> ${purchase.key.itemName} </h4>
                 <h4 id="st${purchase.key.itemID}" class="text-success"> Available </h4>
             </td>
             <td> ${purchase.value.amount} </td>
@@ -137,12 +117,12 @@
             </td>
 
             <td>
-                    <form:form method="delete" action="cart/layOut/${purchase.value.cartID}">
-                        <button type="submit" class="btn btn-default btn-danger"> Lay out</button>
-                    </form:form>
+                <form:form method="delete" action="cart/layOut/${purchase.value.cartID}">
+                    <button type="submit" class="btn btn-default btn-danger"> Lay out</button>
+                </form:form>
 
-                    <a data-toggle="modal" class="btn btn-default"
-                       href="#update${purchase.value.cartID}"> Edit form </a>
+                <a data-toggle="modal" class="btn btn-default"
+                   href="#update${purchase.value.cartID}"> Edit form </a>
             </td>
         </tr>
 
@@ -280,10 +260,19 @@
                     <div class="form-group has-feedback" id="city-form">
                         <label class="control-label" for="city" id="city-label"> City: </label>
 
+
+                        <select name="city" class="form-control">
+                            <c:forEach items="${availableCities}" var="city">
+                                <option  id="city" name="city" value="${city}"> ${city} </option>
+                            </c:forEach>
+                        </select>
+                        <br>
+                        <!--
                         <div class="controls">
                             <input type="text" name="city" class="form-control"
                                    placeholder="Enter city name" id="city">
                         </div>
+                        -->
                     </div>
 
                     <div class="form-group has-feedback" id="street-form">
@@ -308,6 +297,8 @@
 </div>
 </div>
 </div>
+
+
 
 <jsp:include page="static/footer.jsp" flush="true"/>
 

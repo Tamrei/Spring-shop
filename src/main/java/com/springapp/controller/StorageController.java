@@ -22,15 +22,15 @@ public class StorageController {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private ItemDeliveryService itemDeliveryService;
+
     @RequestMapping(value="store")
     public String storage(ModelMap modelMap) {
         modelMap.put("items", itemService.getAllItems());
 
         return "store";
     }
-
-    @Autowired
-    private ItemDeliveryService itemDeliveryService;
 
     @RequestMapping(value="store/add/{itemID}")
     public ModelAndView addNewItemDelivery(@ModelAttribute("itemDelivery") @Valid ItemDelivery itemDelivery) {
@@ -42,12 +42,6 @@ public class StorageController {
     @RequestMapping(value = "/enableDisableItem", method = RequestMethod.POST)
     public @ResponseBody
     String enableDisableItem (@RequestParam("itemID") Integer id) {
-        /*
-        if (itemService.enableDisableItem(id)) {
-            return "true";
-        }
-        else return "false";
-        */
         return itemService.enableDisableItem(id);
     }
 

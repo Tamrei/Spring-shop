@@ -5,27 +5,25 @@
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
 
-    <display-name>Spring PetClinic + Thymeleaf</display-name>
-    <description>Spring PetClinic + Thymeleaf sample application</description>
+    <display-name>Grocery store</display-name>
+    <description>Grocery store</description>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/spring/root-context.xml</param-value>
+        <param-value>classpath:/spring/root-context.xml</param-value>
     </context-param>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!--
-- Servlet that dispatches request to registered handlers (Controller implementations).
--->
+    <!-- Servlet that dispatches request to registered handlers (Controller implementations). -->
     <servlet>
         <servlet-name>petclinic</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>WEB-INF/spring/servlet-context.xml</param-value>
+            <param-value>classpath:/spring/servlet-context.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -61,8 +59,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     </filter-mapping>
 
 
-
-    <!--  -->
+    <!-- lazy load -->
     <filter>
         <filter-name>hibernateFilter</filter-name>
         <filter-class>

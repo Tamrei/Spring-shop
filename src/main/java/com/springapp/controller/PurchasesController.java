@@ -1,7 +1,6 @@
 package com.springapp.controller;
 
 import com.springapp.anotation.ActiveUser;
-import com.springapp.model.Purchase;
 import com.springapp.model.PurchaseStatus;
 import com.springapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +31,8 @@ public class PurchasesController {
     }
 
     @RequestMapping(value = "purchases/update/{purchaseID}", method = RequestMethod.POST)
-    public String updateOrderStatus(@PathVariable("purchaseID") Integer id, @RequestParam("status") String status) {
-        purchaseService.changeOrderStatus(id, status);
+    public String updatePurchaseStatus(@PathVariable("purchaseID") Integer id, @RequestParam("status") String status) {
+        purchaseService.changePurchaseStatus(id, status);
 
         return "redirect:/purchases";
     }

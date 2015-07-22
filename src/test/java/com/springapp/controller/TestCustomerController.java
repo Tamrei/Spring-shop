@@ -1,6 +1,5 @@
 package com.springapp.controller;
 
-import com.springapp.model.Customer;
 import com.springapp.service.CustomerService;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+@ContextConfiguration(locations = {"file:src/main/resources/spring/root-context.xml"})
 public class TestCustomerController {
 
     private MockMvc mockMvc;

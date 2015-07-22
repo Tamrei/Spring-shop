@@ -2,10 +2,7 @@ package com.springapp.service;
 
 
 import com.springapp.exceptions.ItemNotAvailableException;
-import com.springapp.model.Address;
-import com.springapp.model.Cart;
-import com.springapp.model.Item;
-import com.springapp.model.Purchase;
+import com.springapp.model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,10 +17,9 @@ public interface PurchaseService {
 
     public void makePurchase(Address address, String customerName) throws ItemNotAvailableException;
 
-    public void changeOrderStatus(long id, String status);
+    public void changePurchaseStatus(long id, String status);
 
     public List<Purchase> getAllPurchasesForCustomer(String customerName);
 
-
-
+    public List<City> getAllAvailableCities();
 }

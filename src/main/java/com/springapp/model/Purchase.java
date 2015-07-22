@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "purchase")
-@Cache(usage= CacheConcurrencyStrategy.READ_ONLY, region="yourEntityCache")
+//@Cache(usage= CacheConcurrencyStrategy.READ_ONLY, region="yourEntityCache")
 public class Purchase implements Serializable {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
@@ -149,9 +149,6 @@ public class Purchase implements Serializable {
                 ", price=" + price +
                 ", addressID=" + addressID +
                 ", status=" + status +
-                ", carts=" + carts +
-                ", customer=" + customer +
-                ", address=" + address +
                 '}';
     }
 }

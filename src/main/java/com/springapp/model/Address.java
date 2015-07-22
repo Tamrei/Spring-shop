@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "address")
-@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Address {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
@@ -35,7 +35,7 @@ public class Address {
 
     public Address() {
     }
-
+/*
     public Address(long addressID, String ownerUsername, String city, String street) {
         this.addressID = addressID;
         this.ownerUsername = ownerUsername;
@@ -53,7 +53,7 @@ public class Address {
         this.city = city;
         this.street = street;
     }
-
+*/
     public long getAddressID() {
         return addressID;
     }
@@ -118,7 +118,6 @@ public class Address {
                 ", ownerUsername='" + ownerUsername + '\'' +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
-                ", purchases=" + purchases +
                 '}';
     }
 }

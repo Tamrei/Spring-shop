@@ -15,4 +15,5 @@ public interface CartDAO {
     public List<Cart> getNotOrderedCartByCustomerName(String userName);
     public List<Cart> getOrderedCartByCustomerName(String userName);
     public List<Cart> getCartsForPurchase(long id);
+    public List<Cart> getAllPurchasedCart();
 }

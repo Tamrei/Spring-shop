@@ -9,53 +9,31 @@
 
 <html>
 <head>
-    <style>
-        <%@ include file="../../resources/css/bootstrap.css" %>
-        <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/panel.css" %>
-
-        .thumbnail {
-            height: 185px;
-        }
-
-        #priceInformation {
-            color: darkgreen;
-            padding-left: 5px;
-        }
-
-    </style>
-
-    <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
-    <script src="<c:url value="/resources/js/search.js" />"></script>
-    <script src="<c:url value="/resources/js/ajax.js" />"></script>
+    <title> Shop </title>
+    <jsp:include page="static/staticFiles.jsp"/>
     <script src="<c:url value="/resources/js/view/shop.js" />"></script>
     <script>
         $(document).ready(function () {
             $('#cartNotification').hide();
             sortPanel();
+            //getHomePageImages();
         });
     </script>
-    <title> Shop </title>
 </head>
-
 <body>
 
 <script>
-    getHomePageImages();
-</script>
 
+</script>
 
 <div class="container">
 
-
-<c:import url="static/navbar.jsp"></c:import>
+<jsp:include page="static/navbar.jsp"/>
 
 <div class="bs-example" id="cartNotification" style="display:none;">
     <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>Success!</strong>
-
         <div id="cartNotificationMessage"> Success!</div>
     </div>
 </div>
@@ -115,9 +93,6 @@
 
         <div class="col-md-10 content">
 
-            <input type="search" id="searchByItemName" class="form-control" style="margin-bottom:15px;"
-                   placeholder="Search by item name" onkeyup="searchValue('#itemName', this.id)">
-
             <div class="row">
                 <c:forEach items="${items}" var="item">
                     <div class="type" id="${item.type}">
@@ -133,7 +108,7 @@
                                         <c:choose>
                                             <c:when test="${empty pageContext.request.userPrincipal}">
                                                 <a data-toggle="modal" role="button" class="btn btn-default btn-block"
-                                                   href="/login"> Put item in the cart </a>
+                                                   href="#login"> Put item in the cart </a>
                                             </c:when>
                                             <c:otherwise>
                                                 <a data-toggle="modal" role="button" class="btn btn-default btn-block"
@@ -151,7 +126,7 @@
                             </div>
 
 
-                            <!-- out update form (remove to store) -->
+                            <!-- Out update form (remove to store) -->
                             <div id="update${item.itemID}" class="modal fade">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -196,7 +171,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- out update form -->
+                            <!--  -->
 
 
                             <!-- Put in the cart modal -->
@@ -235,7 +210,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Put in the cart modal -->
+                                <!--  -->
 
                                 <!-- price information script -->
                                 <script>

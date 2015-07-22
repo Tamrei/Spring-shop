@@ -1,11 +1,8 @@
 package com.springapp.controller;
 
-import com.springapp.anotation.ActiveUser;
-import com.springapp.model.Item;
 import com.springapp.model.site.HomePageImage;
 import com.springapp.service.site.HomePageImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -28,6 +25,7 @@ public class HomePageImageController {
     @RequestMapping(value = "carouselController")
     public String carouselController(ModelMap modelMap) {
         modelMap.addAttribute("homePageImages", homePageImageService.getAllHomePageImages());
+
         return "carouselController";
     }
 
@@ -44,7 +42,7 @@ public class HomePageImageController {
         try {
             homePageImageService.addHomePageImage(homePageImage, file, 1500, 430);
         } catch (IOException e) {
-            e.printStackTrace();
+            return new ModelAndView("carouselController", "IOException", "Woops! IO Exception!");
         } catch (NullPointerException e) {
             return new ModelAndView("carouselController", "notAnImage", "Woops! seams like its not an image!");
         }

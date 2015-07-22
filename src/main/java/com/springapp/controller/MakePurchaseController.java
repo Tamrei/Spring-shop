@@ -4,10 +4,12 @@ package com.springapp.controller;
 import com.springapp.anotation.ActiveUser;
 import com.springapp.exceptions.ItemNotAvailableException;
 import com.springapp.model.Address;
+import com.springapp.model.PurchaseStatus;
 import com.springapp.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +44,7 @@ public class MakePurchaseController {
         } catch (ItemNotAvailableException e) {
             return new ModelAndView("redirect:/cart");
         }
-
     }
+
+
 }

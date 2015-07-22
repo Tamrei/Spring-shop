@@ -1,4 +1,4 @@
-/**
+/*
 $("#s").keyup(function () {
     var regex = new RegExp($("#search").val(), "i");
     var rows = $('tr:gt(0)');
@@ -11,12 +11,13 @@ $("#s").keyup(function () {
         }
     });
 });
-**/
-
+*/
+/*
 function searchValue(value, id) {
+    alert("+++");
     var regex = new RegExp($("#" + id).val(), "i");
-    //var rows = $('tr:gt(0)'); //old version
-    var rows = $('.type');
+    var rows = $('tr:gt(0)'); //old version
+    //var rows = $('.type:gt(0)');
     rows.each(function (index) {
         var title = $(this).children(value).html();
         if (title.search(regex) != -1) {
@@ -26,3 +27,4 @@ function searchValue(value, id) {
         }
     });
 }
+*/

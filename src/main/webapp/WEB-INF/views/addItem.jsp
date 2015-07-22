@@ -6,23 +6,13 @@
 <html>
 <head>
     <title>Add new item</title>
-    <style>
-        <%@ include file="../../resources/css/bootstrap.css" %>
-        <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/panel.css" %>
-    </style>
-
-    <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
+    <jsp:include page="static/staticFiles.jsp"/>
     <script src="<c:url value="/resources/js/validation/addNewItemFormValidator.js" />"></script>
-
     <script>
         $(document).ready(function () {
             validateAddNewItemForm();
         });
     </script>
-
-    <title> Add new item </title>
 </head>
 <body>
 <div class="container">

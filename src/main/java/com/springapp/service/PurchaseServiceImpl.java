@@ -2,6 +2,7 @@ package com.springapp.service;
 
 import com.springapp.dao.CartDAO;
 import com.springapp.dao.CustomerDAO;
+import com.springapp.dao.ItemDAO;
 import com.springapp.dao.generic.GenericDAO;
 import com.springapp.exceptions.EmptyCartException;
 import com.springapp.exceptions.ItemNotAvailableException;
@@ -20,7 +21,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     private GenericDAO purchaseDAO;
 
     @Autowired
-    private GenericDAO itemDAO;
+    private ItemDAO itemDAO;
 
     @Autowired
     private GenericDAO addressDAO;
@@ -30,6 +31,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Autowired
     private CartDAO cartDAO;
+
+    @Autowired
+    private GenericDAO cityDAO;
 
     @Override
     @Transactional
@@ -49,7 +53,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         Map<Item, Cart> map = new HashMap<Item, Cart>();
 
         for (Cart cart : cartDAO.getCartsForPurchase(cartID)) {
-            Item item = (Item) itemDAO.get(cart.getItemID());
+            Item item = (Item) itemDAO.getByID(cart.getItemID());
             map.put(item, cart);
         }
 
@@ -98,7 +102,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseDAO.add(purchase);
 
         for (Cart cart : carts) {
-            Item item = (Item) itemDAO.get(cart.getItemID());
+            Item item = itemDAO.getByID(cart.getItemID());
 
             checkForAvailability(cart, item);
 
@@ -131,7 +135,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      */
     @Override
     @Transactional
-    public void changeOrderStatus(long purchaseID, String status) {
+    public void changePurchaseStatus(long purchaseID, String status) {
         //if (status.isEmpty()) {
         //    throw new IllegalArgumentException("Status is empty.");
         //}
@@ -139,6 +143,12 @@ public class PurchaseServiceImpl implements PurchaseService {
         Purchase purchase = (Purchase) purchaseDAO.get(purchaseID);
         purchase.setStatus(PurchaseStatus.valueOf(status));
         purchaseDAO.update(purchase);
+    }
+
+    @Override
+    @Transactional
+    public List<City> getAllAvailableCities() {
+        return cityDAO.getAll();
     }
 
     @Override

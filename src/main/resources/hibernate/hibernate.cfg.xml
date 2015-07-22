@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Mapping (Annotation) -->
+        <mapping class="com.springapp.model.Customer"/>
+        <mapping class="com.springapp.model.Item"/>
+        <mapping class="com.springapp.model.Cart"/>
+        <mapping class="com.springapp.model.Purchase"/>
+        <mapping class="com.springapp.model.Address"/>
+        <mapping class="com.springapp.model.site.HomePageImage"/>
+        <mapping class="com.springapp.model.ItemDelivery"/>
+        <mapping class="com.springapp.model.City"/>
+
+    </session-factory>
+</hibernate-configuration>
+

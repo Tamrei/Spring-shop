@@ -29,7 +29,7 @@ function putItemInCart(itemID, itemName) {
         url: 'putItemInTheCart.html',
         data: "itemID=" + itemID + "&amount=" + amount,
         success: function (data) {
-            showCartCount('cartCount'); // update cart count
+            getCartCount('cartCount'); // update cart count
             $('.modal.in').modal('hide'); // hide modal
 
             /* display popover with info */
@@ -51,7 +51,7 @@ function putItemInCart(itemID, itemName) {
 }
 
 /**
- * This method sort item by their type.
+ * This method controls panel that allow to sort items by their types.
  */
 function sortPanel() {
     var rows = $('div.type');
@@ -64,8 +64,7 @@ function sortPanel() {
         $("#searchBar").children().each(function () {
             if ($(this).text() != col) {
                 $(this).removeClass("list-group-item active").addClass("list-group-item");
-            }
-            else {
+            } else {
                 $(this).removeClass("list-group-item").addClass("list-group-item active");
             }
         });

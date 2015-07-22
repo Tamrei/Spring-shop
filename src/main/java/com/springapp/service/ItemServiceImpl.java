@@ -95,14 +95,6 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
-    /*
-    private void updateItemQuantityOnStore(long itemID, long amount) {
-        Item item = itemDAO.getByID(itemID);
-        item.setLeftOnStore(item.getLeftOnStore() - amount);
-        itemDAO.updateItem(item);
-    }
-    */
-
     @Override
     @Transactional
     public List<Item> getAllItems() {

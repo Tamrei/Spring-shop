@@ -6,18 +6,12 @@
 <%@ page session="true" %>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="datatables" uri="http://github.com/dandelion/datatables" %>
 
 <html>
 <head>
-    <style>
-        <%@ include file="../../resources/css/bootstrap.css" %>
-        <%@ include file="../../resources/css/custom.css" %>
-    </style>
-    <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
-    <script src="<c:url value="/resources/js/search.js" />"></script>
-
     <title>All Purchases</title>
+    <jsp:include page="static/staticFiles.jsp"/>
 </head>
 <body>
 
@@ -37,7 +31,7 @@
             <!-- Page Header -->
 
             <div class="table">
-                <table class="table table-curved table-hover">
+                <table class="table table-curved table-hover" id="purchase">
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -56,7 +50,8 @@
                             <td> ${purchase.address.city} </td>
                             <td> ${purchase.ownerUsername} </td>
                             <td> ${purchase.status}
-                            <td><a class="btn btn-default" data-toggle="modal" href="#update${purchase.purchaseID}" id="btn${purchase.purchaseID}">Change
+                            <td><a class="btn btn-default" data-toggle="modal" href="#update${purchase.purchaseID}"
+                                   id="btn${purchase.purchaseID}">Change
                                 status</a></td>
                         </tr>
 
@@ -72,16 +67,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <form:form method="post" action="purchases/update/${purchase.purchaseID}">
-
                                             <select name="status" class="form-control">
                                                 <c:forEach items="${orderStatus}" var="status">
                                                     <option value="${status}">${status}</option>
                                                 </c:forEach>
                                             </select>
                                             <br>
-
                                             <div class="modal-footer">
-                                                <button id="sub" class="btn btn-primary" type="submit"> Submit </button>
+                                                <button id="sub" class="btn btn-primary" type="submit"> Submit</button>
                                             </div>
                                         </form:form>
                                     </div>
@@ -104,7 +97,7 @@
                                 isThisAStatusButton = false;
                             });
 
-                            isThisAStatusButton = false;
+                            //isThisAStatusButton = false;
                         </script>
                     </c:forEach>
 

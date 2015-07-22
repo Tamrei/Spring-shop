@@ -86,4 +86,13 @@ public class TestCartDAO {
             assertEquals((long)cart.getPurchaseID(), id);
         }
     }
+
+    @Test
+    @Transactional
+    @DatabaseSetup("classpath:/db/model/dao/cartDAO/initialData.xml")
+    public void testGetAllPurchasedCarts() {
+        for (Cart cart : cartDAO.getAllPurchasedCart()) {
+            System.out.println(cart);
+        }
+    }
 }

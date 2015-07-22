@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "item")
-@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Item implements Serializable {
     @Id
     @GenericGenerator(name = "id_generator", strategy = "increment")

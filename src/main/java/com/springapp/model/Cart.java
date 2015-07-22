@@ -7,15 +7,10 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Cart entity have specific logic :
- * if addressID is null that mean that cart no ordered
- * and waiting to be ordered.
- */
+
 @Entity
 @Table(name = "cart")
-//@org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true) //???
-@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Cart implements Serializable {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
@@ -33,7 +28,7 @@ public class Cart implements Serializable {
      * if addressID null purchase
      *    purchase not ordered
      * else
-     *    purchase ordered and waiting for ...
+     *    purchase ordered and waiting for delivery
      */
     @Column(name="purchaseID")
     private Long purchaseID;
@@ -57,19 +52,19 @@ public class Cart implements Serializable {
         this.ownerUsername = ownerUsername;
         this.amount = amount;
     }
+    /*
+        public Cart(long itemID, String ownerUsername) {
+            this.itemID = itemID;
+            this.ownerUsername = ownerUsername;
+        }
 
-    public Cart(long itemID, String ownerUsername) {
-        this.itemID = itemID;
-        this.ownerUsername = ownerUsername;
-    }
-
-    public Cart(long itemID, String ownerUsername, Long purchaseID, long amount) {
-        this.itemID = itemID;
-        this.ownerUsername = ownerUsername;
-        this.purchaseID = purchaseID;
-        this.amount = amount;
-    }
-
+        public Cart(long itemID, String ownerUsername, Long purchaseID, long amount) {
+            this.itemID = itemID;
+            this.ownerUsername = ownerUsername;
+            this.purchaseID = purchaseID;
+            this.amount = amount;
+        }
+    */
     public long getCartID() {
         return cartID;
     }
@@ -151,14 +146,12 @@ public class Cart implements Serializable {
 
     @Override
     public String toString() {
-        return "";/*"Cart{" +
+        return "Cart{" +
                 "cartID=" + cartID +
                 ", itemID=" + itemID +
                 ", ownerUsername='" + ownerUsername + '\'' +
                 ", purchaseID=" + purchaseID +
                 ", amount=" + amount +
-                ", customer=" + customer +
-                ", purchase=" + purchase +
-                '}';*/
+                '}';
     }
 }

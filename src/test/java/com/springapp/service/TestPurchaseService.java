@@ -7,6 +7,7 @@ import com.springapp.exceptions.ItemNotAvailableException;
 import com.springapp.model.Address;
 import com.springapp.model.Cart;
 import com.springapp.model.Item;
+import com.springapp.model.Purchase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -38,7 +41,7 @@ public class TestPurchaseService {
 
     @Autowired
     private PurchaseService purchaseService;
-
+/*
     @Test
     @DatabaseSetup("classpath:/db/model/service/purchaseService/initialData.xml")
     @ExpectedDatabase("classpath:/db/model/service/purchaseService/expectedData_makePurchase.xml")
@@ -69,4 +72,15 @@ public class TestPurchaseService {
             assertEquals(entry.getKey().getItemID(), entry.getValue().getItemID());
         }
     }
+*/
+    /*
+    @Test
+    @DatabaseSetup("classpath:/db/model/service/statisticService/initialData.xml")
+    public void testStatisticService() {
+        Map<String, Integer> map = ;
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+    }*/
 }

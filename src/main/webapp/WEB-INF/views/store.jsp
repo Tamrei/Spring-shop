@@ -11,17 +11,8 @@
 
 <html>
 <head>
-    <style>
-        <%@ include file="../../resources/css/bootstrap.css" %>
-        <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/panel.css" %>
-    </style>
-
-    <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
+    <jsp:include page="static/staticFiles.jsp"/>
     <script src="<c:url value="/resources/js/view/user.js" />"></script>
-
-
     <title> Store </title>
 </head>
 <body>
@@ -150,7 +141,7 @@
     <!-- Disable/Enable Modal -->
 
 
-    <!-- Add new item modal -->
+    <!-- Add new delivery modal -->
     <div id="addDelivery${item.itemID}" class="modal fade">
         <div class="modal-dialog" style="padding-top: 165px;">
             <div class="modal-content">
@@ -178,7 +169,7 @@
             </div>
         </div>
     </div>
-    <!-- Add new item modal -->
+    <!-- Add new delivery modal -->
 
 
     <script>
@@ -204,14 +195,12 @@
 <script>
     function setStatus(isEnabled, itemID) {
         var status = $("#stst" + itemID);
-        var panel2 = $("#pnl" + itemID);
+        //var panel2 = $("#pnl" + itemID);
 
         if (isEnabled) {
             status.css("color", "darkgreen").text("enabled");
-            //panel2.css("border-color", "red");
         } else {
             status.css("color", "darkred").text("disabled");
-            //panel2.css("border-color", "red");
         }
 
     }

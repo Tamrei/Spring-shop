@@ -11,14 +11,8 @@
 
 <html>
 <head>
-    <style>
-        <%@ include file="../../resources/css/bootstrap.css" %>
-        <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/panel.css" %>
-    </style>
-    <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
-    <script src="<c:url value="/resources/js/search.js" />"></script>
+    <title>Carousel Controller</title>
+    <jsp:include page="static/staticFiles.jsp"/>
 </head>
 <body>
 
@@ -62,7 +56,7 @@
                         </div>
                         <div class="col-md-3">
                             <form:form method="delete" action="carouselController/delete/${image.id}">
-                                <button type="submit" class="btn btn-primary"> <- Delete this image </button>
+                                <button type="submit" class="btn btn-primary"> <- Delete this image</button>
                             </form:form>
 
                         </div>
@@ -83,16 +77,15 @@
                         <div class="form-group">
                             <label>Add new Image</label>
                             <input type="file" name="file" class="form-control" accept="image/*">
+
                             <p>All images will be resized to 1500x430 resolution!</p>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form:form>
                 </div>
             </div>
-            <!-- /.row -->
         </div>
     </div>
-
 </div>
 
 <jsp:include page="static/footer.jsp" flush="true"/>

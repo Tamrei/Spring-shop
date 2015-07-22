@@ -14,9 +14,11 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private PurchaseService purchaseService;
+
     @RequestMapping(value = "cart")
     public String cartList(@ActiveUser User activeUser, ModelMap modelMap) {
-        //modelMap.addAttribute("cart", new Cart());
         modelMap.addAttribute("carts", cartService.getAllItemsInTheCart(activeUser.getUsername()));
 
         return "cart";
@@ -34,5 +36,10 @@ public class CartController {
         cartService.layOutItemFromCart(itemID);
 
         return "redirect:/cart";
+    }
+
+    @ModelAttribute
+    public void getAllAvailableCities(ModelMap modelMap) {
+        modelMap.addAttribute("availableCities", purchaseService.getAllAvailableCities());
     }
 }

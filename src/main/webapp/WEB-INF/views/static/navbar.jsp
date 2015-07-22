@@ -1,31 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <%@page session="true" %>
-<%@taglib prefix="sec"
-          uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
-    <style>
-        <%@ include file="/resources/css/bootstrap.css" %>
-        <%@ include file="/resources/css/custom.css" %>
-        <%@ include file="/resources/css/panel.css" %>
-    </style>
-
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/ajax.js" />"></script>
-
+    <script src="<c:url value="/resources/js/cartCount.js" />"></script>
 </head>
 <body>
 
 <sec:authorize access="isAuthenticated()">
     <script>
         $(document).ready(function () {
-            showCartCount('cartCount');
+            getCartCount('cartCount');
         });
     </script>
 </sec:authorize>
@@ -54,8 +45,10 @@
                         <li><a href="/carouselController">Carousel controller</a></li>
                         <li><a href="/addItem">Add new item</a></li>
                         <li><a href="/purchases">All orders</a></li>
+                        <li><a href="/city"> Available cities </a></li>
                         <li class="divider"></li>
                         <li><a href="/store">Store (alpha)</a></li>
+                        <li><a href="/statistic">Statistic (alpha)</a></li>
                     </ul>
                 </li>
             </sec:authorize>
@@ -64,7 +57,6 @@
         <ul class="nav navbar-nav navbar-right">
             <c:choose>
                 <c:when test="${empty pageContext.request.userPrincipal}">
-                    <!--<li role="presentation"><a href="/login"> You are not Authorized! Pls Login!</a></li>-->
                     <li role="presentation"><a data-toggle="modal" href="/registration">Registration</a></li>
                     <li role="presentation"><a data-toggle="modal" href="#login">Login</a></li>
                 </c:when>

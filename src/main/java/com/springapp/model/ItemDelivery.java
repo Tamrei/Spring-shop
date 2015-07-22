@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "itemdelivery")
-@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class ItemDelivery implements Serializable {
     @Id
     @GenericGenerator(name = "id_generator", strategy = "increment")
@@ -33,7 +33,6 @@ public class ItemDelivery implements Serializable {
     //@Temporal(TemporalType.TIME)
     @Column(name = "dateOfDelivery")
     private Date dateOfDelivery;
-
 
     public Date getDateOfDelivery() {
         return dateOfDelivery;
@@ -112,7 +111,6 @@ public class ItemDelivery implements Serializable {
                 "itemDeliveryID=" + itemDeliveryID +
                 ", itemID=" + itemID +
                 ", itemQuantity=" + itemQuantity +
-                ", item=" + item +
                 ", dateOfDelivery=" + dateOfDelivery +
                 '}';
     }

@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "customer")
-@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Customer implements Serializable {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
@@ -22,7 +22,7 @@ public class Customer implements Serializable {
     @Column(name="customerID")
     private long id;
 
-    @Column(name="username")
+    @Column(name="username", unique=true)
     @Size(min=1, max=20, message = "Invalid username")
     //@Pattern(regexp = "/ /g", message = "Username contains spaces")
     private String username;
@@ -152,14 +152,6 @@ public class Customer implements Serializable {
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 ", enabled=" + enabled +
-                ", carts=" + carts +
-                ", purchases=" + purchases +
                 '}';
-    }
-
-    //@PrePersist
-    protected void repair(){
-        System.out.println("=== Post Load ===");
-        //if(username != null) username = username.trim();
     }
 }

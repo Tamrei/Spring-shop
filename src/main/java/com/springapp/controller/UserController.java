@@ -36,15 +36,7 @@ public class UserController {
     @RequestMapping(value = "/enableDisableUser", method = RequestMethod.POST)
     public @ResponseBody
     String enableDisableUser(@RequestParam("userID") Integer id) {
-        //if (customerService.enableDisableCustomer(id)) {
-        //    return "true";
-        //}
-        //else return "false";
-
-        //return Bool.TRUE.toString();
-
         return customerService.enableDisableCustomer(id);
-
     }
 
 }

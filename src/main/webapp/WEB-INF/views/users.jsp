@@ -11,15 +11,7 @@
 <html>
 <head>
     <title>Users</title>
-    <style>
-        <%@ include file="../../resources/css/bootstrap.css" %>
-        <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/panel.css" %>
-    </style>
-
-    <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
-    <script src="<c:url value="/resources/js/search.js" />"></script>
+    <jsp:include page="static/staticFiles.jsp"/>
     <script src="<c:url value="/resources/js/view/user.js" />"></script>
 </head>
 <body>
@@ -40,9 +32,6 @@
                 </div>
             </div>
             <!-- Page Header -->
-
-            <input type="search" id="searchByUsername" class="form-control" style="margin-bottom:15px;"
-                   placeholder="Search by username" onkeyup="searchValue('#username', this.id)">
 
             <div class="table">
                 <table class="table table-curved table-hover">

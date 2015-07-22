@@ -1,6 +1,7 @@
 package com.springapp.controller;
 
 import com.springapp.service.CartService;
+import com.springapp.service.PurchaseService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+@ContextConfiguration(locations = {"file:src/main/resources/spring/root-context.xml"})
 public class TestCartController {
 
     private MockMvc mockMvc;
@@ -44,6 +45,10 @@ public class TestCartController {
     @Autowired
     @Mock
     private CartService cartService;
+
+    @Autowired
+    @Mock
+    private PurchaseService purchaseService;
 
     private TestingAuthenticationToken testingAuthenticationToken;
 

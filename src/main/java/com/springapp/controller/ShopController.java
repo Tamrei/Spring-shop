@@ -31,6 +31,9 @@ public class ShopController {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private HomePageImageService homePageImageService;
+
     @RequestMapping(value = "shop")
     public String itemsList(ModelMap modelMap) {
         modelMap.put("items", itemService.getAllAvailableItems());
@@ -68,5 +71,10 @@ public class ShopController {
         itemService.updateItem(item);
 
         return "redirect:/shop";
+    }
+
+    @ModelAttribute
+    public void getAllHomePageImages(ModelMap modelMap) {
+        modelMap.addAttribute("homePageImages", homePageImageService.getAllHomePageImages());
     }
 }

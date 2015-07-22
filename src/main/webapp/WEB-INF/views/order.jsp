@@ -11,14 +11,8 @@
 
 <html>
 <head>
-    <style>
-        <%@ include file="../../resources/css/bootstrap.css" %>
-        <%@ include file="../../resources/css/custom.css" %>
-        <%@ include file="../../resources/css/panel.css" %>
-    </style>
-    <script src="<c:url value="/resources/js/bootstrap.3.0.0.min.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
     <title>My purchase</title>
+    <jsp:include page="static/staticFiles.jsp"/>
 </head>
 
 <body>
@@ -43,7 +37,7 @@
                     <table class="table table-curved">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th></th>
                             <th>Item Name</th>
                             <th>Amount</th>
                             <th>Price</th>
@@ -83,36 +77,14 @@
                     </table>
                 </div>
 
-                <!--
-                <div class="table">
-                    <table class="table table-curved">
-                        <thead>
-                        <tr>
-                            <th>Address ID</th>
-                            <th>City</th>
-                            <th>Street</th>
-                            <th>Customer Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                <hr>
 
-                        <tr>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-                -->
             </div>
             <div class="col-md-3 sidebar" style="margin-top: 45px">
-                <h4> <strong> Address ID: </strong> ${address.addressID} </h4>
-                <h4> <strong> City: </strong> ${address.city}</h4>
-                <h4> <strong> Street: </strong> ${address.street}</h4>
-                <h4> <strong> Customer Name: </strong> ${address.ownerUsername}</h4>
+                <h4><strong> Address ID: </strong> ${address.addressID} </h4>
+                <h4><strong> City: </strong> ${address.city}</h4>
+                <h4><strong> Street: </strong> ${address.street}</h4>
+                <h4><strong> Customer Name: </strong> ${address.ownerUsername}</h4>
 
                 <h3 id="totalPrice" style="color: darkgreen"> Empty </h3>
                 <script>
