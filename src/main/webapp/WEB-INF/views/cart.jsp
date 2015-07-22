@@ -13,6 +13,7 @@
     <title> My Cart </title>
     <jsp:include page="static/staticFiles.jsp"/>
     <script src="<c:url value="/resources/js/validation/purchaseFormValidator.js" />"></script>
+    <script src="<c:url value="/resources/js/validation/validationMarkup.js" />"></script>
     <script src="<c:url value="/resources/js/view/cart.js" />"></script>
     <script>
         $(document).ready(function () {
@@ -23,7 +24,7 @@
             }
             else $('#invalidFormAlert').hide();
 
-            //validatePurchaseForm();
+            validatePurchaseForm();
         });
     </script>
 </head>
@@ -132,30 +133,24 @@
             var itemsLeftOnTheStore = ${purchase.key.leftOnStore};
             var isItemAvailable = ${purchase.key.available};
 
-            var i = itemsInTheCart - itemsLeftOnTheStore;
-
             var st = $("#st${purchase.key.itemID}");
 
             if (!isItemAvailable) {
                 $("#alert${purchase.key.itemID}").append("This item currently not available for purchase.");
-                $("#alert${purchase.key.itemID}").css("color", "#A94442");
-
-                $('#itemsNotAvailable').removeClass('hidden');
-
-                st.css("color", "rgb(169, 68, 66)").text("disabled");
-
+                setErrorMarkup();
                 isCartReadyForOrder = false;
             }
 
             else if (itemsInTheCart > itemsLeftOnTheStore) {
                 $("#alert${purchase.key.itemID}").append("Sorry but currently only have " + itemsLeftOnTheStore + " of this in our stock.");
-                $("#alert${purchase.key.itemID}").css("color", "#A94442");
-
-                $('#itemsOutOfStore').removeClass('hidden');
-
-                st.css("color", "rgb(169, 68, 66)").text("disabled");
-
+                setErrorMarkup();
                 isCartReadyForOrder = false;
+            }
+
+            function setErrorMarkup() {
+                $("#alert${purchase.key.itemID}").css("color", "#A94442");
+                $('#itemsOutOfStore').removeClass('hidden');
+                st.css("color", "rgb(169, 68, 66)").text("disabled");
             }
         </script>
         <!-- Check if items in the cart available for purchase -->
@@ -297,8 +292,6 @@
 </div>
 </div>
 </div>
-
-
 
 <jsp:include page="static/footer.jsp" flush="true"/>
 

@@ -6,7 +6,6 @@
 <%@ page session="true" %>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="datatables" uri="http://github.com/dandelion/datatables" %>
 
 <html>
 <head>

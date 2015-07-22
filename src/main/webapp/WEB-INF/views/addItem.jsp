@@ -8,6 +8,7 @@
     <title>Add new item</title>
     <jsp:include page="static/staticFiles.jsp"/>
     <script src="<c:url value="/resources/js/validation/addNewItemFormValidator.js" />"></script>
+    <script src="<c:url value="/resources/js/validation/validationMarkup.js" />"></script>
     <script>
         $(document).ready(function () {
             validateAddNewItemForm();

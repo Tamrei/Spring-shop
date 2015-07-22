@@ -106,17 +106,6 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-jdk14:1.7.7" />
           <element id="library" level="project" name="Maven: org.imgscalr:imgscalr-lib:4.2" />
           <element id="library" level="project" name="Maven: com.h2database:h2:1.4.187" />
-          <element id="library" level="project" name="Maven: com.github.dandelion:datatables-jsp:0.10.1" />
-          <element id="library" level="project" name="Maven: com.github.dandelion:datatables-core:0.10.1" />
-          <element id="library" level="project" name="Maven: com.github.dandelion:dandelion-core:0.10.1" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.3.1" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.1" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.3.1" />
-          <element id="library" level="project" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" />
-          <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
-          <element id="library" level="project" name="Maven: com.github.dandelion:dandelion-jsp:0.10.1" />
-          <element id="library" level="project" name="Maven: com.github.dandelion:datatables-export-itext:0.10.1" />
-          <element id="library" level="project" name="Maven: com.itextpdf:itextpdf:5.4.5" />
         </element>
       </element>
     </root>

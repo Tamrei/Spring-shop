@@ -385,7 +385,7 @@
         </dependency>
         <!-- -->
 
-        <!-- Datatables -->
+        <!-- Datatables
         <dependency>
             <groupId>com.github.dandelion</groupId>
             <artifactId>datatables-jsp</artifactId>
@@ -396,7 +396,7 @@
             <groupId>com.github.dandelion</groupId>
             <artifactId>datatables-export-itext</artifactId>
             <version>0.10.1</version>
-        </dependency>
+        </dependency> -->
 
     </dependencies>
 

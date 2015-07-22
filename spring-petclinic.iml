@@ -11,6 +11,7 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -21,6 +22,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
@@ -129,17 +131,6 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-jdk14:1.7.7" level="project" />
     <orderEntry type="library" name="Maven: org.imgscalr:imgscalr-lib:4.2" level="project" />
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.187" level="project" />
-    <orderEntry type="library" name="Maven: com.github.dandelion:datatables-jsp:0.10.1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.dandelion:datatables-core:0.10.1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.dandelion:dandelion-core:0.10.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.3.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.3.1" level="project" />
-    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
-    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
-    <orderEntry type="library" name="Maven: com.github.dandelion:dandelion-jsp:0.10.1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.dandelion:datatables-export-itext:0.10.1" level="project" />
-    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.4.5" level="project" />
   </component>
 </module>
 
