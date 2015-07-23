@@ -1,7 +1,7 @@
 
-CREATE DATABASE IF NOT EXISTS shop;
+CREATE DATABASE IF NOT EXISTS shop4;
 
-USE shop;
+USE shop4;
 
 CREATE TABLE IF NOT EXISTS `address` (
   `addressID`     INT(11) NOT NULL,
@@ -9,6 +9,11 @@ CREATE TABLE IF NOT EXISTS `address` (
   `city`          TEXT    NULL,
   `street`        TEXT    NULL,
   PRIMARY KEY (`addressID`)
+);
+
+CREATE TABLE `city` (
+  `id` INT(11) NULL DEFAULT NULL,
+  `cityName` TINYTEXT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `cart` (

@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "customer")
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Customer implements Serializable {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
@@ -29,12 +29,11 @@ public class Customer implements Serializable {
 
     @Column(name="password")
     @Size(min=1, max=20, message = "Invalid password")
-    //@Pattern(regexp = "/ /g")
     private String password;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private UserRoles role = UserRoles.USER;
+    private UserRoles role = UserRoles.ADMIN;
 
     @Column(name = "enabled")
     private boolean enabled = true;
@@ -73,10 +72,7 @@ public class Customer implements Serializable {
     }
 
     public void setUsername(String username) {
-        System.out.println("Set Username");
-
         this.username = username;
-        //this.username = StringTrimmer.Trim(username);
     }
 
     public String getPassword() {
@@ -84,12 +80,7 @@ public class Customer implements Serializable {
     }
 
     public void setPassword(String password) {
-
-        System.out.println("Set password");
-
-        //this.password = password;
-
-        this.password = StringTrimmer.TrimAll(password);
+        this.password = password;
     }
 
     public UserRoles getRole() {

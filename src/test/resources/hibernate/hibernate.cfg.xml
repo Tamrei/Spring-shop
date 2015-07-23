@@ -13,6 +13,7 @@
         <mapping class="com.springapp.model.Address"/>
         <mapping class="com.springapp.model.site.HomePageImage"/>
         <mapping class="com.springapp.model.ItemDelivery"/>
+        <mapping class="com.springapp.model.City"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -1,7 +1,5 @@
 function validatePurchaseForm() {
 
-    alert("WOW");
-
     var cityForm = $('#city-form');
     var isCityValid = false;
 

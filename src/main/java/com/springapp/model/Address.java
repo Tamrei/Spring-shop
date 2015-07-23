@@ -42,13 +42,13 @@ public class Address {
         this.city = city;
         this.street = street;
     }
-
+*/
     public Address(String ownerUsername, String city, String street) {
         this.ownerUsername = ownerUsername;
         this.city = city;
         this.street = street;
     }
-
+/*
     public Address(String city, String street) {
         this.city = city;
         this.street = street;

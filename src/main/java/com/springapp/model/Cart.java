@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "cart")
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Cart implements Serializable {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
