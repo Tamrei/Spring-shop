@@ -37,11 +37,11 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public void updateCity(City city) {
-
+        cityDAO.update(city);
     }
 
     @Override
     public void deleteCity(long id) {
-
+        cityDAO.delete(id);
     }
 }

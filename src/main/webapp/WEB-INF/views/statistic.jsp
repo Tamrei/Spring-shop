@@ -60,14 +60,15 @@
             <ul class="chart">
                 <li class="title" title=""><h3> Total purchases </h3></li>
                 <hr>
-                <c:forEach items="${sts}" var="st">
-                    <li class="past" title="${st.key}"><span class="bar" data-number="${st.value}"></span><span
-                            class="number">${st.value}</span></li>
+                <c:forEach items="${totalStatistic}" var="statistic">
+                    <li class="past" title="${statistic.key}"><span class="bar" data-number="${statistic.value}"></span><span
+                            class="number">${statistic.value}</span></li>
                 </c:forEach>
             </ul>
 
             <hr>
 
+            <!---
             <ul class="chart">
                 <li class="title" title=""><h3> City statistic </h3></li>
                 <hr>
@@ -76,6 +77,22 @@
                             class="number">${st.value}</span></li>
                 </c:forEach>
             </ul>
+
+            <hr>
+            -->
+            <c:forEach items="${citiesStatisticMap}" var="statisticList">
+                <ul class="chart">
+                    <li class="title" title=""><h3> ${statisticList.key} statistic </h3></li>
+                    <hr>
+                    <c:forEach items="${statisticList.value}" var="statistic">
+                        <li class="past" title="${statistic.key}"><span class="bar" data-number="${statistic.value}"></span><span
+                                class="number">${statistic.value}</span></li>
+                    </c:forEach>
+                </ul>
+
+                <hr>
+
+            </c:forEach>
 
         </div>
     </div>

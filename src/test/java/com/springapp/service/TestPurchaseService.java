@@ -41,7 +41,7 @@ public class TestPurchaseService {
 
     @Autowired
     private PurchaseService purchaseService;
-/*
+
     @Test
     @DatabaseSetup("classpath:/db/model/service/purchaseService/initialData.xml")
     @ExpectedDatabase("classpath:/db/model/service/purchaseService/expectedData_makePurchase.xml")
@@ -72,15 +72,4 @@ public class TestPurchaseService {
             assertEquals(entry.getKey().getItemID(), entry.getValue().getItemID());
         }
     }
-*/
-    /*
-    @Test
-    @DatabaseSetup("classpath:/db/model/service/statisticService/initialData.xml")
-    public void testStatisticService() {
-        Map<String, Integer> map = ;
-
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
-    }*/
 }

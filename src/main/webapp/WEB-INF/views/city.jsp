@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>All Purchases</title>
+    <title>Available Cities</title>
     <jsp:include page="static/staticFiles.jsp"/>
 </head>
 <body>

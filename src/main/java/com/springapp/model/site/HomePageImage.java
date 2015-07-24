@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "homepageimage")
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class HomePageImage implements Serializable {
 
     @Id

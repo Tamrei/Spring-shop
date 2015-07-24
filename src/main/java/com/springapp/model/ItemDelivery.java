@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "itemdelivery")
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class ItemDelivery implements Serializable {
     @Id
     @GenericGenerator(name = "id_generator", strategy = "increment")

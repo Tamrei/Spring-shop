@@ -35,13 +35,6 @@ public class Address {
 
     public Address() {
     }
-/*
-    public Address(long addressID, String ownerUsername, String city, String street) {
-        this.addressID = addressID;
-        this.ownerUsername = ownerUsername;
-        this.city = city;
-        this.street = street;
-    }
 
     public Address(String ownerUsername, String city, String street) {
         this.ownerUsername = ownerUsername;
@@ -49,11 +42,6 @@ public class Address {
         this.street = street;
     }
 
-    public Address(String city, String street) {
-        this.city = city;
-        this.street = street;
-    }
-*/
     public long getAddressID() {
         return addressID;
     }

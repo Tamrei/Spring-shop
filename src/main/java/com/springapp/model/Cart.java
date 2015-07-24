@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "cart")
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="yourEntityCache")
 public class Cart implements Serializable {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
@@ -52,19 +52,7 @@ public class Cart implements Serializable {
         this.ownerUsername = ownerUsername;
         this.amount = amount;
     }
-    /*
-        public Cart(long itemID, String ownerUsername) {
-            this.itemID = itemID;
-            this.ownerUsername = ownerUsername;
-        }
 
-        public Cart(long itemID, String ownerUsername, Long purchaseID, long amount) {
-            this.itemID = itemID;
-            this.ownerUsername = ownerUsername;
-            this.purchaseID = purchaseID;
-            this.amount = amount;
-        }
-    */
     public long getCartID() {
         return cartID;
     }

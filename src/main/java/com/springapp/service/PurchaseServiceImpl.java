@@ -53,7 +53,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         Map<Item, Cart> map = new HashMap<Item, Cart>();
 
         for (Cart cart : cartDAO.getCartsForPurchase(cartID)) {
-            Item item = (Item) itemDAO.getByID(cart.getItemID());
+            Item item = itemDAO.getByID(cart.getItemID());
             map.put(item, cart);
         }
 
@@ -128,7 +128,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     /**
-     * This method change purchase status
+     * This method change purchase status.
      *
      * @param purchaseID of purchase to change
      * @param status     that we want to set
@@ -136,10 +136,6 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @Transactional
     public void changePurchaseStatus(long purchaseID, String status) {
-        //if (status.isEmpty()) {
-        //    throw new IllegalArgumentException("Status is empty.");
-        //}
-
         Purchase purchase = (Purchase) purchaseDAO.get(purchaseID);
         purchase.setStatus(PurchaseStatus.valueOf(status));
         purchaseDAO.update(purchase);
