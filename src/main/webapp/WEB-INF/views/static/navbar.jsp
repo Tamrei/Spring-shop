@@ -98,8 +98,13 @@
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary"> Submit </button>
 
+                    <input type='hidden' name='spring-security-redirect' value='${params['spring-security-redirect']}'/>
+
+                    <!--
                     <input type="hidden" name="${_csrf.parameterName}" class="btn btn-primary"
                            value="${_csrf.token}"/>
+                           -->
+
 
                     <a href="/registration" class="btn btn-link"> Don't have account? Registration </a>
                 </form>

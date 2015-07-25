@@ -16,22 +16,15 @@
         <intercept-url pattern="/addItem" access="isAuthenticated()" />
         <intercept-url pattern="/purchases" access="isAuthenticated()" />
         <intercept-url pattern="/users" access="isAuthenticated()" />
-
         <intercept-url pattern="/static/navbar" access="isAuthenticated()" />
         <intercept-url pattern="/cartCount" access="isAuthenticated()" />
-
         <intercept-url pattern="/myPurchases" access="isAuthenticated()" />
-
         <intercept-url pattern="putItemInTheCart" access="isAuthenticated()" />
-        <!--<intercept-url pattern="/shop" access="isAuthenticated()" />-->
-
         <access-denied-handler error-page="/login?denied"/>
-
 
 
         <form-login
                 login-page="/login"
-                default-target-url="/shop"
                 authentication-failure-url="/login?error"
                 username-parameter="username"
                 password-parameter="password" />
