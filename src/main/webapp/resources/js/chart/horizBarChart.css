@@ -41,7 +41,7 @@
 }
 
 .chart li .number {
-    color: darkgreen;
+    color: #494949;
     font-size: 18px;
     font-weight: bold;
     padding-left: 5px;
@@ -50,11 +50,14 @@
 }
 
 .chart li.past .bar {
-    background: #aaa
+    background: #4cae4c;
+    border-color: #4cae4c;
+    border-radius: 2px;
 }
 
 .chart li.past .number {
-    color: #aaa
+    /*color: #aaa*/
+    color: #494949;
 }
 
 @media screen and (max-width: 480px) {

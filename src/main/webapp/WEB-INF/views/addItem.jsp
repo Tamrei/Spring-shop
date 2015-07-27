@@ -40,6 +40,24 @@
             </div>
         </c:if>
 
+        <c:if test="${not empty warning}">
+            <div class="bs-example">
+                <div class="alert alert-warning">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Error!</strong> <c:out value="${warning}"/>
+                </div>
+            </div>
+        </c:if>
+
+        <c:if test="${not empty success}">
+            <div class="bs-example">
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Error!</strong> <c:out value="${success}"/>
+                </div>
+            </div>
+        </c:if>
+
         <div class="panel">
 
             <div class="panel-heading">
@@ -81,6 +99,8 @@
                         <label class="control-label" for="image" id="image-label">Item Image:</label>
                         <input type="file" name="file" class="form-control" accept="image/*" id="image">
                     </div>
+
+                    <hr>
 
                     <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
                 </form:form>

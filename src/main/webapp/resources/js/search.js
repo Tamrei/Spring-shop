@@ -14,7 +14,6 @@ $("#s").keyup(function () {
 */
 /*
 function searchValue(value, id) {
-    alert("+++");
     var regex = new RegExp($("#" + id).val(), "i");
     var rows = $('tr:gt(0)'); //old version
     //var rows = $('.type:gt(0)');
@@ -28,3 +27,15 @@ function searchValue(value, id) {
     });
 }
 */
+
+
+/*
+
+ var rows = $('div.type');
+
+ $("#searchBar").children().click(function () {
+ var col = $(this).text();
+ var ww = rows.filter("#" + col).show();
+ rows.not(ww).hide();
+
+ */

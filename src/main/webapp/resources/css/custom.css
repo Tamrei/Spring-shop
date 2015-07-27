@@ -1,5 +1,6 @@
 body {
-    background-color: /*#8998B1;*/ #ededed;
+    background-color:  #ededed;
+    background-image: url("http://www.solutiisoft.com/bootstrap-sidebar/public/img/bg.png");
 }
 
 /** out custom table **/
@@ -49,10 +50,6 @@ body {
 
 
 
-
-
-
-
 #footer {
     color: #6d6d6d;
     font-size: 12px;
@@ -69,7 +66,7 @@ body {
 /** DELETE **/
 
 img {
-    border-radius: 2px;
+    border-radius: 1px;
 }
 
 .table {
@@ -90,7 +87,18 @@ img {
 
 
 
+.list-group-item {
+    border: none;
+    border-radius: 0;
+}
 
+.btn {
+    border-radius: 3px;
+}
+
+.list-group {
+    border-radius: 0;
+}
 
 
 

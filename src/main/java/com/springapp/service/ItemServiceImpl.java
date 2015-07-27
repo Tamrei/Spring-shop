@@ -96,28 +96,6 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
-    /**
-     * Enable or disable item.
-     *
-     * @param id of item
-     * @return the value that will be set
-     */
-    //@Override
-    @Transactional
-    public boolean enableDisableItem2(long id) {
-        boolean isGonnaBeEnabled;
-        Item item = itemDAO.getByID(id);
-
-        if (item.isAvailable()) {
-            item.setAvailable(false);
-            isGonnaBeEnabled = false;
-        } else {
-            item.setAvailable(true);
-            isGonnaBeEnabled = true;
-        }
-        return isGonnaBeEnabled;
-    }
-
     @Override
     @Transactional
     public List<Item> getAllItems() {

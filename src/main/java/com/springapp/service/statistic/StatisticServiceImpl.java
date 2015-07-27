@@ -5,16 +5,14 @@ import com.springapp.dao.ItemDAO;
 import com.springapp.dao.generic.GenericDAO;
 import com.springapp.model.Cart;
 import com.springapp.model.City;
-import com.springapp.model.Item;
-import com.springapp.model.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -29,52 +27,44 @@ public class StatisticServiceImpl implements StatisticService {
     @Autowired
     private GenericDAO cityDAO;
 
+    /**
+     *
+     * @return map of total purchase static for all items
+     * where Key is itemName and Value is purchase count
+     */
     @Override
     @Transactional
     public Map<String, Long> getTotalPurchaseStatistic() {
-        List<Cart> carts = cartDAO.getAllPurchasedCart();
-        Map<String, Long> map = new HashMap<String, Long>();
-
-        for(Cart cart : carts) {
-            String itemName = itemDAO.getByID(cart.getItemID()).getItemName();
-            Long count = map.get(itemName);
-            map.put(itemName, (count == null) ? cart.getAmount() : cart.getAmount() + count);
-        }
-        return map;
+        return getStatistic(cartDAO.getAllPurchasedCart(), (c) -> true);
     }
-/*
-    @Override
-    @Transactional
-    public Map<String, Long> getPurchaseStatisticForAllCities() {
-        List<Cart> carts = cartDAO.getAllPurchasedCart();
-        Map<String, Long> map = new HashMap<String, Long>();
 
-        for(Cart cart : carts) {
-            String city = cart.getPurchase().getAddress().getCity();
-            Long count = map.get(city);
-            map.put(city, (count == null) ? cart.getAmount() : cart.getAmount() + count);
-        }
-        return map;
-    }
-*/
+    /**
+     *
+     * @return map of purchase statistic for each city
+     * where Key is a city name and Value is a map
+     * where Key is itemName and Value is purchase count
+     */
     @Override
     @Transactional
     public Map<String, Map<String, Long>> getStatisticsForAllCities() {
-        Map<String, Map<String, Long>> mapList = new HashMap<String, Map<String, Long>>();
+        Map<String, Map<String, Long>> mapList = new HashMap<>();
         List<City> cities = cityDAO.getAll();
 
         for (City city : cities) {
-            mapList.put(city.getCityName(), getTotalPurchaseRatio(city.getCityName()));
+            String cityName = city.getCityName();
+            mapList.put(cityName, getStatistic(cartDAO.getAllPurchasedCart(), (c) -> c.getPurchase()
+                    .getAddress()
+                    .getCity().equals(cityName)));
         }
         return mapList;
     }
 
-    private Map<String, Long> getTotalPurchaseRatio(String cityName) {
-        List<Cart> carts = cartDAO.getAllPurchasedCart();
-        Map<String, Long> map = new HashMap<String, Long>();
+    @Transactional
+    private Map<String, Long> getStatistic(List<Cart> carts, Predicate<Cart> selector) {
+        Map<String, Long> map = new HashMap<>();
 
-        for(Cart cart : carts) {
-            if(cart.getPurchase().getAddress().getCity().equals(cityName)) {
+        for (Cart cart : carts) {
+            if (selector.test(cart)) {
                 String itemName = itemDAO.getByID(cart.getItemID()).getItemName();
                 Long count = map.get(itemName);
                 map.put(itemName, (count == null) ? cart.getAmount() : cart.getAmount() + count);

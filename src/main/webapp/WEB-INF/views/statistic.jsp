@@ -81,6 +81,7 @@
             <hr>
             -->
             <c:forEach items="${citiesStatisticMap}" var="statisticList">
+                <c:if test="${not empty statisticList.value}">
                 <ul class="chart">
                     <li class="title" title=""><h3> ${statisticList.key} statistic </h3></li>
                     <hr>
@@ -91,7 +92,7 @@
                 </ul>
 
                 <hr>
-
+                </c:if>
             </c:forEach>
 
         </div>

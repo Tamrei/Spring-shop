@@ -2,9 +2,6 @@ package com.springapp.controller;
 
 import com.springapp.model.Item;
 import com.springapp.service.ItemService;
-import com.springapp.util.ImageResizer;
-import com.springapp.util.ImageResizerImpl;
-import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,22 +26,28 @@ public class AddItemController {
         return new Item();
     }
 
-    @RequestMapping(value="createItem", method = RequestMethod.POST)
+    @RequestMapping(value = "createItem", method = RequestMethod.POST)
     public ModelAndView createItem(@ModelAttribute("item") @Valid Item item, BindingResult result,
-                             @RequestParam("file") MultipartFile file) {
-        if(result.hasErrors()) {
-            return new ModelAndView("redirect:/addItem", "invalidInputData", "Woops! seams like you have some errors!");
+                                   @RequestParam("file") MultipartFile file) {
+        if (result.hasErrors()) {
+            return new ModelAndView("addItem", "invalidInputData", "Woops! seams like you have some errors!");
         }
 
         try {
             itemService.addItemAndResizeImage(item, file.getBytes(), 240, 150);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        catch (NullPointerException e) {
-            return new ModelAndView("redirect:/addItem", "notAnImage", "Woops! seams like it's not an image!");
+        } catch (NullPointerException e) {
+            return new ModelAndView("addItem", "notAnImage", "Woops! seams like it's not an image!");
         }
 
-        return new ModelAndView("redirect:/shop");
+        if (item.getLeftOnStore() == 0) {
+            return new ModelAndView("addItem", "warning", "Your added item have a default value for " +
+                    "'leftOnStore' param in order to make this item available for purchase you need " +
+                    "to manually add delivery for this item and enable  it on storage page!");
+        } else {
+            return new ModelAndView("addItem", "success", "Your item successfully " +
+                    "added and available for purchase!");
+        }
     }
 }

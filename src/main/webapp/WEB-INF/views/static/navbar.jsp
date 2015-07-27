@@ -30,7 +30,8 @@
 
         <ul class="nav navbar-nav">
             <!-- Popover -->
-            <li role="presentation"><a href="/cart" id="navCart" data-original-title="" data-content="" data-placement="bottom" rel="popover">Cart <sec:authorize access="isAuthenticated()"> <span
+            <li role="presentation"><a href="/cart" id="navCart" data-original-title="" data-content="" data-placement="bottom" rel="popover">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Cart <sec:authorize access="isAuthenticated()"> <span
                     class="badge" id="cartCount"> </span> </sec:authorize> </a></li>
             <!-- Popover -->
 
@@ -40,7 +41,7 @@
 
             <sec:authorize access="hasRole('ADMIN')">
                 <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Admin tools <b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-wrench"></span> Admin tools <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="/carouselController">Carousel controller</a></li>
                         <li><a href="/addItem">Add new item</a></li>
@@ -61,7 +62,7 @@
                     <li role="presentation"><a data-toggle="modal" href="#login">Login</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li role="presentation"><a href="#"> Hi, ${pageContext.request.userPrincipal.name} </a></li>
+                    <li role="presentation"><a href="#"> <span class="glyphicon glyphicon-user"></span>  Hi, ${pageContext.request.userPrincipal.name} </a></li>
                     <li role="presentation"><a href="<c:url value="j_spring_security_logout"/>"> Logout </a></li>
                 </c:otherwise>
             </c:choose>

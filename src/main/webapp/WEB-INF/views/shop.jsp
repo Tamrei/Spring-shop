@@ -11,6 +11,18 @@
 <head>
     <title> Shop </title>
     <jsp:include page="static/staticFiles.jsp"/>
+    <style>
+        .list-group-item {
+            border-radius: 0px;
+            border: none;
+        }
+        #searchBar h4 {
+            margin-bottom: 3px;
+            margin-top: 3px;
+            font-size: 15px;
+        }
+
+    </style>
     <script src="<c:url value="/resources/js/view/shop.js" />"></script>
     <script>
         $(document).ready(function () {
@@ -21,10 +33,6 @@
     </script>
 </head>
 <body>
-
-<script>
-
-</script>
 
 <div class="container">
 
@@ -68,7 +76,7 @@
 </div>
 <!-- Carousel -->
 
-<div class="panel" style="margin-top: 20px; padding-top: 1%;">
+<div class="panel">
     <div class="panel-body">
 
         <!-- Page Header -->
@@ -79,19 +87,19 @@
         </div>
         <!-- Page Header -->
 
-        <div class="col-md-2 sidebar" style="padding-right: 15px;">
+        <div class="col-md-2 sidebar" style="padding-right: 0px; padding-left: 0px;">
             <div class="list-group" id="searchBar">
-                <a href="#" class="list-group-item active" id="All">All</a>
-                <a href="#" class="list-group-item" id="Fruit">Fruit</a>
-                <a href="#" class="list-group-item" id="Drink">Drink</a>
-                <a href="#" class="list-group-item" id="Vegetables">Vegetables</a>
-                <a href="#" class="list-group-item" id="Diary-products">Dairy-products</a>
-                <a href="#" class="list-group-item" id="Chocolate">Chocolate</a>
-                <a href="#" class="list-group-item" id="Chips">Chips</a>
+                <a href="#" class="list-group-item active" id="All"><h4>All</h4></a>
+                <a href="#" class="list-group-item" id="Fruit"><h4 id>Fruit</h4></a>
+                <a href="#" class="list-group-item" id="Drink"><h4>Drink</h4></a>
+                <a href="#" class="list-group-item" id="Vegetables"><h4>Vegetables</h4></a>
+                <a href="#" class="list-group-item" id="Diary-products"><h4>Dairy-products</h4></a>
+                <a href="#" class="list-group-item" id="Chocolate"><h4>Chocolate</h4></a>
+                <a href="#" class="list-group-item" id="Chips"><h4>Chips</h4></a>
             </div>
         </div>
 
-        <div class="col-md-10 content">
+        <div class="col-md-10 content" style="padding-right: 0px;">
 
             <div class="row">
                 <c:forEach items="${items}" var="item">
@@ -102,7 +110,7 @@
 
                                 <div class="caption">
                                     <h4 class="pull-right">$${item.price}</h4>
-                                    <h4 id="itemName">${item.itemName}</h4>
+                                    <h4 class="itemName" id="itemName">${item.itemName}</h4>
 
                                     <p>
                                         <c:choose>

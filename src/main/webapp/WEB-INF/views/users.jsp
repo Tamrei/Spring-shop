@@ -87,7 +87,7 @@
                                         <c:otherwise>
                                             <div class="dropdown">
                                                 <button class="btn btn-default dropdown-toggle" type="button"
-                                                        data-toggle="dropdown"> Options
+                                                        data-toggle="dropdown"> <span class="glyphicon glyphicon-cog"></span> Options
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
                                                     <li onclick="deleteUser(${user.id})"><a href="#">Delete</a></li>

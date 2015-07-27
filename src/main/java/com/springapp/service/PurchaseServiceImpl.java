@@ -75,7 +75,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     /**
      * This method purchases all items which are located in this customer cart.
      *
-     * Carts without purchase id are considered as a not purchased and only them will be
+     * Carts without purchase id are considered as a not purchased.
      *
      * @param address      that is associated with the order
      * @param customerName username of order owner

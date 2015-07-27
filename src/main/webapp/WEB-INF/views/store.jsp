@@ -32,9 +32,6 @@
 </div>
 <!-- Page Header -->
 
-<input type="search" id="searchByItemName" class="form-control" style="margin-bottom:15px;"
-       placeholder="Search by item name" onkeyup="searchValue('#itemName', this.id)">
-
 <!-- Table -->
 <c:forEach items="${items}" var="item">
     <div class="panel panel-default" id="pnl${item.itemID}">
@@ -117,15 +114,15 @@
                 </div>
 
                 <div class="modal-body">
-                    <p><strong>If you enable item</strong> that mean that item can be available for
+                    <p><strong>If you enable item</strong> that mean that this item will be available for
                         purchase. </p>
 
-                    <p><strong>If you disable item</strong> that mean that item will be not available for
-                        purchase as long as it not ... </p>
+                    <p><strong>If you disable item</strong> that mean that this item will be not available for
+                        purchase. </p>
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
                             onclick="enableDisableItem(${item.itemID})">Enable
                     </button>
 
