@@ -53,13 +53,13 @@
 <img src="http://i.imgur.com/HVN9Dyo.jpg">
 
 ```
-	7) Statistic page.
+	8) Statistic page.
 ```
 
 <img src="http://i.imgur.com/csMxwLD.jpg">
 
 ```
-	7) storage (admin) page.
+	9) storage (admin) page.
 ```
 
 <img src="http://i.imgur.com/dNR8mUp.jpg">
