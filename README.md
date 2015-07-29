@@ -13,7 +13,6 @@
 	1) Shop (main) page.
 ```
 
-
-<img src="http://imgur.com/8GYRARZ,jpg">
+<img src="http://imgur.com/8GYRARZ.jpg">
 
 <img src="http://imgur.com/9lHpvMq.jpg">
