@@ -57,3 +57,9 @@
 ```
 
 <img src="http://i.imgur.com/csMxwLD.jpg">
+
+```
+	7) storage (admin) page.
+```
+
+<img src="http://i.imgur.com/dNR8mUp.jpg">
