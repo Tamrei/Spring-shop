@@ -27,7 +27,19 @@
 
 
 ```
-	3) User (admin) page.
+	4) User (admin) page.
 ```
 
 <img src="http://i.imgur.com/obVwrGM.jpg">
+
+```
+	5) All purchases (admin) page.
+```
+
+<img src="http://i.imgur.com/znJXGrU.jpg">
+
+```
+	6) Home page image controller (admin) page.
+```
+
+<img src="http://i.imgur.com/UbJiRBe.jpg">
