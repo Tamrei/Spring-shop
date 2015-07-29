@@ -9,4 +9,10 @@
 
 <img src="http://i.imgur.com/EUTSDg6.jpg">
 
+```
+	1) Shop (main) page.
+```
 
+<img src="http://imgur.com/8GYRARZ">
+
+<img src="http://imgur.com/9lHpvMq">
