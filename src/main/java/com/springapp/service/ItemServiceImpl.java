@@ -33,7 +33,7 @@ public class ItemServiceImpl implements ItemService {
      * This method creates new cart entity or update existing one that is associated with customer.
      *
      * New cart will be create only if customer don't have not ordered cart with same item (itemID).
-     * Otherwise if customer have not ordered cart with same item,
+     * if customer have not ordered cart with same item,
      * the existing cart's amount will be increased by @param amount.
      *
      * @param itemID       id of the item that was bought
@@ -58,6 +58,9 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Add new item in to the shop and resize it.
+     *
+     * set item status to true (enable) only if
+     * param leftOnStore is greater than 0
      *
      * @param item   item entity that we want to add
      * @param image  image to resize
@@ -84,15 +87,14 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     @Transactional
-    public String enableDisableItem(long id) {
+    public boolean enableDisableItem(long id) {
         Item item = itemDAO.getByID(id);
-
         if (item.isAvailable()) {
             item.setAvailable(false);
-            return "false";
+            return false;
         } else {
             item.setAvailable(true);
-            return "true";
+            return true;
         }
     }
 

@@ -36,7 +36,7 @@ public class UserController {
     @RequestMapping(value = "/enableDisableUser", method = RequestMethod.POST)
     public @ResponseBody
     String enableDisableUser(@RequestParam("userID") Integer id) {
-        return customerService.enableDisableCustomer(id);
+        return Boolean.toString(customerService.enableDisableCustomer(id));
     }
 
 }

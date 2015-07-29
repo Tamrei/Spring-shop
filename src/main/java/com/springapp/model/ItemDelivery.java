@@ -30,7 +30,6 @@ public class ItemDelivery implements Serializable {
     @JoinColumn(name = "itemID", insertable = false, updatable = false)
     private Item item;
 
-    //@Temporal(TemporalType.TIME)
     @Column(name = "dateOfDelivery")
     private Date dateOfDelivery;
 

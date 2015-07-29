@@ -274,6 +274,7 @@ th {
     url('/resources/css/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
     url('/resources/css/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
+
 .glyphicon {
     position: relative;
     top: 1px;

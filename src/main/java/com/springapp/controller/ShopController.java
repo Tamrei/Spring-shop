@@ -7,7 +7,6 @@ import com.springapp.service.CartService;
 import com.springapp.service.ItemService;
 import com.springapp.service.site.HomePageImageService;
 import com.springapp.service.site.HomePageImageServiceImpl;
-import com.springapp.util.CourierTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.User;

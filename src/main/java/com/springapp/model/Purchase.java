@@ -16,7 +16,6 @@ public class Purchase implements Serializable {
     @Id
     @GenericGenerator(name = "test", strategy = "increment")
     @GeneratedValue(generator = "test")
-    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "purchaseID")
     private long purchaseID;
 

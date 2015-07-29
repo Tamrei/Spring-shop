@@ -1,7 +1,7 @@
 
-CREATE DATABASE IF NOT EXISTS shop4;
+CREATE DATABASE IF NOT EXISTS grocery;
 
-USE shop4;
+USE grocery;
 
 CREATE TABLE IF NOT EXISTS `address` (
   `addressID`     INT(11) NOT NULL,

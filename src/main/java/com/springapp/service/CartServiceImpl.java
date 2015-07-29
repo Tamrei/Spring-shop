@@ -3,7 +3,6 @@ package com.springapp.service;
 import com.springapp.dao.CartDAO;
 import com.springapp.dao.generic.GenericDAO;
 import com.springapp.model.*;
-import com.springapp.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,7 @@ public class CartServiceImpl implements CartService {
     @Override
     @Transactional
     public Map<Item, Cart> getAllItemsInTheCart(String customerName) {
-        Map<Item, Cart> map = new HashMap<>();
+        Map<Item, Cart> map = new HashMap<Item, Cart>();
 
         for (Cart cart : cartDAO.getNotOrderedCartByCustomerName(customerName)) {
             Item item = (Item) itemDAO.get(cart.getItemID());

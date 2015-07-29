@@ -17,7 +17,7 @@ public interface ItemService {
     public void updateItem(Item item);
     public void deleteItem(long id);
 
-    public String enableDisableItem(long id);
+    public boolean enableDisableItem(long id);
     public void putItemInCart(long itemID, String customerName, long amount);
     public void addItemAndResizeImage(Item item, byte[] image, int width, int height) throws IOException;
 }

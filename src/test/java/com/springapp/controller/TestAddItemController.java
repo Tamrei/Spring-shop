@@ -67,7 +67,7 @@ public class TestAddItemController {
                 .param("price", "999"))
                 //.andExpect(status().isOk())
                 .andExpect(model().hasNoErrors())
-                .andExpect(redirectedUrl("/shop"));
+                .andExpect(forwardedUrl("/WEB-INF/views/addItem.jsp"));
 
         verify(itemService).addItemAndResizeImage(item, file.getBytes(), 240, 150);
 

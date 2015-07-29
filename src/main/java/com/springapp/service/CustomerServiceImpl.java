@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @return returns status that will be set.
      * as example: if customer currently disable(false) set his status to enabled(true) and return true.
      */
-    /*
+
     @Override
     @Transactional
     public boolean enableDisableCustomer(long id) {
@@ -50,20 +50,6 @@ public class CustomerServiceImpl implements CustomerService {
         } else {
             customer.setEnabled(true);
             return true;
-        }
-    }
-    */
-
-    @Override
-    @Transactional
-    public String enableDisableCustomer(long id) {
-        Customer customer = customerDAO.getByID(id);
-        if (customer.isEnabled()) {
-            customer.setEnabled(false);
-            return "false";
-        } else {
-            customer.setEnabled(true);
-            return "true";
         }
     }
 
@@ -77,9 +63,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public void registerNewCustomer(Customer customer) throws UserAlreadyExistsException {
         List<Customer> customerList = customerDAO.getAllCustomers();
-        for (Customer customers : customerList) {
-            if (customer.getUsername().equals(customers.getUsername())) {
-                throw new UserAlreadyExistsException();
+        for (Customer existingCustomer : customerList) {
+            String customerUsername = customer.getUsername();
+            if (customerUsername.equals(existingCustomer.getUsername())) {
+                throw new UserAlreadyExistsException(customerUsername);
             }
         }
         customerDAO.addCustomer(customer);

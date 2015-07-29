@@ -1,6 +1,5 @@
 package com.springapp.model;
 
-import com.springapp.util.StringTrimmer;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;

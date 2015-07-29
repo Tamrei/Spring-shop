@@ -42,7 +42,7 @@ public class StorageController {
     @RequestMapping(value = "/enableDisableItem", method = RequestMethod.POST)
     public @ResponseBody
     String enableDisableItem (@RequestParam("itemID") Integer id) {
-        return itemService.enableDisableItem(id);
+        return Boolean.toString(itemService.enableDisableItem(id));
     }
 
     @RequestMapping(value = "/enableDisableItem/{itemID}", method = RequestMethod.POST)

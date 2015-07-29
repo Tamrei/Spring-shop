@@ -28,7 +28,6 @@ public class StatisticServiceImpl implements StatisticService {
     private GenericDAO cityDAO;
 
     /**
-     *
      * @return map of total purchase static for all items
      * where Key is itemName and Value is purchase count
      */
@@ -39,7 +38,6 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     /**
-     *
      * @return map of purchase statistic for each city
      * where Key is a city name and Value is a map
      * where Key is itemName and Value is purchase count
