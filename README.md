@@ -51,3 +51,9 @@
 ```
 
 <img src="http://i.imgur.com/HVN9Dyo.jpg">
+
+```
+	7) Statistic page.
+```
+
+<img src="http://i.imgur.com/csMxwLD.jpg">
