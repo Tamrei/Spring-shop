@@ -16,3 +16,11 @@
 <img src="http://imgur.com/8GYRARZ.jpg">
 
 <img src="http://imgur.com/9lHpvMq.jpg">
+
+
+```
+	1) User cart page.
+```
+<img src="http://i.imgur.com/IAZJjQY.jpg">
+
+<img src="http://i.imgur.com/LScvKz0.jpg">
