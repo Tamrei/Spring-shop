@@ -10,7 +10,7 @@
 <img src="http://i.imgur.com/EUTSDg6.jpg">
 
 ```
-	1) Shop (main) page.
+	2) Shop (main) page.
 ```
 
 <img src="http://imgur.com/8GYRARZ.jpg">
@@ -19,8 +19,15 @@
 
 
 ```
-	1) User cart page.
+	3) User cart page.
 ```
 <img src="http://i.imgur.com/IAZJjQY.jpg">
 
 <img src="http://i.imgur.com/LScvKz0.jpg">
+
+
+```
+	3) User (admin) page.
+```
+
+<img src="http://i.imgur.com/obVwrGM.jpg">
