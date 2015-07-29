@@ -33,13 +33,21 @@
 <img src="http://i.imgur.com/obVwrGM.jpg">
 
 ```
-	5) All purchases (admin) page.
+	5) Purchases (admin) page.
 ```
 
 <img src="http://i.imgur.com/znJXGrU.jpg">
+
+<img src="http://i.imgur.com/Nkfihf3.jpg">
 
 ```
 	6) Home page image controller (admin) page.
 ```
 
 <img src="http://i.imgur.com/UbJiRBe.jpg">
+
+```
+	7) Add new item (admin) page.
+```
+
+<img src="http://i.imgur.com/HVN9Dyo.jpg">
