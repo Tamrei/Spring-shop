@@ -44,11 +44,4 @@ public class StorageController {
     String enableDisableItem (@RequestParam("itemID") Integer id) {
         return Boolean.toString(itemService.enableDisableItem(id));
     }
-
-    @RequestMapping(value = "/enableDisableItem/{itemID}", method = RequestMethod.POST)
-    public String enableDisableItem2(@PathVariable("itemID") Integer id) {
-        itemService.enableDisableItem(id);
-
-        return "redirect:/store";
-    }
 }
