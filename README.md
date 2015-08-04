@@ -1,6 +1,6 @@
 # Spring-shop
 
-Technologies: Java 8, Spring, Hibernate, JSP/JSTL, MySQL,
+##Technologies: Java 8, Spring, Hibernate, JSP/JSTL, MySQL,
 Bootstrap, JQuery, AJAX, JUnit, Mockito, Maven.
 
 <a href="http://grocerystore-webgrocerystore.rhcloud.com/"> <h3> Demo </h3> </a>
