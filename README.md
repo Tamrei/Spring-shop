@@ -1,8 +1,14 @@
 # Spring-shop
 
+<h2> Web grocery store with storage managment and statistic system. </h2>
+
+###Technologies: Java 8, Spring, Hibernate, JSP/JSTL, MySQL, Bootstrap, JQuery, AJAX, JUnit, Mockito, Maven
+
+
+
 <a href="http://grocerystore-webgrocerystore.rhcloud.com/"> <h3> Demo </h3> </a>
 
-## Web grocery store with all needed features and more.
+
 ```
 	1) Registration page.
 ```
