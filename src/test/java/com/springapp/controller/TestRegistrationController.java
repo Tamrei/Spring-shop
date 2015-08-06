@@ -72,7 +72,7 @@ public class TestRegistrationController {
                 .param("username", "TestUserExist49")
                 .param("password", "1")
                 .param("role", "USER"))
-                .andExpect(model().attributeExists("userExist"))
+                .andExpect(model().attributeExists("error"))
                 .andExpect(forwardedUrl("/WEB-INF/views/registration.jsp"));
 
         verify(customerService, times(1)).registerNewCustomer(new Customer("TestUserExist49", "1", UserRoles.USER));
@@ -84,7 +84,7 @@ public class TestRegistrationController {
                 .param("username", "")
                 .param("password", ""))
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("someError"))
+                .andExpect(model().attributeExists("error"))
                 .andExpect(forwardedUrl("/WEB-INF/views/registration.jsp"));
 
         verify(customerService, never()).registerNewCustomer(new Customer("", "", UserRoles.USER));

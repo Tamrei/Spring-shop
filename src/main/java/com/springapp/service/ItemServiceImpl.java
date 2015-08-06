@@ -26,9 +26,6 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private CartDAO cartDAO;
 
-    @Autowired
-    private ImageResizer imageResizer;
-
     /**
      * This method creates new cart entity or update existing one that is associated with customer.
      *
@@ -75,7 +72,7 @@ public class ItemServiceImpl implements ItemService {
             item.setAvailable(true);
         }
 
-        item.setImage(imageResizer.resizeImage(image, width, height));
+        item.setImage(ImageResizer.resizeImage(image, width, height));
         itemDAO.addItem(item);
     }
 
@@ -83,7 +80,7 @@ public class ItemServiceImpl implements ItemService {
      * Enable or disable item.
      *
      * @param id of item
-     * @return the value that will be set
+     * @return boolean value that will be set
      */
     @Override
     @Transactional
@@ -92,10 +89,10 @@ public class ItemServiceImpl implements ItemService {
         if (item.isAvailable()) {
             item.setAvailable(false);
             return false;
-        } else {
-            item.setAvailable(true);
-            return true;
         }
+
+        item.setAvailable(true);
+        return true;
     }
 
     @Override

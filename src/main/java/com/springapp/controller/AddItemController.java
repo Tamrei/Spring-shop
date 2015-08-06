@@ -30,24 +30,26 @@ public class AddItemController {
     public ModelAndView createItem(@ModelAttribute("item") @Valid Item item, BindingResult result,
                                    @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
-            return new ModelAndView("addItem", "invalidInputData", "Woops! seams like you have some errors!");
+            return new ModelAndView("addItem", "error", "Woops! seams like you have some errors!");
         }
 
         try {
             itemService.addItemAndResizeImage(item, file.getBytes(), 240, 150);
         } catch (IOException e) {
             e.printStackTrace();
+            return new ModelAndView("addItem", "error", "Woops! IOException!");
         } catch (NullPointerException e) {
-            return new ModelAndView("addItem", "notAnImage", "Woops! seams like it's not an image!");
+            return new ModelAndView("addItem", "error", "Woops! seams like it's not an image!");
         }
 
         if (item.getLeftOnStore() == 0) {
             return new ModelAndView("addItem", "warning", "Your added item have a default value for " +
                     "'leftOnStore' param in order to make this item available for purchase you need " +
                     "to manually add delivery for this item and enable  it on storage page!");
-        } else {
-            return new ModelAndView("addItem", "success", "Your item successfully " +
-                    "added and available for purchase!");
         }
+
+        return new ModelAndView("addItem", "success", "Your item successfully " +
+                "added and available for purchase!");
+
     }
 }

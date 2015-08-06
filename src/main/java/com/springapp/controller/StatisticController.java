@@ -16,7 +16,7 @@ public class StatisticController {
     private StatisticService statisticService;
 
     @RequestMapping(value = "statistic")
-    public String testPage(ModelMap modelMap) {
+    public String statistics(ModelMap modelMap) {
         modelMap.addAttribute("totalStatistic", statisticService.getTotalPurchaseStatistic());
         modelMap.addAttribute("citiesStatisticMap", statisticService.getStatisticsForAllCities());
 

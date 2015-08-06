@@ -1,6 +1,6 @@
 package com.springapp.exceptions;
 
-public class UserAlreadyExistsException extends RuntimeException {
+public class UserAlreadyExistsException extends Exception {
 
     private String message;
 

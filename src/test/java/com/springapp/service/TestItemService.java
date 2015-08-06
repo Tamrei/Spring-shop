@@ -57,7 +57,6 @@ public class TestItemService {
 
     @Ignore
     @Test
-    //@DatabaseSetup("classpath:/db/model/service/itemService/initialData.xml")
     public void testAddItemAndResizeImage() throws IOException {
 
         final int desiredWidth = 480;
@@ -68,7 +67,7 @@ public class TestItemService {
         item.setType("TestType3");
         item.setLeftOnStore(100);
 
-        final String path = getClass().getResource("test_image_350x282.jpg").getPath();
+        final String path = getClass().getResource("images/test_image2_350x282.jpg").getPath();
 
         BufferedImage image = ImageIO.read(new File(path));
 

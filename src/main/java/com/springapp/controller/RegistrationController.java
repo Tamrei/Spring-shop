@@ -27,14 +27,14 @@ public class RegistrationController {
     @RequestMapping(value="createUser", method = RequestMethod.POST)
     public ModelAndView createUser(@ModelAttribute("customer") @Valid Customer customer, BindingResult result) {
         if(result.hasErrors()) {
-            return new ModelAndView("registration", "someError", "Some errors in your fields");
+            return new ModelAndView("registration", "error", "Some errors in your fields");
         }
 
         try {
             customerService.registerNewCustomer(customer);
             return new ModelAndView("login", "success", "Successfully registered as " + '"' + customer.getUsername() + '"');
         } catch (UserAlreadyExistsException e) {
-            return new ModelAndView("registration", "userExist", "User with the same name already exists");
+            return new ModelAndView("registration", "error", "User with the same name already exists");
         }
     }
 }

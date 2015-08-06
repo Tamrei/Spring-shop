@@ -21,11 +21,11 @@
 
     <jsp:include page="static/navbar.jsp" flush="true"/>
 
-    <c:if test="${not empty notAnImage}">
+    <c:if test="${not empty error}">
         <div class="bs-example">
             <div class="alert alert-danger alert-error">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong>Error!</strong> <c:out value="${notAnImage}"/>
+                <strong>Error!</strong> <c:out value="${error}"/>
             </div>
         </div>
     </c:if>

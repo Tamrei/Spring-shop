@@ -22,20 +22,11 @@
 
     <div class="col-md-6 col-md-offset-3">
 
-        <c:if test="${not empty notAnImage}">
+        <c:if test="${not empty error}">
             <div class="bs-example">
                 <div class="alert alert-danger alert-error">
                     <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>Error!</strong> <c:out value="${notAnImage}"/>
-                </div>
-            </div>
-        </c:if>
-
-        <c:if test="${not empty invalidInputData}">
-            <div class="bs-example">
-                <div class="alert alert-danger alert-error">
-                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>Error!</strong> <c:out value="${invalidInputData}"/>
+                    <strong>Error!</strong> <c:out value="${error}"/>
                 </div>
             </div>
         </c:if>

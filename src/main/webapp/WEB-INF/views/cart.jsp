@@ -33,24 +33,16 @@
 
 <jsp:include page="static/navbar.jsp"/>
 
-<c:if test="${not empty errorE}">
-    <div class="bs-example">
-        <div class="alert alert-danger alert-error">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>Error!</strong> <c:out value="${errorE}"/>
-        </div>
-    </div>
-</c:if>
-
-<c:if test="${not empty successfulPurchase}">
+<c:if test="${not empty success}">
     <div class="bs-example">
         <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>Successful Purchase!</strong> You can view all your purchases <a href="/myPurchases"> here.</a>
+            <strong>Error!</strong> <c:out value="${success}"/>
         </div>
     </div>
 </c:if>
 
+<!-- This alerts controlled by js -->
 <div class="bs-example hidden" id="itemsOutOfStore">
     <div class="alert alert-danger alert-error">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -65,6 +57,7 @@
         In order to make purchase pls lay out them.
     </div>
 </div>
+<!-- -->
 
 <div class="panel">
 <div class="panel-body">
@@ -109,6 +102,7 @@
             <td>
                 <p> Price for ${purchase.value.amount}
                     is $${purchase.key.price * purchase.value.amount} </p>
+
                 <p class="text-success"> Price per one: $${purchase.key.price} </p>
             </td>
 
@@ -168,9 +162,9 @@
                         <form:form method="post" action="/cart/update/${purchase.value.cartID}">
 
                             <div class="form-group">
-                                <label>Old Amount: ${purchase.value.amount} </label>
+                                <label for="amount">Old Amount: ${purchase.value.amount} </label>
                                 <input type="number" name="amount" class="form-control bfh-number"
-                                       value="${purchase.value.amount}">
+                                       value="${purchase.value.amount}" id="amount">
                             </div>
 
                             <button type="submit" id="sub" class="btn btn-primary">Submit</button>
@@ -255,18 +249,13 @@
                         <label class="control-label" for="city" id="city-label"> City: </label>
 
 
-                        <select name="city" class="form-control">
+                        <select name="city" class="form-control" id="city">
                             <c:forEach items="${availableCities}" var="city">
-                                <option  id="city" name="city" value="${city}"> ${city} </option>
+                                <option id="city" name="city" value="${city}"> ${city} </option>
                             </c:forEach>
                         </select>
                         <br>
-                        <!--
-                        <div class="controls">
-                            <input type="text" name="city" class="form-control"
-                                   placeholder="Enter city name" id="city">
-                        </div>
-                        -->
+
                     </div>
 
                     <div class="form-group has-feedback" id="street-form">

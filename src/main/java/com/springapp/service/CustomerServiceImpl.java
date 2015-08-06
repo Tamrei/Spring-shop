@@ -47,10 +47,10 @@ public class CustomerServiceImpl implements CustomerService {
         if (customer.isEnabled()) {
             customer.setEnabled(false);
             return false;
-        } else {
-            customer.setEnabled(true);
-            return true;
         }
+
+        customer.setEnabled(true);
+        return true;
     }
 
     /**

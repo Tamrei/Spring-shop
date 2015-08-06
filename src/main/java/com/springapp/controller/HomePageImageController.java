@@ -42,9 +42,9 @@ public class HomePageImageController {
         try {
             homePageImageService.addHomePageImage(homePageImage, file, 1500, 430);
         } catch (IOException e) {
-            return new ModelAndView("carouselController", "IOException", "Woops! IO Exception!");
+            return new ModelAndView("carouselController", "error", "Woops! IOException!");
         } catch (NullPointerException e) {
-            return new ModelAndView("carouselController", "notAnImage", "Woops! seams like its not an image!");
+            return new ModelAndView("carouselController", "error", "Woops! seams like its not an image!");
         }
 
         return new ModelAndView("redirect:/carouselController");

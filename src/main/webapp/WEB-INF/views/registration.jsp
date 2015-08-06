@@ -21,20 +21,11 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
 
-            <c:if test="${!empty someError }">
+            <c:if test="${not empty error}">
                 <div class="bs-example">
                     <div class="alert alert-danger alert-error">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <strong>Error!</strong> Some errors in your registration data.
-                    </div>
-                </div>
-            </c:if>
-
-            <c:if test="${!empty userExist }">
-                <div class="bs-example">
-                    <div class="alert alert-danger alert-error">
-                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <strong>Error!</strong> <c:out value="${userExist}"/>
+                        <strong>Error!</strong> <c:out value="${error}"/>
                     </div>
                 </div>
             </c:if>

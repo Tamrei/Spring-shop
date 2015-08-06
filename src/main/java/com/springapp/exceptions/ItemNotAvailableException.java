@@ -1,7 +1,7 @@
 package com.springapp.exceptions;
 
 
-public class ItemNotAvailableException extends Exception {
+public class ItemNotAvailableException extends RuntimeException {
 
     public String message;
 

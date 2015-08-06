@@ -40,7 +40,7 @@ public class MakePurchaseController {
 
         try {
             purchaseService.makePurchase(address, activeUser.getUsername());
-            return new ModelAndView("cart", "successfulPurchase", "");
+            return new ModelAndView("cart", "success", "");
         } catch (ItemNotAvailableException e) {
             return new ModelAndView("redirect:/cart");
         }

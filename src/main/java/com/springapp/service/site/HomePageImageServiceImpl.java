@@ -2,11 +2,9 @@ package com.springapp.service.site;
 
 
 import com.springapp.dao.generic.GenericDAO;
-import com.springapp.exceptions.ImageFormatException;
 import com.springapp.model.Address;
 import com.springapp.model.site.HomePageImage;
 import com.springapp.util.ImageResizer;
-import com.springapp.util.ImageResizerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +21,9 @@ public class HomePageImageServiceImpl implements HomePageImageService {
     @Autowired
     private GenericDAO homePageImageDAO;
 
-    @Autowired
-    private ImageResizer imageResizer;
-
     @Override
     public void addHomePageImage(HomePageImage homePageImage, MultipartFile image, int width, int height) throws IOException {
-        homePageImage.setImage(imageResizer.resizeImage(image.getBytes(), width, height));
+        homePageImage.setImage(ImageResizer.resizeImage(image.getBytes(), width, height));
         homePageImageDAO.add(homePageImage);
     }
 
