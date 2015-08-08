@@ -29,12 +29,7 @@ public class CurrentUserHandlerMethodArgumentResolver
                                   WebDataBinderFactory binderFactory) throws Exception {
         if (this.supportsParameter(methodParameter)) {
             Principal principal = webRequest.getUserPrincipal();
-            User user = null;
-            try {
-                user = (User) ((Authentication) principal).getPrincipal();
-            } catch (NullPointerException e) {
-                return WebArgumentResolver.UNRESOLVED;
-            }
+            User user = (User) ((Authentication) principal).getPrincipal();
             return user;
         } else {
             return WebArgumentResolver.UNRESOLVED;
