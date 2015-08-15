@@ -32,14 +32,14 @@ public class Purchase implements Serializable {
     @Enumerated(EnumType.STRING)
     private PurchaseStatus status;
 
-    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "purchase")
     private Set<Cart> carts;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ownerUsername", referencedColumnName = "username", insertable = false, updatable = false)
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.ALL)//(fetch = FetchType.LAZY, optional = true)(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "addressID", insertable = false, updatable = false)
     private Address address;
 

@@ -30,7 +30,7 @@ public class Address {
     @Size(min=1, max=20, message = "Street name can't be empty!")
     private String street;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address")
     private Set<Purchase> purchases;
 
     public Address() {

@@ -36,11 +36,11 @@ public class Cart implements Serializable {
     @Column(name="amount")
     private long amount;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ownerUsername", referencedColumnName = "username", insertable = false, updatable = false)
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "purchaseID", insertable = false, updatable = false)
     private Purchase purchase;
 

@@ -37,10 +37,10 @@ public class Customer implements Serializable {
     @Column(name = "enabled")
     private boolean enabled = true;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     private Set<Cart> carts;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     private Set<Purchase> purchases;
 
     public Customer() {

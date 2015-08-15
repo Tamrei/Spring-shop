@@ -40,7 +40,7 @@ public class Item implements Serializable {
     @Column(name = "available")
     private boolean available;
 
-    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private Set<ItemDelivery> itemDeliveries;
 
     public Item() {
