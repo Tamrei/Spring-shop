@@ -22,7 +22,6 @@ public class ImageResizer {
      * @return resized image as a byte array
      * @throws IOException
      */
-    //@Override
     public static byte[] resizeImage(byte[] image, int width, int height) throws IOException {
         BufferedImage newImage = getScaledInstance
                 (ImageIO.read(new ByteArrayInputStream(image)), width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
